@@ -54,8 +54,8 @@ Scheduling-Copilot models the scheduling problem as a **Resource-Constrained Pro
 
 The objective is to minimize penalties associated with not scheduling higher-priority tasks. This is achieved by assigning weights to tasks based on their impact:
 
-\[
+$$
 \text{Weight}_i = (\text{Impact}_{\text{max}} + 1 - \text{Impact}_i)^3
-\]
+$$
 
 The function heavily penalizes the non-scheduling of higher-priority tasks, optimizing the overall criticality of the schedule.
