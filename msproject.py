@@ -4,12 +4,15 @@ os.environ["JAVA_HOME"]="/opt/miniconda3/envs/ortools/lib/jvm"
 import jpype
 import mpxj
 import numpy as np
+import json
+from utils import read_json
 
 from java.lang import Double, Number
 from java.time import LocalDate, LocalDateTime, DayOfWeek, LocalTime
 from net.sf.mpxj import ProjectFile, TaskField, Duration, TimeUnit, RelationType, Availability, Relation, LocalTimeRange
 from net.sf.mpxj.common import LocalDateTimeHelper
 from net.sf.mpxj.writer import UniversalProjectWriter, FileFormat
+
 
 def timestamp_to_LocalDateTime(timestamp):
     year = timestamp.year
@@ -21,8 +24,24 @@ def timestamp_to_LocalDateTime(timestamp):
     return LocalDateTime.of(year, month, day, hour, minute)
 
 
-def generate_mspdi(tasks_df, squads_df, file_name = "Program.xml"):
-    
+def generate_mspdi(tasks_json_path='tasks.json', solver_json_path=None, file_name = "solution.xml"):
+        
+    tasks_df, squads_df, tools_df = read_json(tasks_json_path)
+
+    if solver_json_path is None:
+        tasks_df['Start'] = tasks_df['Start(p)']
+        tasks_df['Scheduled'] = np.where(tasks_df['Start'].notnull(), 1, 0)
+    else:
+        with open(solver_json_path) as f:
+            data = json.load(f)
+
+            solution = pd.DataFrame(data).T.reset_index().rename(columns={'index':'TaskID'})
+            solution['Start'] = pd.to_datetime(solution['Start'])
+            solution['TaskID'] = solution['TaskID'].astype(int)
+            solution['Scheduled'] = solution['Scheduled'].astype(int)
+            tasks_df = tasks_df.merge(solution[['TaskID', 'Start', 'Scheduled']], on='TaskID', how='left')
+            
+    tasks_df['Finish'] = tasks_df['Start'] + pd.to_timedelta(tasks_df['Duration'], unit='h')
 
     min_date = timestamp_to_LocalDateTime(tasks_df['Start'].min())
 
@@ -48,11 +67,12 @@ def generate_mspdi(tasks_df, squads_df, file_name = "Program.xml"):
     properties = file.getProjectProperties()
     properties.setStartDate(min_date)
 
-    # Add Resources
-    personal = df['Squad'].dropna().unique().tolist()
-    equipment = df['Tool'].dropna().unique().tolist()
+
+    personal = squads_df[squads_df['SquadID'].isin(df['SquadID'].dropna().unique().tolist())]['Name'].tolist()
+    equipment = tools_df[tools_df['ToolID'].isin(df['ToolID'].dropna().unique().tolist())]['Name'].tolist()
     personal_resources = {}
     equipment_resources = {}
+
 
     for p in personal:
         cap = float(squads_df[squads_df['Name'] == p]['Capacity'].iloc[0]*100)
@@ -87,9 +107,9 @@ def generate_mspdi(tasks_df, squads_df, file_name = "Program.xml"):
             tasks[ot][i].setActualStart(timestamp_to_LocalDateTime(row['Start']))
             tasks[ot][i].setActualFinish(timestamp_to_LocalDateTime(row['Finish']))
             
-            tasks[ot][i].addResourceAssignment(personal_resources[row['Squad']])
-            if not pd.isna(row['Tool']):
-                tasks[ot][i].addResourceAssignment(equipment_resources[row['Tool']])
+            tasks[ot][i].addResourceAssignment(personal_resources[squads_df[squads_df['SquadID']==row['SquadID']]['Name'].iloc[0]])
+            if not pd.isna(row['ToolID']):
+                tasks[ot][i].addResourceAssignment(equipment_resources[tools_df[tools_df['ToolID']==row['ToolID']]['Name'].iloc[0]])
 
     # Verificar posibilidad de hacerlo en RAM
     writer = UniversalProjectWriter(file_format).write(file, file_name)

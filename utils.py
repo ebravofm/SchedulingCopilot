@@ -6,6 +6,70 @@ from datetime import timedelta
 
 pd.options.mode.chained_assignment = None
 
+
+def data_to_json(xlsx_file='ProcessedDataset.xlsx', json_file='tasks.json'):
+
+
+    df = pd.read_excel(xlsx_file, converters={'N° Opr': str})
+    squads = pd.read_excel(xlsx_file, sheet_name='Squads')
+
+    squad_list = []
+    squad_mapping = {}
+
+    for i, row in squads.iterrows():
+        squad_list.append({
+            "SquadID": i,
+            "Name": row["Cuadrilla"],
+            "Capacity": row["Capacidad"],
+            "HoursPerDay": row["ActiveHours"],
+            "Shift": row["Turno"],
+            "ShiftStartDate": row["DiaInicio"]
+        })
+        squad_mapping[row["Cuadrilla"]] = i
+
+
+    # Construir lista de Tools
+    tool_list = df["Herramienta"].dropna().unique()
+    tools = [{"ToolID": i + len(squads), "Name": tool} for i, tool in enumerate(tool_list)]
+
+    # Crear un mapeo Herramienta -> ToolID
+    tool_mapping = {tool["Name"]: tool["ToolID"] for tool in tools}
+
+    # Construir lista de Tasks
+    task_list = []
+    for i, row in df.iterrows():
+        task_list.append({
+            "TaskID": i,
+            "OT": row["OT"],
+            "OTDescription": row["Descripción Orden"],
+            "Task": row["N° Opr"],
+            "TaskDescription": row["Descripción"],
+            "Asset": row["Denominación"],
+            "Duration": row["Len"],
+            "Impact": row["Impact"],
+            "SquadID": squad_mapping.get(row["Puesto Trabajo"], None),
+            "Workers": row["Q"],
+            "ToolID": tool_mapping.get(row["Herramienta"], None),
+            "Predecessor": None,
+            "EarliestDate": row["Fecha Inicio Extrema"],
+            "RequiredDate": row["Fecha Requerida"],
+            "Start(p)": row["Start(p)"]
+        })
+
+    # Estructura final del JSON
+    output = {
+        "Squads": squad_list,
+        "Tools": tools,
+        "Tasks": task_list
+    }
+
+    # Exportar a JSON
+    with open(json_file, "w") as f:
+        json.dump(output, f, indent=4, default=str)
+
+    print("JSON generado exitosamente.")
+
+
 def read_json(json_file):
     with open(json_file, "r") as f:
         data = json.load(f)
@@ -13,8 +77,12 @@ def read_json(json_file):
     tools_df = pd.DataFrame(data["Tools"])
     tasks_df = pd.DataFrame(data["Tasks"])
     
+    tasks_df['ToolID'] = tasks_df['ToolID'].astype(pd.Int64Dtype())
+    tasks_df['SquadID'] = tasks_df['SquadID'].astype(pd.Int64Dtype())
+    
     tasks_df['EarliestDate'] = pd.to_datetime(tasks_df['EarliestDate'])
     tasks_df['RequiredDate'] = pd.to_datetime(tasks_df['RequiredDate'])
+    tasks_df['Start(p)'] = pd.to_datetime(tasks_df['Start(p)'])
     
     tasks_df['RequiredDate'] = np.where(tasks_df['RequiredDate'] < tasks_df['EarliestDate'], tasks_df['EarliestDate'] + timedelta(days=7), tasks_df['RequiredDate'])
     
@@ -48,6 +116,7 @@ def gen_num_dates(tasks_df, start_column_name='EarliestDate', finish_column_name
     RequiredDateNum = np.where(RequiredDateNum > 2000, 2000, RequiredDateNum)
     return EarliestDateNum, RequiredDateNum, min_date
 
+
 def scale(tasks_df, scaling=4):
     
     tasks_df['Duration'] = np.round(tasks_df['Duration']*scaling).astype(int)
@@ -56,6 +125,7 @@ def scale(tasks_df, scaling=4):
     tasks_df['RequiredDateNum'] = tasks_df['RequiredDateNum']*scaling
     
     return tasks_df
+
 
 def get_inputs(tasks_df, squads_df, scaling = 4):
     
@@ -126,6 +196,7 @@ def get_shift_details(squads_df, scaling):
 
     
     return squads_df
+  
         
 def get_forbidden_intervals(squads_df, tasks_df, tools, scaling=4, days=7):
 
@@ -207,6 +278,7 @@ def get_forbidden_intervals(squads_df, tasks_df, tools, scaling=4, days=7):
     resources_forbidden_intervals = squad_forbidden_intervals | tools_forbidden_intervals
     
     return resources_forbidden_intervals
+
 
 def split_tasks_df(tasks_df):
     relevant_df = tasks_df[['SquadID', 'ToolID']].dropna().drop_duplicates()
