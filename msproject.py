@@ -5,7 +5,7 @@ import jpype
 import mpxj
 import numpy as np
 import json
-from utils import read_json
+from utils import read_json, load_solution
 
 from java.lang import Double, Number
 from java.time import LocalDate, LocalDateTime, DayOfWeek, LocalTime
@@ -32,14 +32,8 @@ def generate_mspdi(tasks_json_path='tasks.json', solver_json_path=None, file_nam
         tasks_df['Start'] = tasks_df['Start(p)']
         tasks_df['Scheduled'] = np.where(tasks_df['Start'].notnull(), 1, 0)
     else:
-        with open(solver_json_path) as f:
-            data = json.load(f)
-
-            solution = pd.DataFrame(data).T.reset_index().rename(columns={'index':'TaskID'})
-            solution['Start'] = pd.to_datetime(solution['Start'])
-            solution['TaskID'] = solution['TaskID'].astype(int)
-            solution['Scheduled'] = solution['Scheduled'].astype(int)
-            tasks_df = tasks_df.merge(solution[['TaskID', 'Start', 'Scheduled']], on='TaskID', how='left')
+        solution = load_solution(solver_json_path)
+        tasks_df = tasks_df.merge(solution[['TaskID', 'Start', 'Scheduled']], on='TaskID', how='left')
             
     tasks_df['Finish'] = tasks_df['Start'] + pd.to_timedelta(tasks_df['Duration'], unit='h')
 

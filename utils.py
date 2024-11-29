@@ -7,6 +7,18 @@ from datetime import timedelta
 pd.options.mode.chained_assignment = None
 
 
+def load_solution(solution_json_path):
+    with open(solution_json_path) as f:
+        data = json.load(f)
+
+        solution = pd.DataFrame(data).T.reset_index().rename(columns={'index':'TaskID'})
+        solution['Start'] = pd.to_datetime(solution['Start'])
+        solution['TaskID'] = solution['TaskID'].astype(int)
+        solution['Scheduled'] = solution['Scheduled'].astype(int)
+        
+    return solution
+
+
 def data_to_json(xlsx_file='ProcessedDataset.xlsx', json_file='tasks.json'):
 
 
@@ -303,3 +315,136 @@ def split_tasks_df(tasks_df):
                          for squad in unrelated_tasks['SquadID'].unique()]
 
     return subsets + unrelated_subsets
+
+
+def print_excel(tasks_json_path='tasks.json', solver_json_path='solution.json', file_name = "solution.xlsx"):
+
+    scale = 4
+    tasks_df, squads_df, tools_df = read_json(tasks_json_path)
+    solution = load_solution(solver_json_path)
+    tasks_df = tasks_df.merge(solution[['TaskID', 'Start', 'Scheduled']], on='TaskID', how='left')
+
+    tasks_df = tasks_df.merge(squads_df[['SquadID', 'Name']], on='SquadID', how='left').rename(columns={'Name': 'Squad'})
+    tasks_df = tasks_df.merge(tools_df[['ToolID', 'Name']], on='ToolID', how='left').rename(columns={'Name': 'Tool'})
+    tasks_df['Finish'] = tasks_df['Start'] + pd.to_timedelta(tasks_df['Duration'], unit='h')
+
+    df = tasks_df[tasks_df['Scheduled'] == 1].copy()
+
+
+
+    min_date = df['Start'].min()
+
+    df['StartNum'] = (((df['Start'] - min_date).dt.total_seconds() / 86400) * 24)
+    df['FinishNum'] = (((df['Finish'] - min_date).dt.total_seconds() / 86400) * 24)
+    df['StartNum'] = df['StartNum'].apply(lambda x: 0 if x < 0 else x)
+    df['StartNum'] = (df['StartNum']*scale).astype(int)
+    df['FinishNum'] = (df['FinishNum']*scale).astype(int)
+    # Crear DataFrame de tareas programadas y no programadas
+    scheduled_tasks = df.copy()
+    unscheduled_tasks = tasks_df[tasks_df['Scheduled'] == 0].reset_index(drop=True)
+
+    # Si no hay tareas programadas, establecer max_hour a 0
+    if scheduled_tasks.empty:
+        max_hour = 0
+    else:
+        max_hour = int(scheduled_tasks['FinishNum'].max())
+
+    # Crear mapa de horas para cada tarea programada
+    task_hour_map = {}
+    for idx, row in scheduled_tasks.iterrows():
+        start = int(row['StartNum'])
+        end = int(row['FinishNum'])
+        task_hour_map[row['TaskID']] = [row['Workers'] if start <= hour < end else 0 for hour in range(max_hour + 1)]
+
+    # Crear DataFrame para el diagrama de Gantt
+    gantt_columns = [i for i in range(max_hour + 1)]
+    gantt = pd.DataFrame.from_dict(task_hour_map, orient='index', columns=gantt_columns)
+
+    # Combinar datos de tareas programadas con el diagrama de Gantt
+    df_gantt = pd.concat([scheduled_tasks.reset_index(drop=True), gantt.reset_index(drop=True)], axis=1)
+    df_gantt = df_gantt.sort_values('StartNum')
+
+    # Crear un objeto ExcelWriter para escribir en múltiples hojas
+    with pd.ExcelWriter(file_name, engine='xlsxwriter') as writer:
+        # Escribir las tareas programadas y el diagrama de Gantt en la primera hoja
+        df_gantt.to_excel(writer, sheet_name='Programadas', index=False)
+        
+        # Escribir las tareas no programadas en una hoja separada
+        unscheduled_tasks.to_excel(writer, sheet_name='No Programadas', index=False)
+        
+        # Obtener el workbook y worksheet para ajustar el formato
+        workbook = writer.book
+        worksheet = writer.sheets['Programadas']
+        
+        # Ajustar el ancho de las columnas de task_hour_map (desde la columna 'Cantidad' en adelante)
+        for i, column in enumerate(df_gantt.columns):
+            if i >= len(scheduled_tasks.columns):
+                # Ajustar el ancho de las columnas correspondientes a las horas
+                worksheet.set_column(i, i, 25 / 7)  # 25px a ancho de columna Excel (aprox 25/7)
+        
+        # Crear un formato condicional para celdas que no son iguales a 0
+        yellow_format = workbook.add_format({'bg_color': '#FFFF00'})  # Fondo amarillo
+        
+        # Aplicar el formato condicional en las columnas del diagrama de Gantt (celdas que son != 0)
+        for i in range(len(scheduled_tasks.columns), len(df_gantt.columns)):  # Solo las columnas del Gantt
+            worksheet.conditional_format(1, i, len(df_gantt), i,  # Aplica desde fila 2 (índice 1) a todas las filas
+                                        {'type': 'cell',
+                                        'criteria': '!=',
+                                        'value': 0,
+                                        'format': yellow_format})
+        
+        # Aplicar freeze panes en la celda L2 (congela primeras 11 columnas y la primera fila)
+        worksheet.freeze_panes(1, 12)
+        
+        # ============= NUEVA HOJA GANTT POR RECURSO =============
+
+        # Crear una carta Gantt para cada recurso
+        recursos = [(0, s) for s in squads_df.Name.dropna().unique()] + [(1, t) for t in tools_df.Name.dropna().unique()] 
+        
+        for tipo, recurso in recursos:
+            # Filtrar las tareas programadas para este recurso
+            if tipo == 0:
+                tareas_recurso = scheduled_tasks[scheduled_tasks['Squad'] == recurso]
+            else:
+                tareas_recurso = scheduled_tasks[scheduled_tasks['Tool'] == recurso]
+            
+            if tareas_recurso.empty:
+                continue
+            
+            # Crear un mapa de tiempo para este recurso donde se registre el ID de la tarea
+            recurso_hour_map = {}
+            for idx, row in tareas_recurso.iterrows():
+                task_id = row['TaskID']  # ID de la tarea
+                start = int(row['StartNum'])
+                end = int(row['FinishNum'])
+                cantidad = int(row['Workers'])  # La cantidad de capacidad que usa la tarea
+                
+                # Para cada celda del rango de tiempo ocupado por esta tarea, añadimos tantas filas como 'Cantidad'
+                for hour in range(start, end):
+                    if hour not in recurso_hour_map:
+                        recurso_hour_map[hour] = []
+                    # Añadimos la tarea 'Cantidad' veces (según la capacidad que utiliza)
+                    for _ in range(cantidad):
+                        recurso_hour_map[hour].append(task_id)
+                        if tipo == 1:
+                            break
+            
+            # Crear un DataFrame para este recurso, con cada fila mostrando una tarea en cada hora
+            max_rows = max(len(tasks) for tasks in recurso_hour_map.values())  # Máximo de tareas simultáneas por hora
+            recurso_df = pd.DataFrame(index=range(max_rows), columns=range(max_hour + 1))
+
+            # Llenar el DataFrame con las tareas programadas por hora
+            for hour, tasks in recurso_hour_map.items():
+                for i, task in enumerate(tasks):
+                    recurso_df.loc[i, hour] = task
+
+            # Escribir este DataFrame en una nueva hoja del Excel para este recurso
+            recurso_sheet_name = f'R {recurso}'
+            recurso_df.to_excel(writer, sheet_name=recurso_sheet_name, index=False)
+            
+            # Obtener la hoja de cálculo de este recurso
+            recurso_worksheet = writer.sheets[recurso_sheet_name]
+
+            # Ajustar el ancho de las columnas correspondientes a las horas
+            for i in range(max_hour + 1):
+                recurso_worksheet.set_column(i, i, 25 / 7)  # Ajustar a 25px de ancho por columna
