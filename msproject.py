@@ -30,7 +30,7 @@ def timestamp_to_LocalDateTime(timestamp):
     return LocalDateTime.of(year, month, day, hour, minute)
 
 
-def generate_mspdi(tasks_json_path='tasks.json', solver_json_path=None, file_name = "solution.xml"):
+def generate_mspdi(tasks_json_path='tasks.json', solver_json_path=None, file_name = "solution.xml", scaling=4):
         
     tasks_df, squads_df, tools_df = read_json(tasks_json_path)
 
@@ -40,6 +40,10 @@ def generate_mspdi(tasks_json_path='tasks.json', solver_json_path=None, file_nam
     else:
         solution = load_solution(solver_json_path)
         tasks_df = tasks_df.merge(solution[['TaskID', 'Start', 'Scheduled']], on='TaskID', how='left')
+        
+    tasks_df['Duration'] = np.round(tasks_df['Duration']*scaling).astype(int)
+    tasks_df['Duration'] = np.where(tasks_df['Duration'] == 0, 1, tasks_df['Duration'])
+    tasks_df['Duration'] = tasks_df['Duration']/scaling
             
     tasks_df['Finish'] = tasks_df['Start'] + pd.to_timedelta(tasks_df['Duration'], unit='h')
 
