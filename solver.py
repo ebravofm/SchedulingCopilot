@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from ortools.sat.python import cp_model
 from utils import read_json, dfs_to_inputs, split_tasks_df
 import uuid
+import pandas as pd
 
 # Configuración básica del logger
 logging.basicConfig(
@@ -12,6 +13,8 @@ logging.basicConfig(
     filemode="a"  # Abrir en modo append
 )
 
+
+    
 def log_solver_run(
     uuid4,
     tasks, 
@@ -75,8 +78,19 @@ def run_solver(tasks_json='tasks.json' , split_tasks=True):
         task_results = task_results | result
         
     solve_time = (datetime.now() - start_timestamp).total_seconds()
-    logging.info(f"Total solve time: {solve_time:.2f} seconds\n")
-        
+    metrics = calculate_metrics(tasks_json, task_results)
+    
+    #     metrics  {
+    #     "Total Tasks": total_tasks,
+    #     "Scheduled Tasks": scheduled_tasks,
+    #     "Unscheduled Tasks": unscheduled_tasks,
+    #     "Makespan": makespan,
+    #     "Average Makespan": average_makespan,
+    #     "Objective Value": objective_value
+    # }
+
+    
+    logging.info(f"Total Tasks: {metrics['Total Tasks']}, Scheduled Tasks: {metrics['Scheduled Tasks']}, Unscheduled Tasks: {metrics['Unscheduled Tasks']}, Makespan: {metrics['Makespan']}, Objective Value: {metrics['Objective Value']}, Average OT Makespan: {metrics['Average Makespan']}, Solve Time: {solve_time:.2f} seconds\n")
 
     
     return task_results
@@ -176,3 +190,39 @@ def solve(tasks, task_windows, task_groups, max_impact, resource_capacities, res
     )
 
     return task_results
+
+
+
+def calculate_metrics(tasks_json, task_results):
+    """
+    Función para calcular métricas de desempeño del solver.
+    """
+    # Inicializar variables
+    
+    tasks_df, squads_df, tools_df = read_json(tasks_json)
+
+    total_tasks = len(tasks_df)
+    scheduled_tasks = sum(task_results[task_id]["Scheduled"] for task_id in task_results)
+    unscheduled_tasks = total_tasks - scheduled_tasks
+    
+    solution = pd.DataFrame(task_results).T.reset_index().rename(columns={'index':'TaskID'})
+    solution['Start'] = pd.to_datetime(solution['Start'])
+    solution['TaskID'] = solution['TaskID'].astype(int)
+    solution['Scheduled'] = solution['Scheduled'].astype(int)
+    tasks_df = tasks_df.merge(solution[['TaskID', 'Start', 'Scheduled']], on='TaskID', how='left')
+    tasks_df['Finish'] = tasks_df['Start'] + pd.to_timedelta(tasks_df['Duration'], unit='h')
+    
+    makespan = (tasks_df['Finish'].max() - tasks_df['Start'].min()).total_seconds() / 3600
+    
+    objective_value = sum((tasks_df['Impact'].max() + 1 - tasks_df['Impact']) ** 3 * (1 - tasks_df['Scheduled']))
+    
+    #calculate the average of the makespan of the group of tasks (OT column is the group of tasks)
+    average_makespan = tasks_df.groupby('OT').apply(lambda x: (x['Finish'].max() - x['Start'].min()).total_seconds() / 3600).mean()
+    return {
+        "Total Tasks": total_tasks,
+        "Scheduled Tasks": scheduled_tasks,
+        "Unscheduled Tasks": unscheduled_tasks,
+        "Makespan": makespan,
+        "Objective Value": objective_value,
+        "Average Makespan": round(average_makespan, 1)
+    }
