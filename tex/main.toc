@@ -1,18 +1,17 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {section}{\numberline {1}Introducción}{4}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Contexto}{4}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Consideraciones}{4}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Descripción detallada y levantamiento del problema}{5}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Proceso de Programación}{5}{subsection.2.1}%
-\contentsline {subsubsection}{\numberline {2.1.1}Proceso de Planificación}{5}{subsubsection.2.1.1}%
-\contentsline {subsubsection}{\numberline {2.1.2}Proceso de Programación}{6}{subsubsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.2}Ciclo Semanal de Programación}{6}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Actualización y Continuidad del Ciclo}{7}{subsubsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.3}Consideraciones al programar}{7}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Definiciones teóricas}{7}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Problema de Programación de Proyectos con Restricciones de Recursos (RCPSP)}{8}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Algoritmos de Programación por Restricciones y Satisfacción de Restricciones (CP-SAT)}{8}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Algoritmos Genéticos}{9}{subsection.3.3}%
+\contentsline {section}{\numberline {1}Introducción}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Contexto}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Consideraciones}{5}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Descripción detallada y levantamiento del problema}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Proceso de Programación}{6}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Proceso de Planificación}{6}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Proceso de Programación}{7}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}Ciclo Semanal de Programación}{7}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Actualización y Continuidad del Ciclo}{8}{subsubsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.3}Consideraciones al programar}{8}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Definiciones teóricas}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Problema de Programación de Proyectos con Restricciones de Recursos (RCPSP)}{9}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Algoritmos de Programación por Restricciones y Satisfacción de Restricciones (CP-SAT)}{9}{subsection.3.2}%
 \contentsline {section}{\numberline {4}Aplicación de los conceptos teóricos al problema}{10}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Problema de Programación}{10}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Generalización del Problema como RCPSP}{11}{subsection.4.2}%
@@ -24,10 +23,23 @@
 \contentsline {subsection}{\numberline {5.1}Entrada de Datos}{17}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Salida de Datos}{17}{subsection.5.2}%
 \contentsline {section}{\numberline {6}Flujo de Trabajo}{18}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Algoritmo de Programación con Restricciones}{18}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Algoritmo Genético}{19}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Combinación CP-SAT y Algoritmo Genético}{19}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Resultados Preliminares}{19}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Resumen de los Resultados}{19}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Detalles del Proceso de Optimización}{19}{subsection.7.2}%
-\contentsline {section}{\numberline {8}Conclusiones Preliminares}{20}{section.8}%
+\contentsline {subsection}{\numberline {6.1}Pre Procesamiento}{18}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}División en Subconjuntos de Tareas}{19}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Razonamiento Teórico}{19}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Metodología}{19}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Ventajas del Enfoque}{20}{subsubsection.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.4}División en Subsets}{20}{subsubsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.3}Input}{21}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Solver}{21}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Output}{22}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Post-Procesamiento}{23}{subsection.6.6}%
+\contentsline {section}{\numberline {7}Resultados Preliminares}{24}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Resumen de los Resultados}{24}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Detalles del Proceso de Optimización}{24}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Conclusiones Preliminares}{25}{section.8}%
+\contentsline {section}{\numberline {9}Resultados}{25}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Mejoras en la duración total del cronograma}{25}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Ahorros estimados en tiempo del equipo de programación}{25}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Impacto en la reducción de errores humanos}{26}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Proyección de ahorros generales}{26}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Resumen de beneficios}{26}{subsection.9.5}%

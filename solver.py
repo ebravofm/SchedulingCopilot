@@ -1,6 +1,8 @@
 import logging
 from datetime import datetime, timedelta
 from ortools.sat.python import cp_model
+from utils import read_json, dfs_to_inputs, split_tasks_df
+import uuid
 
 # Configuración básica del logger
 logging.basicConfig(
@@ -11,6 +13,7 @@ logging.basicConfig(
 )
 
 def log_solver_run(
+    uuid4,
     tasks, 
     task_results, 
     status, 
@@ -30,6 +33,7 @@ def log_solver_run(
     
     # Crear línea de log
     log_line = (
+        f"{str(uuid4)[-5:]}: "
         f"{run_time}, "
         f"Status: {status}, "
         f"Tasks: {num_tasks}, "
@@ -43,7 +47,45 @@ def log_solver_run(
     logging.info(log_line)
 
 
-def solve(tasks, task_windows, task_groups, max_impact, resource_capacities, resources_forbidden_intervals, min_date, scaling):
+def run_solver(tasks_json='tasks.json' , split_tasks=True):
+
+
+    start_timestamp = datetime.now()
+
+    tasks_df, squads_df, tools_df = read_json(tasks_json)
+    uuid4 = uuid.uuid4()
+
+    # Split tasks into subsets if split_tasks is True
+    if split_tasks:
+        dfs = split_tasks_df(tasks_df)
+    else:
+        dfs = [tasks_df]
+
+    # Scaling factor
+    scaling = 4
+
+    # Initialize results dictionary
+    task_results = {}
+
+    # Solve each subset
+    for i, df in enumerate(dfs):
+        print(f'Solving subset {i + 1}/{len(dfs)}')
+        tasks, task_windows, task_groups, max_impact, resource_capacities, resources_forbidden_intervals, min_date = dfs_to_inputs(df, squads_df, tools_df, scaling)
+        result = solve(tasks, task_windows, task_groups, max_impact, resource_capacities, resources_forbidden_intervals, min_date, scaling, uuid4=uuid4)
+        task_results = task_results | result
+        
+    solve_time = (datetime.now() - start_timestamp).total_seconds()
+    logging.info(f"Total solve time: {solve_time:.2f} seconds\n")
+        
+
+    
+    return task_results
+    
+
+def solve(tasks, task_windows, task_groups, max_impact, resource_capacities, resources_forbidden_intervals, min_date, scaling, uuid4):
+    
+    start_timestamp = datetime.now()
+
     # Definir el modelo de optimización
     model = cp_model.CpModel()
     is_scheduled = {}
@@ -93,7 +135,6 @@ def solve(tasks, task_windows, task_groups, max_impact, resource_capacities, res
     solver.parameters.relative_gap_limit = 0.25
 
     # Medir tiempo de solución
-    start_timestamp = datetime.now()
     status = solver.Solve(model)
     solve_time = (datetime.now() - start_timestamp).total_seconds()
 
@@ -124,6 +165,7 @@ def solve(tasks, task_windows, task_groups, max_impact, resource_capacities, res
 
     # Escribir en el log
     log_solver_run(
+        uuid4,
         tasks,
         task_results,
         solver.StatusName(status),

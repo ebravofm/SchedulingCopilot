@@ -1,48 +1,44 @@
 import jpype
 jpype.startJVM()
-import pandas as pd
 import json
-import numpy as np
-from utils import read_json, dfs_to_inputs, split_tasks_df, gen_num_dates, print_excel
-from solver import solve
+import argparse
 from msproject import generate_mspdi
+from solver import run_solver
+from utils import print_excel
 
-# Load input data
-tasks_df, squads_df, tools_df = read_json('tasks.json')
+# Inicializa la JVM
 
-# Split tasks into subsets
-dfs = split_tasks_df(tasks_df)
-print(f'Tasks split into {len(dfs)} subsets')
+def main():
+    # Configuración de argumentos para el CLI
+    parser = argparse.ArgumentParser(description="Run solver and export results.")
+    parser.add_argument("-s", "--split-tasks", action="store_true", help="Enable splitting tasks during solving.")
+    parser.add_argument("-x", "--export-to-xml", action="store_true", help="Generate a Microsoft Project XML file.")
+    parser.add_argument("-e", "--export-to-xlsx", action="store_true", help="Generate an Excel file.")
+    parser.add_argument("-t", "--task-file", type=str, default="tasks.json", help="Path to the task file (default: tasks.json).")
+    parser.add_argument("-o", "--output-file", type=str, default="solution.json", help="Path to save the JSON output (default: solution.json).")
+    parser.add_argument("-X", "--xml-file", type=str, default="solution.xml", help="Path for the XML output (default: solution.xml).")
+    parser.add_argument("-E", "--xlsx-file", type=str, default="solution.xlsx", help="Path for the Excel output (default: solution.xlsx).")
+    args = parser.parse_args()
 
-# Scaling factor
-scaling = 4
+    # Ejecuta el solver
+    print("Running solver...")
+    task_results = run_solver(args.task_file, split_tasks=args.split_tasks)
+    print("Solving complete.")
 
-# Initialize results dictionary
-task_results = {}
+    # Guarda los resultados en un archivo JSON
+    with open(args.output_file, "w") as json_file:
+        json.dump(task_results, json_file, indent=4)
+    print(f"Results saved to {args.output_file}")
 
-# Solve each subset
-for i, df in enumerate(dfs):
-    print(f'Solving subset {i + 1}/{len(dfs)}')
-    tasks, task_windows, task_groups, max_impact, resource_capacities, resources_forbidden_intervals, min_date = dfs_to_inputs(df, squads_df, tools_df, scaling)
-    result = solve(tasks, task_windows, task_groups, max_impact, resource_capacities, resources_forbidden_intervals, min_date, scaling)
-    task_results = task_results | result
+    # Exporta a XML si es solicitado
+    if args.export_to_xml:
+        generate_mspdi(args.task_file, args.output_file, args.xml_file)
+        print(f"Microsoft Project file generated as {args.xml_file}")
 
-print('Solving complete')
+    # Exporta a Excel si es solicitado
+    if args.export_to_xlsx:
+        print_excel(args.task_file, args.output_file, args.xlsx_file)
+        print(f"Excel file generated as {args.xlsx_file}")
 
-# Save results to a JSON file
-output_file = "solution.json"
-with open(output_file, "w") as json_file:
-    json.dump(task_results, json_file, indent=4)
-print(f'Results saved to {output_file}')
-
-# Ask user which outputs to generate
-generate_mspdi_output = input("Generate Microsoft Project file? (yes/no): ").strip().lower() == "yes"
-generate_excel_output = input("Generate Excel file? (yes/no): ").strip().lower() == "yes"
-
-if generate_mspdi_output:
-    generate_mspdi('tasks.json', 'solution.json', 'solution.xml')
-    print('Microsoft Project file generated as solution.xml')
-
-if generate_excel_output:
-    print_excel('tasks.json', 'solution.json', 'solution.xlsx')
-    print('Excel file generated as solution.xlsx')
+if __name__ == "__main__":
+    main()

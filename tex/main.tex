@@ -151,7 +151,7 @@ Las tareas utilizan dos tipos de recursos: cuadrillas y equipos. Las cuadrillas 
 Por otro lado, algunos equipos son específicos de cada cuadrilla, por lo que no implican una restricción en el proceso de programación; pero existen recursos compartidos, como grúas y camiones, cuya disponibilidad debe gestionarse cuidadosamente, ya que no pueden estar en dos ubicaciones al mismo tiempo. Por lo tanto, el programador debe coordinar no solo las cuadrillas y sus horarios, sino también la disponibilidad y el uso eficiente de estos equipos compartidos, garantizando que no se generen conflictos o retrasos debido a la sobreasignación de recursos críticos.
 
 \section{Definiciones teóricas}
-En este apartado se presentan las definiciones y conceptos teóricos fundamentales para comprender el enfoque del proyecto. Se abordan el Problema de Programación de Proyectos con Restricciones de Recursos (RCPSP), los algoritmos de Programación por Restricciones y Satisfacción de Restricciones (CP SAT), y los algoritmos genéticos. Estos conceptos son esenciales para entender las metodologías utilizadas en la optimización de la programación de actividades de mantenimiento.
+En este apartado se presentan las definiciones y conceptos teóricos fundamentales para comprender el enfoque del proyecto. Se abordan el Problema de Programación de Proyectos con Restricciones de Recursos (RCPSP) y los algoritmos de Programación por Restricciones y Satisfacción de Restricciones (CP SAT). Estos conceptos son esenciales para entender las metodologías utilizadas en la optimización de la programación de actividades de mantenimiento.
 
 \subsection{Problema de Programación de Proyectos con Restricciones de Recursos (RCPSP)}
 El RCPSP (Resource-Constrained Project Scheduling Problem) es un problema clásico en el campo de la investigación operativa y la gestión de proyectos. Consiste en programar un conjunto de actividades interrelacionadas, considerando restricciones tanto de precedencia entre tareas como de disponibilidad limitada de recursos. El objetivo principal es determinar el calendario óptimo que minimice la duración total del proyecto (makespan) o que optimice otro criterio relevante, como costos o utilización de recursos.
@@ -183,28 +183,6 @@ Las restricciones de recursos se manejan mediante la restricción cumulativa, qu
 La función objetivo en estos problemas suele ser minimizar el makespan, es decir, el tiempo total del proyecto. Los algoritmos CP-SAT permiten integrar esta función objetivo en el modelo, buscando no solo soluciones factibles que satisfagan todas las restricciones, sino también optimizar este criterio para mejorar la eficiencia global del proyecto.
 
 Una de las ventajas clave de los algoritmos CP-SAT es su eficiencia en el manejo de restricciones complejas, permitiendo resolver problemas NP-Hard como el RCPSP en tiempos razonables. Su flexibilidad permite incorporar fácilmente nuevas restricciones o modificar las existentes sin reestructurar todo el modelo, lo que es especialmente útil en entornos dinámicos donde las condiciones pueden cambiar. Además, son capaces de encontrar soluciones de alta calidad, óptimas o cercanas al óptimo, lo cual es esencial en contextos industriales donde la optimización de recursos y tiempos es crítica.
-
-\subsection{Algoritmos Genéticos}
-Los algoritmos genéticos son una clase de algoritmos metaheurísticos inspirados en los procesos de evolución natural y genética poblacional. Estos algoritmos emulan mecanismos biológicos como la selección natural, el cruce (crossover) y la mutación para explorar el espacio de soluciones de un problema y encontrar soluciones óptimas o cercanas al óptimo.
-
-En problemas de optimización complejos donde el espacio de soluciones es vasto y los métodos exactos son impracticables debido a su complejidad computacional, los algoritmos genéticos ofrecen una alternativa eficiente. Aunque no garantizan encontrar la solución óptima global, su capacidad para explorar múltiples regiones del espacio de soluciones simultáneamente aumenta las probabilidades de acercarse al óptimo en tiempos razonables.
-
-El funcionamiento de un algoritmo genético se basa en la evolución de una población de individuos, donde cada individuo representa una solución potencial al problema. Se comienza generando una población inicial de individuos, generalmente de forma aleatoria, para cubrir una amplia variedad de soluciones posibles. Cada individuo está codificado de una manera que refleja una solución al problema; esta codificación se conoce como cromosoma o genotipo.
-
-Cada individuo es evaluado mediante una función de aptitud (fitness function) que mide qué tan buena es la solución en relación con el objetivo del problema. Esta función es crucial, ya que guía el proceso evolutivo al indicar cuáles individuos son más aptos y, por lo tanto, tienen mayores probabilidades de transmitir sus características a la siguiente generación.
-
-Para generar nuevas soluciones, se aplican operadores genéticos que simulan procesos biológicos:
-\begin{itemize}
-  \item Selección: Se eligen individuos de la población actual para reproducirse, generalmente dando preferencia a aquellos con mayor aptitud. Métodos comunes incluyen la selección por torneo o por ruleta.
-  \item Cruzamiento (Crossover): Se combinan pares de individuos seleccionados para crear descendientes que heredan características de ambos padres. El cruce permite explorar nuevas combinaciones de soluciones y es esencial para recombinar información genética de manera efectiva.
-  \item Mutación: Se introducen pequeñas alteraciones aleatorias en los descendientes para mantener la diversidad genética en la población y evitar la convergencia prematura hacia óptimos locales. La mutación ayuda a explorar áreas del espacio de soluciones que podrían no ser alcanzadas solo mediante el cruzamiento.
-  
-\end{itemize}
-
-La nueva generación de individuos reemplaza parcial o totalmente a la población anterior, dependiendo de la estrategia de reemplazo utilizada. Este proceso se repite durante varias generaciones hasta que se cumple un criterio de parada, como alcanzar un número máximo de generaciones o lograr una aptitud satisfactoria.
-
-El Problema de Programación de Proyectos con Restricciones de Recursos (RCPSP) es un problema complejo de optimización combinatoria, reconocido por ser NP-Hard. Aplicar algoritmos genéticos al RCPSP implica adaptar los componentes del algoritmo para manejar las restricciones específicas del problema, como las precedencias entre tareas, las capacidades limitadas de los recursos y las ventanas de tiempo.
-Una de las primeras decisiones al aplicar algoritmos genéticos al RCPSP es cómo representar cada solución (individuo). Una representación común es utilizar una permutación de los IDs de las tareas, que indica el orden en que las tareas serán programadas. Esta permutación debe respetar las restricciones de precedencia; es decir, si una tarea B depende de la finalización de una tarea A, A debe aparecer antes que B en la permutación.
 
 
 \section{Aplicación de los conceptos teóricos al problema}
@@ -486,9 +464,119 @@ Este archivo XML será utilizado en dos etapas posteriores del flujo de trabajo:
 
 \section{Flujo de Trabajo}
 
-El backend de la solución está diseñado para recibir la información de programación en un formato estructurado, procesarla mediante un algoritmo de optimización y generar como salida una planificación completa que cumpla con las restricciones operativas. Este flujo se divide en varias etapas, que van desde la ingesta de datos hasta la salida de los resultados en un formato compatible con las herramientas de planificación de la empresa.
+El backend de la solución está diseñado para estructurar y procesar la información de programación en cinco etapas secuenciales, asegurando una transición fluida desde los datos iniciales hasta los resultados finales. Estas etapas abarcan desde la ingesta de datos en su formato original hasta la generación de un cronograma optimizado y formatos exportables para su uso práctico. A continuación, se describen las cinco partes que componen el flujo de trabajo:
 
-\subsection{Algoritmo de Programación con Restricciones}
+\begin{enumerate}
+    \item \textbf{Pre-Procesamiento}: En esta etapa, se toman los datos de las tareas desde distintas fuentes, ya sea conectándose directamente a un sistema ERP, cargando archivos de Microsoft Project o utilizando archivos con datos de las tareas en otros formatos. El objetivo de esta etapa es realizar un procesamiento inicial que estandarice los datos, asegurando que todos los campos relevantes estén definidos y estructurados de manera uniforme.
+
+    \item \textbf{Input}: Una vez estandarizados los datos, se transforman al formato requerido por el solver. Esto incluye definir las variables necesarias, como la duración de las tareas, los recursos requeridos, las ventanas de tiempo y las relaciones de precedencia, de forma que el modelo de optimización pueda procesarlas correctamente.
+
+    \item \textbf{Solver}: En esta etapa, se utiliza el modelo CP-SAT de \texttt{OR-Tools} para resolver el problema de programación. Este modelo toma los datos en el formato especificado, aplica las restricciones definidas (como ventanas de tiempo, disponibilidad de recursos y precedencias), y encuentra una solución que maximice el cumplimiento de las tareas según su prioridad y criticidad.
+
+    \item \textbf{Output}: Una vez que el solver ha calculado una solución, esta se devuelve en un archivo JSON. Este archivo contiene información detallada sobre el estado de programación de cada tarea, incluyendo si fue programada, sus tiempos de inicio y finalización, y los recursos asignados.
+
+    \item \textbf{Post-Procesamiento}: Finalmente, la información generada por el solver se procesa para producir outputs prácticos. Esto incluye la generación de una carta GANTT interactiva que permite visualizar y analizar el cronograma. Además, esta información puede ser exportada en distintos formatos, como archivos compatibles con Microsoft Project u otras herramientas de gestión, para integrarse fácilmente en los flujos de trabajo existentes.
+\end{enumerate}
+
+Este flujo de trabajo modular garantiza flexibilidad y adaptabilidad, permitiendo procesar datos de diversas fuentes, optimizar la programación bajo restricciones complejas y generar resultados en formatos útiles para los usuarios finales. A continuación, se describen en detalle cada una de las etapas mencionadas.
+
+
+\subsection{Pre Procesamiento}
+
+
+El pre-procesamiento constituye la primera etapa del flujo de trabajo y se encarga de recibir y preparar la información de entrada relacionada con las tareas, el personal y los equipos. Esta etapa es fundamental para garantizar que los datos sean consistentes, estén limpios y normalizados, permitiendo al solver trabajar de manera eficiente y confiable. Dependiendo de la fuente de los datos (por ejemplo, un sistema ERP o un archivo externo), se realizan las siguientes operaciones clave:
+
+\begin{itemize}
+    \item \textbf{Corrección de discrepancias}: Los datos se revisan para detectar y corregir inconsistencias. Por ejemplo, si una tarea contiene una fecha requerida que es anterior a su fecha de inicio más temprana, esta discrepancia se ajusta automáticamente. Asimismo, se corrigen formatos erróneos en campos como fechas y duraciones para garantizar su compatibilidad con las etapas posteriores.
+
+    \item \textbf{Cuantización de ventanas horarias}: Para que el solver pueda trabajar con números enteros, las ventanas horarias se cuantizan en intervalos de 15 minutos. Esto significa que la duración de una tarea de una hora se representa como 4 unidades en el solver, mientras que una tarea de 15 minutos se representa como una unidad. Este proceso permite que las restricciones temporales sean manejadas de manera eficiente dentro del modelo de optimización.
+
+    \item \textbf{Segmentación en subconjuntos}: Con el objetivo de mejorar la eficiencia del solver, las tareas se agrupan en subconjuntos relacionados. Este proceso se basa en identificar conexiones entre tareas mediante relaciones compartidas, como recursos comunes o dependencias temporales. La segmentación permite particionar el problema en componentes más manejables, reduciendo la complejidad computacional.
+
+    \item \textbf{Generación de formato estándar}: Una vez completadas las etapas de limpieza y normalización, los datos se estructuran en un archivo JSON. Este archivo contiene toda la información relevante, como la duración de las tareas, los recursos requeridos, las ventanas horarias y las dependencias, en un formato compatible con la primera etapa del solver.
+\end{itemize}
+
+En conjunto, el pre-procesamiento asegura que los datos de entrada cumplan con los requisitos técnicos del modelo de optimización, eliminando posibles inconsistencias y adaptando los datos a un formato uniforme y eficiente. Esta etapa es crucial para garantizar el éxito de las etapas posteriores en el flujo de trabajo.
+
+
+\subsection{División en Subconjuntos de Tareas}
+
+Para abordar el problema de programación de tareas de manera más eficiente, se implementó una estrategia de simplificación basada en la división del conjunto de tareas en subconjuntos o \textit{subsets}. Este enfoque busca reducir la complejidad computacional y permitir un tratamiento más localizado de las restricciones y dependencias entre las tareas.
+
+\subsubsection{Razonamiento Teórico}
+
+Las tareas analizadas vienen previamente asignadas a cuadrillas específicas (\textit{Squads}), que son los grupos de trabajo responsables de ejecutarlas. En principio, esta asignación podría sugerir que el problema se puede simplificar al optimizar las tareas cuadrilla por cuadrilla, de forma independiente. Es decir, las tareas de cada cuadrilla podrían programarse separadamente, y luego las soluciones podrían combinarse para obtener un cronograma general.
+
+Sin embargo, esta estrategia no es viable debido a la existencia de herramientas compartidas (\textit{Tools}). En algunos casos, tareas asignadas a cuadrillas distintas están relacionadas porque utilizan las mismas herramientas. Estas relaciones generan interdependencias que impiden tratar las cuadrillas como sistemas completamente independientes. Por lo tanto, para obtener una solución factible y eficiente, es necesario considerar las tareas y sus dependencias de forma global.
+
+La estrategia propuesta se basa en identificar estas relaciones entre tareas para determinar qué tareas están efectivamente conectadas entre sí. Esto permite dividir el problema en subconjuntos más pequeños, pero manteniendo la coherencia de las dependencias.
+
+\subsubsection{Metodología}
+
+El proceso para dividir las tareas en subconjuntos consta de los siguientes pasos principales:
+
+\begin{enumerate}
+    \item \textbf{Construcción del grafo:}  
+    Se representa el conjunto de tareas como un grafo no dirigido, donde:
+    \begin{itemize}
+        \item Cada nodo representa una cuadrilla (\textit{Squad}) o una herramienta (\textit{Tool}).
+        \item Se añade una arista entre una cuadrilla y una herramienta si ambas están asociadas a la misma tarea.
+    \end{itemize}
+    Este grafo modela las dependencias entre las cuadrillas y las herramientas, proporcionando una representación visual y analítica de las relaciones entre las tareas.
+    
+    \item \textbf{Identificación de componentes conexas:}  
+    Se identifican las componentes conexas del grafo, que representan grupos de nodos interrelacionados. Cada componente conexa corresponde a un subconjunto de tareas que comparten cuadrillas, herramientas o ambas. Esto garantiza que las tareas que están relacionadas por el uso de herramientas compartidas permanezcan juntas.
+    
+    \item \textbf{Creación de subconjuntos de tareas:}  
+    Para cada componente conexa identificada, se agrupan las tareas asociadas a las cuadrillas y herramientas involucradas en esa componente. Estas tareas conforman un subconjunto, que puede ser tratado de forma independiente en el proceso de optimización.
+    
+    \item \textbf{Identificación de tareas independientes:}  
+    Aquellas tareas que no están conectadas a otras (es decir, no comparten herramientas ni tienen dependencias externas) se agrupan como subconjuntos individuales. Estas tareas pueden ser programadas de manera autónoma sin afectar a otros grupos.
+\end{enumerate}
+
+\subsubsection{Ventajas del Enfoque}
+
+Este método ofrece varias ventajas prácticas y teóricas:
+\begin{itemize}
+    \item \textbf{Reducción de la complejidad:} Al dividir el problema en subconjuntos más pequeños, se disminuyen el número de variables y restricciones que deben resolverse simultáneamente.
+    \item \textbf{Conservación de dependencias relevantes:} Las relaciones importantes, como el uso compartido de herramientas, se mantienen dentro de cada subconjunto.
+    \item \textbf{Paralelización:} Los subconjuntos independientes pueden resolverse de forma paralela, acelerando el tiempo total de cálculo.
+    \item \textbf{Adaptabilidad:} Este enfoque permite identificar de forma explícita las interdependencias en los datos, haciendo que el modelo sea más transparente y modular.
+\end{itemize}
+
+\subsubsection{División en Subsets}
+
+En nuestro dataset se identificaron 15 \textit{subsets} de tareas relacionadas. Estos \textit{subsets} presentan la siguiente distribución:
+\begin{itemize}
+    \item El \textbf{subset más grande} contiene aproximadamente el 68\% del total de tareas, representando la mayor concentración de dependencias entre cuadrillas y herramientas.
+    \item Los \textbf{subsets restantes} contienen entre el 1\% y el 10\% de las tareas, lo que permite tratarlos como grupos más pequeños y manejables dentro del proceso de optimización.
+\end{itemize}
+
+Esta división refleja la estructura del problema, destacando la existencia de un gran grupo de tareas interconectadas junto con varios grupos más pequeños que pueden ser tratados de forma independiente en la mayoría de los casos.
+
+
+\subsection{Input}
+
+La etapa de \textit{Input} se encarga de transformar el archivo JSON generado en la etapa de pre-procesamiento en las estructuras de datos requeridas por el solver. Estas estructuras están diseñadas para representar de manera eficiente la información de las tareas, recursos y restricciones, adaptándolas al formato interno que utiliza el modelo de optimización CP-SAT. 
+
+A partir del archivo JSON, se generan los siguientes arreglos principales:
+
+\begin{itemize}
+    \item \textbf{Array de tareas}: Contiene información detallada sobre cada tarea, como su duración, los recursos requeridos y las herramientas necesarias. Este array es esencial para definir las variables principales del modelo, como el inicio y fin de cada tarea.
+
+    \item \textbf{Array de ventanas de tiempo}: Para cada tarea, se crea un array que define su ventana temporal permitida, especificando el tiempo más temprano y más tardío en el que puede comenzar. Esto permite que el solver respete las restricciones temporales durante el proceso de optimización.
+
+    \item \textbf{Array de capacidades de recursos}: Este array representa la capacidad máxima disponible de cada recurso (por ejemplo, el número de trabajadores en una cuadrilla o la disponibilidad de una herramienta específica). El solver utiliza esta información para garantizar que no se excedan las capacidades de los recursos en ningún momento.
+
+    \item \textbf{Array de agrupaciones de tareas}: Define los grupos de tareas relacionadas, como aquellas que deben realizarse en secuencia o que comparten recursos. Estas agrupaciones son esenciales para implementar restricciones de precedencia y coordinar la asignación de recursos entre tareas interdependientes.
+
+    \item \textbf{Array de intervalos prohibidos}: Para cada recurso, se define un array que especifica los intervalos de tiempo en los que no está disponible. Esta información permite al solver evitar programar tareas que dependan de recursos ocupados o fuera de servicio en determinados momentos.
+\end{itemize}
+
+La generación de estos arrays es un paso clave para preparar los datos de entrada al solver, permitiendo que toda la información de las tareas y restricciones esté estructurada de manera óptima para el proceso de optimización. Esta etapa asegura que los datos se integren correctamente en el modelo y se procesen de forma eficiente.
+
+
+\subsection{Solver}
 
 
 En este caso, la optimización de la programación de actividades en el backend se realiza mediante el uso de \texttt{OR-Tools} y el modelo de programación por restricciones CP-SAT de Google. Este modelo toma como entrada el conjunto de tareas, recursos y restricciones descritas previamente y calcula un cronograma que busca maximizar el cumplimiento de las tareas según sus prioridades y ventanas de tiempo, al mismo tiempo que respeta la disponibilidad de los recursos. A continuación, se describen los elementos técnicos y parámetros clave utilizados en la configuración del modelo.
@@ -519,11 +607,56 @@ La función objetivo está orientada a minimizar la penalización por no program
 
 El resultado de la optimización se verifica y se genera un archivo XML que contiene el estado de programación de cada tarea, incluyendo las fechas y horas de inicio y finalización si la tarea fue programada. Este archivo, compatible con herramientas de gestión como Microsoft Project, se emplea para visualizar los resultados en el frontend y para integrarse con las plataformas de la empresa mediante el módulo de integración.
 
-\subsection{Algoritmo Genético}
-TBA
+\subsection{Output}
 
-\subsection{Combinación CP-SAT y Algoritmo Genético}
-TBA
+La etapa de \textit{Output} se encarga de procesar los resultados generados por el solver y estructurarlos en un formato JSON simple y claro. Este archivo JSON contiene, para cada tarea, información clave sobre su estado de programación y su tiempo de inicio, lo que facilita la interpretación de los resultados y su integración con las etapas posteriores del flujo de trabajo.
+
+El archivo JSON generado incluye las siguientes variables por cada tarea:
+
+\begin{itemize}
+    \item \textbf{Scheduled}: Indica si la tarea fue programada o no. Toma el valor de 1 si la tarea fue programada exitosamente y 0 si no pudo ser programada debido a conflictos de recursos o restricciones de tiempo.
+    
+    \item \textbf{Start}: Especifica la fecha y hora en la que comienza la tarea, en caso de que haya sido programada. Si la variable \texttt{Scheduled} es 0, entonces \texttt{Start} será \texttt{null}, indicando que la tarea no tiene una asignación en el cronograma.
+\end{itemize}
+
+Un ejemplo de salida en formato JSON es el siguiente:
+
+\begin{verbatim}
+{
+    "TaskID_1": {
+        "Scheduled": 1,
+        "Start": "2023-07-01T08:00:00"
+    },
+    "TaskID_2": {
+        "Scheduled": 0,
+        "Start": null
+    },
+    ...
+}
+\end{verbatim}
+
+Este formato simple permite que los resultados sean fácilmente procesados por herramientas externas y módulos posteriores, como la generación de cartas Gantt y la exportación a formatos compatibles con software de gestión de proyectos. La estructura del JSON asegura que tanto las tareas programadas como las no programadas puedan identificarse de manera rápida y eficiente.
+
+\subsection{Post-Procesamiento}
+
+La etapa de \textit{Post-Procesamiento} tiene como objetivo transformar los resultados del solver en formatos finales que sean compatibles con diversas herramientas de gestión y análisis. Esta etapa toma como entrada el JSON generado por el solver junto con los datos originales de entrada, y prepara archivos que consolidan toda la información relevante de las tareas y los recursos programados.
+
+Durante esta etapa, se generan los siguientes outputs principales:
+
+\begin{itemize}
+    \item \textbf{Archivo XML para Microsoft Project}: Este archivo contiene toda la información de las tareas programadas, incluyendo su hora de inicio, duración y hora de finalización. Es compatible con Microsoft Project, permitiendo que los resultados puedan integrarse fácilmente en esta herramienta para visualización y gestión avanzada.
+
+    \item \textbf{Archivo XLSX para Excel}: Se genera una carta Gantt en formato Excel que organiza las tareas en un cronograma visual. Este archivo incluye detalles como:
+    \begin{itemize}
+        \item Hora de inicio y hora de finalización de cada tarea.
+        \item Duración de las tareas en unidades temporales definidas.
+        \item Recursos asignados a cada tarea.
+    \end{itemize}
+
+    \item \textbf{Integración con APIs o plataformas empresariales}: Los resultados también pueden ser enviados a las plataformas de gestión existentes en la empresa, como un ERP o sistemas similares, utilizando integraciones basadas en APIs. Esto permite que los datos programados sean automáticamente incorporados en el flujo de trabajo operativo de la organización.
+\end{itemize}
+
+Los archivos finales consolidados proporcionan una representación completa de la programación, unificando la información de las tareas y recursos programados, así como los tiempos asociados. Esto asegura que los resultados sean accesibles y utilizables en una variedad de herramientas y entornos, facilitando la comunicación y el análisis de los cronogramas generados.
 
 \section{Resultados Preliminares}
 
@@ -556,5 +689,60 @@ Sin embargo, para hacer la solución más práctica en un entorno de producción
 Asimismo, será clave el desarrollo de un frontend que permita a los usuarios visualizar, editar y aprobar la programación de forma intuitiva, integrando la solución a la operación diaria de la empresa. Estos pasos adicionales completarán el sistema, optimizándolo tanto en tiempos de respuesta como en facilidad de uso.
 
 
+
+
+\section{Resultados}
+
+El desarrollo e implementación del modelo de optimización ha generado resultados prometedores, tanto en términos de la calidad del cronograma producido como en los beneficios operativos proyectados para el equipo de programación. A continuación, se presentan estadísticas clave y una evaluación de los ahorros potenciales derivados del uso de esta herramienta.
+
+\subsection{Mejoras en la duración total del cronograma}
+
+El análisis comparativo entre el cronograma generado manualmente y el producido por el solver muestra una reducción significativa en la duración total del proyecto (\textit{makespan}). Con los datos del conjunto original, el \textit{makespan} inicial era de 25,3 días, mientras que el modelo de optimización logró reducir este valor a 20,5 días, representando una mejora del 18,9\%. Este ahorro de tiempo no solo implica una mayor eficiencia en la ejecución de tareas, sino que también reduce el tiempo en que los equipos e instalaciones permanecen fuera de operación, impactando positivamente en los costos operativos.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Indicador}            & \textbf{Valor}       \\ \hline
+Makespan original             & 25,3 días           \\ \hline
+Makespan optimizado           & 20,5 días           \\ \hline
+Reducción en makespan         & 18,9\%              \\ \hline
+\end{tabular}
+\caption{Reducción del \textit{makespan} tras la optimización.}
+\label{tab:makespan}
+\end{table}
+
+\subsection{Ahorros estimados en tiempo del equipo de programación}
+
+Actualmente, el equipo de programación está compuesto por tres personas que dedican un promedio de 8 horas a la semana a la generación manual del cronograma. Con la implementación de esta herramienta, se estima que dicho tiempo podría reducirse considerablemente, ya que el solver automatiza gran parte del proceso, incluyendo la asignación de tareas y el balanceo de recursos. Esto representa un ahorro semanal estimado de 8 horas, que puede ser redirigido hacia otras actividades de mayor valor agregado, como la validación final o la coordinación con otras áreas.
+
+Además, gracias a la capacidad del solver para realizar ajustes rápidos, el equipo podrá integrar tareas nuevas o modificar el cronograma de manera ágil, especialmente en situaciones donde surjan cambios inesperados en la planificación o disponibilidad de recursos. Esta funcionalidad es crucial para mantener la flexibilidad operativa y asegurar que el cronograma refleje las necesidades actuales en tiempo real.
+
+\subsection{Impacto en la reducción de errores humanos}
+
+Uno de los beneficios más significativos, aunque difícil de cuantificar en este momento, es la reducción de errores humanos. En los procesos manuales, es común que ocurran problemas como:
+\begin{itemize}
+    \item Recursos doblemente agendados.
+    \item Cuadrillas asignadas a tareas sin los recursos necesarios.
+    \item Equipos programados en horarios donde no están disponibles.
+\end{itemize}
+
+Estos errores pueden generar retrasos en las operaciones de mantenimiento, aumentando el tiempo de inactividad de los equipos. En un entorno productivo, estos tiempos adicionales pueden traducirse en costos significativos debido a la falta de disponibilidad de equipos críticos. La automatización del proceso con un solver minimiza estas situaciones, ya que se asegura de cumplir todas las restricciones operativas de manera estricta.
+
+\subsection{Proyección de ahorros generales}
+
+Aunque no se puede calcular un valor exacto, la reducción en errores y el aumento en la eficiencia del proceso tienen el potencial de generar ahorros importantes para la empresa. Al minimizar los problemas operativos y los tiempos de inactividad no planificados, se reduce el impacto financiero asociado al mantenimiento no eficiente. Además, la capacidad de actualizar rápidamente el cronograma reduce la dependencia de procesos iterativos y manuales, haciendo que el equipo de programación sea más productivo y eficiente.
+
+\subsection{Resumen de beneficios}
+
+En resumen, los principales beneficios obtenidos mediante la implementación del solver son los siguientes:
+\begin{itemize}
+    \item Reducción del \textit{makespan} en un 18,9\%, optimizando la duración total del cronograma.
+    \item Ahorro estimado de 8 horas semanales en tiempo del equipo de programación.
+    \item Mayor flexibilidad para realizar ajustes rápidos y manejar cambios intempestivos en el cronograma.
+    \item Reducción en errores humanos, mejorando la precisión de la programación y minimizando los costos asociados a problemas operativos.
+\end{itemize}
+
+Estos resultados preliminares destacan el potencial del modelo para transformar el proceso de programación, haciéndolo más eficiente, preciso y adaptado a las necesidades dinámicas de la operación.
 
 \end{document}
