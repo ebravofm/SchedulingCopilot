@@ -1,8 +1,5 @@
-import jpype
-jpype.startJVM()
 import json
 import argparse
-from msproject import generate_mspdi
 from solver import run_solver
 from utils import print_excel
 
@@ -32,6 +29,10 @@ def main():
 
     # Exporta a XML si es solicitado
     if args.export_to_xml:
+        import jpype
+        jpype.startJVM()
+        from msproject import generate_mspdi
+
         generate_mspdi(args.task_file, args.output_file, args.xml_file)
         print(f"Microsoft Project file generated as {args.xml_file}")
 
