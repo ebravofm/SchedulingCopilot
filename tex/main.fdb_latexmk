@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1733117817.85997 "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" "main.pdf" "main" 1733117819.04923 0
-  "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" 1733117816.15721 75944 d143a0f2c449fa10c6798c0fca4952c3 ""
+["pdflatex"] 1733367964.20933 "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" "main.pdf" "main" 1733367965.36259 0
+  "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" 1733367962.7303 60499 3a45a47b1de4caea1d2eedecfbc6308e ""
   "/Users/laptop/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/cm-mf-extra-bold/cmbcsc10.600pk" 1731202822.32429 10972 1ed6a5d8ee63c0437e713199bbc8927d ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -170,10 +170,10 @@
   "imgs/ModulosDesarrollo.png" 1731213645.83591 127100 dd5133403c5837fa5a0649ad79965426 ""
   "imgs/UC Logo Grande.png" 1731200840.07745 172036 3bbdf8a73ac431a7111ec246c673fd47 ""
   "imgs/UC Logo.png" 1723994970.42055 59116 5e24b430aa1a2264b0c5234af3a48a8e ""
-  "main.aux" 1733117818.95802 6865 f106d59ec22dcfd029e55db720ba149b "pdflatex"
-  "main.out" 1733117818.95944 8756 9f7af7ccffc223e1626c25c3c049d5d1 "pdflatex"
-  "main.tex" 1733117816.15721 75944 d143a0f2c449fa10c6798c0fca4952c3 ""
-  "main.toc" 1733117818.9598 4163 98ba517bd32a222cfd911ddf3cd9915f "pdflatex"
+  "main.aux" 1733367965.27469 5994 999625c94db63b2055209dcc794afd37 "pdflatex"
+  "main.out" 1733367965.27612 7007 d5d97339f56da2be16e5c8528793ada4 "pdflatex"
+  "main.tex" 1733367962.7303 60499 3a45a47b1de4caea1d2eedecfbc6308e ""
+  "main.toc" 1733367965.27633 3398 347d913e1cccf8505f29ac690088e755 "pdflatex"
   (generated)
   "main.aux"
   "main.log"

@@ -281,36 +281,12 @@ INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
 OUTPUT main.toc
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -328,11 +304,22 @@ INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
-INPUT ./imgs/ModulosDesarrollo.png
-INPUT ./imgs/ModulosDesarrollo.png
-INPUT ./imgs/ModulosDesarrollo.png
-INPUT ./imgs/ModulosDesarrollo.png
-INPUT ./imgs/ModulosDesarrollo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -358,24 +345,17 @@ INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+INPUT ./imgs/ModulosDesarrollo.png
+INPUT ./imgs/ModulosDesarrollo.png
+INPUT ./imgs/ModulosDesarrollo.png
+INPUT ./imgs/ModulosDesarrollo.png
+INPUT ./imgs/ModulosDesarrollo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png

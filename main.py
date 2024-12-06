@@ -12,12 +12,12 @@ def main():
     # Configuración de argumentos para el CLI
     parser = argparse.ArgumentParser(description="Run solver and export results.")
     parser.add_argument("-s", "--split-tasks", action="store_true", help="Enable splitting tasks during solving.")
-    parser.add_argument("-x", "--export-to-xml", action="store_true", help="Generate a Microsoft Project XML file.")
-    parser.add_argument("-e", "--export-to-xlsx", action="store_true", help="Generate an Excel file.")
+    parser.add_argument("-p", "--export-to-xml", action="store_true", help="Generate a Microsoft Project XML file.")
+    parser.add_argument("-x", "--export-to-xlsx", action="store_true", help="Generate an Excel file.")
     parser.add_argument("-t", "--task-file", type=str, default="tasks.json", help="Path to the task file (default: tasks.json).")
     parser.add_argument("-o", "--output-file", type=str, default="solution.json", help="Path to save the JSON output (default: solution.json).")
-    parser.add_argument("-X", "--xml-file", type=str, default="solution.xml", help="Path for the XML output (default: solution.xml).")
-    parser.add_argument("-E", "--xlsx-file", type=str, default="solution.xlsx", help="Path for the Excel output (default: solution.xlsx).")
+    parser.add_argument("-P", "--xml-file", type=str, default="solution.xml", help="Path for the XML output (default: solution.xml).")
+    parser.add_argument("-X", "--xlsx-file", type=str, default="solution.xlsx", help="Path for the Excel output (default: solution.xlsx).")
     args = parser.parse_args()
 
     # Ejecuta el solver
