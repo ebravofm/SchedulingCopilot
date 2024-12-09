@@ -18,20 +18,30 @@
 \contentsline {subsubsection}{\numberline {4.2.3}Restricciones}{11}{subsubsection.4.2.3}%
 \contentsline {subsubsection}{\numberline {4.2.4}Objetivo}{13}{subsubsection.4.2.4}%
 \contentsline {subsubsection}{\numberline {4.2.5}Resumen del Modelo}{13}{subsubsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.3}Detalle de Función Objetivo}{13}{subsection.4.3}%
 \contentsline {section}{\numberline {5}Flujo de Trabajo}{14}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Pre Procesamiento}{14}{subsection.5.1}%
-\contentsline {subsubsection}{\numberline {5.1.1}Detalle Segmentación en subconjuntos}{15}{subsubsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.2}Input}{16}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.1}Pre-Procesamiento}{15}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Segmentación en Subconjuntos}{16}{subsection.5.2}%
 \contentsline {subsection}{\numberline {5.3}Solver}{16}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Output}{17}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}Post-Procesamiento}{18}{subsection.5.5}%
-\contentsline {section}{\numberline {6}Resultados}{18}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Mejoras en la duración total del cronograma}{18}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Ahorros estimados en tiempo del equipo de programación}{19}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Impacto en la reducción de errores humanos}{19}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Proyección de ahorros generales}{19}{subsection.6.4}%
-\contentsline {subsection}{\numberline {6.5}Pasos a seguir}{19}{subsection.6.5}%
-\contentsline {subsubsection}{\numberline {6.5.1}Backend}{20}{subsubsection.6.5.1}%
-\contentsline {subsubsection}{\numberline {6.5.2}Frontend}{20}{subsubsection.6.5.2}%
-\contentsline {subsubsection}{\numberline {6.5.3}Integración con Plataformas de la Empresa}{21}{subsubsection.6.5.3}%
-\contentsline {subsection}{\numberline {6.6}Resumen de beneficios}{21}{subsection.6.6}%
+\contentsline {subsection}{\numberline {5.4}Post-Procesamiento}{17}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Resultados y Análisis}{17}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Descripción del Dataset}{18}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Ajuste de Parámetros para la Función Objetivo}{19}{subsection.6.2}%
+\contentsline {paragraph}{Resultados por Configuración}{20}{section*.8}%
+\contentsline {paragraph}{Justificación de la Configuración Elegida}{20}{section*.10}%
+\contentsline {paragraph}{Visualización de los Resultados}{20}{section*.11}%
+\contentsline {subsection}{\numberline {6.3}Resultados de la Segmentación en Subconjuntos}{21}{subsection.6.3}%
+\contentsline {paragraph}{Distribución de Tareas}{22}{section*.14}%
+\contentsline {paragraph}{Paralelización del Procesamiento}{22}{section*.15}%
+\contentsline {paragraph}{Análisis de Desempeño}{22}{section*.16}%
+\contentsline {paragraph}{Relevancia de la Segmentación}{22}{section*.17}%
+\contentsline {paragraph}{Conclusión sobre la Segmentación}{23}{section*.18}%
+\contentsline {subsection}{\numberline {6.4}Mejoras en la duración total del cronograma}{23}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Ahorros estimados en tiempo del equipo de programación}{23}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Impacto en la reducción de errores humanos}{23}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}Proyección de ahorros generales}{24}{subsection.6.7}%
+\contentsline {subsection}{\numberline {6.8}Pasos a seguir}{24}{subsection.6.8}%
+\contentsline {subsubsection}{\numberline {6.8.1}Backend}{25}{subsubsection.6.8.1}%
+\contentsline {subsubsection}{\numberline {6.8.2}Frontend}{25}{subsubsection.6.8.2}%
+\contentsline {subsubsection}{\numberline {6.8.3}Integración con Plataformas de la Empresa}{25}{subsubsection.6.8.3}%
+\contentsline {subsection}{\numberline {6.9}Resumen de beneficios}{25}{subsection.6.9}%

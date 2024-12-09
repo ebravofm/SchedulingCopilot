@@ -3,7 +3,6 @@ import argparse
 from solver import run_solver
 from utils import print_excel
 
-# Inicializa la JVM
 
 def main():
     # Configuración de argumentos para el CLI

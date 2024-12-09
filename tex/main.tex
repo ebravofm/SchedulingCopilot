@@ -14,6 +14,9 @@
 \usepackage{parskip}
 \usepackage{tcolorbox}
 \usepackage{bold-extra}
+\usepackage{array} % Para definir ancho de columnas y word wrapping
+\usepackage{makecell} % Para ajustar texto dentro de las celdas
+
 
 \setlength{\parskip}{1em}  % Ajusta la distancia entre párrafos
 \setlist[itemize]{noitemsep}
@@ -258,7 +261,7 @@ Tenemos los siguientes elementos:
 - \textbf{Recursos}: Un conjunto \( R = \{R_0, R_1, \dots, R_m\} \), donde cada recurso \( R_j \) tiene:
   \begin{itemize}
     \item Una capacidad \( P(R_j) \in \mathbb{N} \).
-    \item Un tipo \( \text{Tipo}(R_j) \in \{0, 1\} \). Donde 0 indica que el recurso es una cuadrilla y 1 indica que es un equipo compartido.
+    \item Un tipo \( \text{Tipo}(R_j) \in \{0, 1\} \). Donde 0 indica que el recurso es una cuadrilla y 1 indica que es un equipo compartido. 
     \item Un conjunto de intervalos prohibidos \( I(R_j) = \{[a_1, b_1), [a_2, b_2), \dots\} \), durante los cuales el recurso no está disponible.
   \end{itemize}
 
@@ -373,7 +376,7 @@ x_i = 0 \implies S_i = 0, \quad E_i = 0
 
 \subsubsection{Objetivo}
 
-El objetivo es minimizar una combinación de tres componentes: el makespan global, el makespan de los grupos y la penalización asociada a no programar tareas de mayor prioridad. Para esto, se define una función de peso para cada tarea basada en su impacto:
+El objetivo es minimizar una combinación del makespan global y la penalización asociada a no programar tareas de mayor prioridad. Para esto, se define una función de peso para cada tarea basada en su impacto:
 
 \[
 w_i = (\text{Impact}_{\text{max}} + 1 - \text{Impact}_i)^3
@@ -381,32 +384,20 @@ w_i = (\text{Impact}_{\text{max}} + 1 - \text{Impact}_i)^3
 
 Donde \( \text{Impact}_{\text{max}} \) es el valor máximo de impacto entre todas las tareas.
 
-Tambien calculamos el makespan global como:
-\[
-\text{makespan} = \max_{T_i \in T} E_i
-\]
-
-El makespan de los grupos como:
-\[
-\text{makespan}_{G_k} = \max_{T_i \in G_k} E_i
-\]
-
-
 La función objetivo es:
 
 \[
-\text{Minimizar } Z = \alpha \cdot \text{makespan} + \beta \cdot \sum_{k=0}^{|G|-1} \text{makespan}_{G_k} + \gamma \cdot \sum_{i=0}^{n} w_i \cdot (1 - x_i)
+\text{Minimizar } Z = \alpha \cdot \text{makespan} + \beta \cdot \sum_{i=0}^{n} w_i \cdot (1 - x_i)
 \]
 
 Donde:
 
 \begin{itemize}
     \item \( \alpha \): Peso asociado al makespan global.
-    \item \( \beta \): Peso asociado al makespan de los grupos de tareas.
-    \item \( \gamma \): Peso asociado a la penalización por no programar tareas según su impacto.
+    \item \( \beta \): Peso asociado a la penalización por no programar tareas según su impacto.
 \end{itemize}
 
-Este enfoque busca una solución que equilibre la minimización del makespan global, la duración de los grupos de tareas, y la priorización de tareas críticas según su impacto.
+Este enfoque busca una solución que equilibre la minimización del makespan global y la priorización de tareas críticas según su impacto.
 
 \vspace{0.5cm}
 
@@ -420,179 +411,342 @@ El modelo presentado integra múltiples aspectos del problema de programación d
     \item \textbf{Intervalos prohibidos}: Evita la asignación de tareas durante periodos en los que los recursos no están disponibles.
     \item \textbf{Precedencia en grupos}: Mantiene el orden requerido entre tareas relacionadas.
     \item \textbf{Optimización basada en impacto}: Prioriza la programación de tareas más críticas según su impacto.
-    \item \textbf{Minimización del makespan}: Incluye la minimización del makespan global y del makespan de los grupos.
+    \item \textbf{Minimización del makespan}: Incluye la minimización del makespan global.
 \end{itemize}
 
 
+
+\subsection{Detalle de Función Objetivo}
+
+Dado que en la práctica puede surgir la posibilidad de que ciertas tareas no puedan ser programadas debido a restricciones como la indisponibilidad de recursos, ventanas de tiempo incompatibles o conflictos en los intervalos prohibidos, es crucial considerar un mecanismo que penalice esta situación. Por ello, la función objetivo incluye un componente que penaliza la no programación de tareas, especialmente aquellas de mayor prioridad según su impacto.
+
+Por otro lado, para equilibrar este aspecto con el objetivo de eficiencia general, también se incluye un segundo componente que penaliza la extensión total del tiempo necesario para completar todas las tareas programadas (makespan). Este enfoque asegura que el modelo busque simultáneamente programar tantas tareas como sea posible y minimizar el tiempo total requerido para su ejecución.
+
+La función objetivo combina estos dos componentes mediante parámetros de ponderación \( \alpha \) y \( \beta \), que permiten ajustar la importancia relativa de cada criterio en la optimización:
+
+\[
+\text{Minimizar } Z = \alpha \cdot \text{makespan} + \beta \cdot \sum_{i=0}^{n} w_i \cdot (1 - x_i)
+\]
+
+Donde:
+
+\begin{enumerate}
+    \item \textbf{Componente del Makespan (\( \alpha \cdot \text{makespan} \))}: Busca reducir la extensión global del horizonte temporal necesario para completar todas las tareas programadas, incentivando la eficiencia en el uso de recursos y tiempo.
+
+    \item \textbf{Componente de Penalización por Tareas no Programadas (\( \beta \cdot \sum_{i=0}^{n} w_i \cdot (1 - x_i) \))}: Penaliza la no programación de tareas, asignando un peso mayor a aquellas con un impacto crítico. Aquí, \( w_i \) es el peso asociado a la tarea \( T_i \), definido como:
+    \[
+    w_i = (\text{Impact}_{\text{max}} + 1 - \text{Impact}_i)^3
+    \]
+    Este peso aumenta de manera cúbica con la criticidad (bajo valor de \( \text{Impact}_i \)) de la tarea, priorizando explícitamente las tareas más importantes.
+\end{enumerate}
+
+\subsubsection*{Razonamiento detrás de la Ponderación}
+
+El uso de \( \alpha \) y \( \beta \) permite al modelo adaptarse a diferentes prioridades operativas. Por ejemplo:
+
+\begin{itemize}
+    \item Si \( \alpha \) es significativamente mayor que \( \beta \), el modelo favorecerá soluciones con makespan reducido, aun si algunas tareas críticas no se programan.
+    \item Si \( \beta \) domina sobre \( \alpha \), el enfoque se orientará a maximizar la programación de tareas críticas, incluso si eso resulta en un makespan mayor.
+\end{itemize}
+
+De esta manera, la función objetivo ofrece un balance flexible que puede ser ajustado según las necesidades específicas del problema, garantizando una solución óptima que considere tanto la completitud de las tareas como la eficiencia global.
+
+
+%%%%%%%%%%%%%%%%%%%
+
 \section{Flujo de Trabajo}
 
-El flujo de trabajo de la solución está diseñado para estructurar y procesar la información de programación en cinco etapas secuenciales, asegurando una transición fluida desde los datos iniciales hasta los resultados finales. Estas etapas abarcan desde la ingesta de datos en su formato original hasta la generación de un cronograma optimizado y formatos exportables para su uso práctico. A continuación, se describen las cinco partes que componen el flujo de trabajo:
+El flujo de trabajo de la solución se ha reorganizado en cuatro etapas secuenciales, cada una diseñada para estructurar y procesar la información de programación de manera eficiente. Estas etapas abarcan desde la ingesta y preparación de datos hasta la generación de un cronograma optimizado, maximizando la eficiencia computacional del solver. A continuación, se describen las cuatro partes que componen el flujo de trabajo:
 
 \begin{enumerate}
     \item \textbf{Pre-Procesamiento}: Se toman los datos de las tareas desde distintas fuentes (ERP, Microsoft Project, u otros formatos) y se estandarizan, asegurando que los campos relevantes estén estructurados de manera uniforme.
 
-    \item \textbf{Input}: Los datos estandarizados se transforman al formato requerido por el solver, incluyendo duración de tareas, recursos, ventanas de tiempo y precedencias.
+    \item \textbf{Segmentación en Subconjuntos}: Para mejorar la eficiencia del solver, las tareas se agrupan en subconjuntos relacionados. Este proceso identifica conexiones entre tareas mediante relaciones compartidas, como recursos comunes o dependencias temporales. La segmentación permite particionar el problema en componentes más manejables, reduciendo la complejidad computacional.
 
-    \item \textbf{Solver}: Se utiliza el modelo de CP de \textit{OR-Tools} para resolver el problema aplicando restricciones y maximizando el cumplimiento de tareas según su prioridad.
+    \item \textbf{Solver}: Se utiliza el modelo de CP de \textit{OR-Tools} para resolver cada subconjunto de manera independiente, aplicando restricciones y maximizando el cumplimiento de tareas según su prioridad.
 
-    \item \textbf{Output}: El solver genera un archivo JSON con el estado de programación de cada tarea, incluyendo tiempos de inicio, finalización y recursos asignados.
-
-    \item \textbf{Post-Procesamiento}: La salida del solver se procesa para generar un cronograma y archivos compatibles con herramientas como Microsoft Project, facilitando su integración en los flujos de trabajo.
+    \item \textbf{Post-Procesamiento}: Los resultados obtenidos del solver se consolidan y procesan para generar un cronograma unificado. Finalmente, se crean archivos compatibles con herramientas como Microsoft Project, facilitando su integración en los flujos de trabajo.
 \end{enumerate}
 
 Este flujo de trabajo modular garantiza flexibilidad y adaptabilidad, permitiendo procesar datos de diversas fuentes, optimizar la programación bajo restricciones complejas y generar resultados en formatos útiles para los usuarios finales. A continuación, se describen en detalle cada una de las etapas mencionadas.
 
 
-\subsection{Pre Procesamiento}
+A continuación se presentan las subsecciones adaptadas a la nueva organización propuesta. Ahora el flujo de trabajo se compone de cuatro etapas principales: Pre-Procesamiento, Segmentación en Subconjuntos, Solver y Post-Procesamiento. Las secciones originales de \textit{Input} y \textit{Output} se han integrado en las etapas inicial y final, respectivamente, para reflejar la nueva estructura modular.
 
+---
 
-El pre-procesamiento constituye la primera etapa del flujo de trabajo y se encarga de recibir y preparar la información de entrada relacionada con las tareas, el personal y los equipos. Esta etapa es fundamental para garantizar que los datos sean consistentes, estén limpios y normalizados, permitiendo al solver trabajar de manera eficiente y confiable. Dependiendo de la fuente de los datos (por ejemplo, un sistema ERP o un archivo externo), se realizan las siguientes operaciones clave:
+\subsection{Pre-Procesamiento}
+
+La etapa de Pre-Procesamiento constituye el punto de partida del flujo de trabajo, recibiendo y preparando la información procedente de diversas fuentes (como sistemas ERP, Microsoft Project u otros formatos externos). Esta fase garantiza que los datos sobre tareas, personal y equipos estén libres de inconsistencias, limpios y normalizados, facilitando así la labor posterior del solver.
+
+Las operaciones clave realizadas durante el Pre-Procesamiento incluyen:
 
 \begin{itemize}
-    \item \textbf{Corrección de discrepancias}: Los datos se revisan para detectar y corregir inconsistencias. Por ejemplo, si una tarea contiene una fecha requerida que es anterior a su fecha de inicio extrema, esta discrepancia se ajusta automáticamente. Asimismo, se corrigen formatos erróneos en campos como fechas y duraciones para garantizar su compatibilidad con las etapas posteriores.
+    \item \textbf{Corrección de discrepancias}: Se revisan y ajustan datos en caso de encontrar inconsistencias. Por ejemplo, si una tarea presenta una fecha límite previa a su fecha de inicio permitida, se corrige automáticamente. Asimismo, se unifican los formatos de fechas, duraciones y demás campos relevantes.
 
-    \item \textbf{Cuantización de ventanas horarias}: Para que el solver pueda trabajar con números enteros, las ventanas horarias se cuantizan en intervalos de 15 minutos. Esto significa que la duración de una tarea de una hora se representa como 4 unidades en el solver, mientras que una tarea de 15 minutos se representa como una unidad. Este proceso permite que las restricciones temporales sean manejadas de manera eficiente dentro del modelo de optimización.
-    
-    \item \textbf{Generación de formato estándar}: Una vez completadas las etapas de limpieza y normalización, los datos se estructuran en un archivo JSON. Este archivo contiene toda la información relevante, como la duración de las tareas, los recursos requeridos, las ventanas horarias y las dependencias, en un formato compatible con la primera etapa del solver.
+    \item \textbf{Cuantización de ventanas horarias}: Las duraciones se expresan en intervalos de 15 minutos para trabajar con unidades enteras en el solver. De este modo, una tarea de una hora se representa como 4 unidades, y una tarea de 15 minutos como 1 unidad, optimizando la eficiencia en el modelado de restricciones temporales.
 
-    \item \textbf{Segmentación en subconjuntos}: Con el objetivo de mejorar la eficiencia del solver, las tareas se agrupan en subconjuntos relacionados. Este proceso se basa en identificar conexiones entre tareas mediante relaciones compartidas, como recursos comunes o dependencias temporales. La segmentación permite particionar el problema en componentes más manejables, reduciendo la complejidad computacional.
+    \item \textbf{Estandarización en un formato unificado (JSON)}: Tras la limpieza y normalización, la información se organiza en un archivo JSON. Este archivo consolida datos sobre duración de las tareas, recursos requeridos, ventanas temporales y dependencias, garantizando un formato coherente que servirá de base para las etapas posteriores.
 
 \end{itemize}
 
-En conjunto, el pre-procesamiento asegura que los datos de entrada cumplan con los requisitos técnicos del modelo de optimización, eliminando posibles inconsistencias y adaptando los datos a un formato uniforme y eficiente. Esta etapa es crucial para garantizar el éxito de las etapas posteriores en el flujo de trabajo.
+Una vez generado el archivo JSON estandarizado, se crean las estructuras de datos internas necesarias para el solver. A partir de dicho JSON, se construyen diccionarios que representarán las tareas y sus atributos relevantes:
+
+\begin{itemize}
+    \item \textbf{Diccionario de tareas}: Contiene la duración, recursos y herramientas requeridas por cada tarea, junto con las variables clave del modelo (inicio, fin, entre otros).
+
+    \item \textbf{Diccionario de ventanas de tiempo}: Especifica para cada tarea sus límites temporales (inicios tempranos, finales máximos), a fin de asegurar el cumplimiento de las restricciones temporales definidas.
+
+    \item \textbf{Diccionario de capacidades de recursos}: Detalla la disponibilidad máxima de cada recurso, garantizando que no se sobrepase su límite durante la programación.
+
+    \item \textbf{Diccionario de agrupaciones de tareas}: Define conjuntos de tareas que comparten recursos o secuencias de precedencia, facilitando la coherencia en la programación de actividades relacionadas.
+
+    \item \textbf{Diccionario de intervalos prohibidos}: Registra los periodos en los que ciertos recursos no están disponibles, asegurando que no se asignen tareas en dichos intervalos.
+
+\end{itemize}
+
+En conjunto, el Pre-Procesamiento sienta las bases para las etapas siguientes, generando un entorno de datos consistente y listo para ser segmentado y optimizado.
 
 
-\subsubsection{Detalle Segmentación en subconjuntos}
+\subsection{Segmentación en Subconjuntos}
 
-Para abordar el problema de programación de tareas de manera más eficiente, se implementó una estrategia de simplificación basada en la división del conjunto de tareas en subconjuntos o \textit{subsets}. Este enfoque busca reducir la complejidad computacional y permitir un tratamiento más localizado de las restricciones y dependencias entre las tareas.
+La Segmentación en Subconjuntos tiene como objetivo reducir la complejidad del problema, dividiendo el conjunto global de tareas en grupos más pequeños y manejables. Este proceso se basa en la identificación de dependencias entre tareas, recursos y cuadrillas, garantizando que aquellas actividades que comparten recursos o presentan relaciones críticas se mantengan dentro de un mismo subconjunto.
 
-Desde el proceso de planificación, las tareas analizadas vienen previamente asignadas a cuadrillas específicas, que son los grupos de trabajo responsables de ejecutarlas. En principio, esta asignación podría sugerir que el problema se puede simplificar al optimizar las tareas cuadrilla por cuadrilla, de forma independiente. Sin embargo, esta estrategia no es viable debido a que ciertas tareas requieren de equipos compartidos. 
-
-Estos requerimientos generan interdependencias que impiden tratar las cuadrillas como sistemas completamente independientes. Por lo tanto, para obtener una solución factible y eficiente, es necesario considerar las tareas y sus dependencias de forma global.
-
-La estrategia propuesta se basa en identificar estas relaciones entre tareas para determinar qué tareas están efectivamente conectadas entre sí, y así dividir el problema en subconjuntos más pequeños, pero manteniendo la coherencia de las dependencias. Para lograrlo, se sigue un proceso usando herramientas de teoría de grafos y algoritmos de componentes conexas, el cual se describe a continuación:
-
+El método para llevar a cabo esta segmentación es el siguiente:
 
 \begin{enumerate}[label=\alph*.]
-    \item \textbf{Construcción del grafo:}  
-    Se representa el conjunto de tareas como un grafo no dirigido, donde:
-    \begin{itemize}
-        \item Cada nodo representa una cuadrilla o un equipo.
-        \item Se añade una arista entre una cuadrilla y una herramienta si ambas están asociadas a la misma tarea.
-    \end{itemize}
-    Este grafo modela las dependencias entre las cuadrillas y las herramientas, proporcionando una representación visual y analítica de las relaciones entre las tareas.
+    \item \textbf{Construcción del grafo}: Se modelan tareas, cuadrillas y equipos como nodos de un grafo no dirigido, añadiendo aristas entre estos nodos cuando comparten recursos o dependen unos de otros.
     
-    \item \textbf{Identificación de componentes conexas:}  
-    Se identifican las componentes conexas del grafo, que representan grupos de nodos interrelacionados. Cada componente conexa corresponde a un subconjunto de tareas que comparten cuadrillas, equipos o ambas. Esto garantiza que las tareas que están relacionadas por el uso de recursos compartidos permanezcan juntas.
-    
-    \item \textbf{Creación de subconjuntos de tareas:}  
-    Para cada componente conexa identificada, se agrupan las tareas asociadas a las cuadrillas y herramientas involucradas en esa componente. Estas tareas conforman un subconjunto, que puede ser tratado de forma independiente en el proceso de optimización.
+    \item \textbf{Identificación de componentes conexas}: A través de algoritmos de componentes conexas, se detectan grupos de nodos interrelacionados. Cada componente conexa representa un subconjunto de tareas que deben mantenerse juntas para preservar la coherencia en el uso de recursos y las dependencias.
 
+    \item \textbf{Formación de subconjuntos}: Cada componente conexa determina un subconjunto de tareas que se tratará de manera independiente en el solver. Esto permite abordar el problema en etapas más pequeñas, reduciendo el número de variables y restricciones manejadas de forma simultánea.
 \end{enumerate}
 
-
-Este método presenta ventajas clave que facilitan el proceso de programación. En primer lugar, al dividir el problema en subconjuntos más pequeños, se simplifica la resolución al reducir el número de variables y restricciones a manejar. Además, las dependencias importantes, como el uso compartido de herramientas, permanecen dentro de cada subconjunto, lo que asegura la coherencia de las relaciones críticas. Por otro lado, los subconjuntos independientes pueden resolverse en paralelo, lo que disminuye significativamente el tiempo total de cálculo. Finalmente, este enfoque destaca por su adaptabilidad, ya que permite identificar de manera clara las interdependencias en los datos, haciendo que el modelo sea más comprensible y modular.
-
-
-\subsection{Input}
-
-La etapa de \textit{Input} se encarga de transformar el archivo JSON generado en la etapa de pre-procesamiento en las estructuras de datos requeridas por el solver. Estas estructuras están diseñadas para representar de manera eficiente la información de las tareas, recursos y restricciones.
-
-A partir del archivo JSON, se generan los siguientes diccionarios principales:
-
-\begin{itemize}
-    \item \textbf{Diccionario de tareas}: Incluye la duración, recursos y herramientas requeridos para cada tarea, y define las variables clave del modelo, como inicio y fin.  
-
-    \item \textbf{Diccionario de ventanas de tiempo}: Especifica los tiempos más temprano y más tardío en los que puede comenzar cada tarea, asegurando el cumplimiento de las restricciones temporales.  
-
-    \item \textbf{Diccionario de capacidades de recursos}: Representa la capacidad máxima disponible de cada recurso, asegurando que no se excedan sus límites durante la programación.  
-
-    \item \textbf{Diccionario de agrupaciones de tareas}: Define grupos de tareas relacionadas que comparten recursos o requieren precedencia, facilitando su coordinación.  
-
-    \item \textbf{Diccionario de intervalos prohibidos}: Identifica los tiempos en que un recurso no está disponible, evitando programaciones conflictivas.  
-\end{itemize}
-
-La generación de estos diccionarios es un paso clave para preparar los datos de entrada al solver, permitiendo que toda la información de las tareas y restricciones esté estructurada de manera óptima para el proceso de optimización. Esta etapa asegura que los datos se integren correctamente en el modelo y se procesen de forma eficiente.
+Gracias a este enfoque, la complejidad computacional disminuye, se mantiene la coherencia en el uso compartido de recursos y es posible resolver cada subconjunto en paralelo, optimizando el uso de recursos computacionales y disminuyendo el tiempo total de cálculo.
 
 
 \subsection{Solver}
 
-Para resolver el problema de RCPSP, se emplea la librería \texttt{OR-Tools} de Google, que proporciona un conjunto de herramientas y solucionadores para problemas de optimización combinatoria. En particular, se utiliza el solucionador de Programación por Restricciones (CP) de \texttt{OR-Tools}, que permite modelar y resolver problemas de programación con restricciones de manera eficiente y escalable.
+La tercera etapa del flujo de trabajo consiste en resolver cada uno de los subconjuntos de tareas utilizando el solver de Programación por Restricciones (CP) proporcionado por la librería \textit{OR-Tools} de Google. Esta herramienta permite modelar problemas complejos de programación con restricciones, aprovechando las estructuras de datos preparadas en el Pre-Procesamiento.
 
-Para mejorar la eficiencia computacional, se implementa un enfoque de paralelización utilizando la librería \textit{joblib} de Python. Este enfoque permite resolver los subconjuntos de tareas identificados en la etapa de pre-procesamiento de forma simultánea, aprovechando al máximo los recursos computacionales disponibles y reduciendo el tiempo total de cálculo.
+Para mejorar el desempeño, se aplican estrategias de paralelización con librerías como \texttt{joblib}, ejecutando la resolución de múltiples subconjuntos de forma simultánea en diferentes hilos o núcleos de procesamiento.
 
-Las restricciones se modelan de la siguiente forma:
-
-\begin{itemize}
-    \item \textbf{Restricciones de Ventanas de Tiempo}: Para cada tarea, el modelo asegura que su tiempo de inicio esté dentro de su ventana temporal permitida. Estas restricciones se implementan mediante variables de intervalo opcional que habilitan o deshabilitan la programación de una tarea según su ventana de tiempo.
-
-    \item \textbf{Restricciones de Intervalos Prohibidos}: Las tareas que requieren recursos específicos deben programarse fuera de los intervalos de tiempo en los que dichos recursos están ocupados o no disponibles. Esto se implementa mediante variables booleanas que indican si una tarea comienza o termina fuera de un intervalo prohibido, las cuales se imponen solo si la tarea es programada.
-
-    \item \textbf{Restricciones Cumulativas para Recursos}: Para cada recurso, el modelo aplica una restricción cumulativa que asegura que el consumo de capacidad por parte de las tareas que lo utilizan no exceda su límite en ningún momento. Se especifica la demanda de cada tarea según el tipo de recurso (con capacidad de 1 unidad o más, dependiendo de la cuadrilla o del equipo adicional), y se controla el consumo de cada recurso con esta restricción.
-
-    \item \textbf{Precedencia en Grupos de Tareas}: En los grupos de tareas (Órdenes de Trabajo), el modelo aplica restricciones de precedencia entre tareas específicas, asegurando que se respeten los órdenes de ejecución entre ellas si el grupo está programado. Esto se controla mediante la variable booleana, que activa las restricciones de precedencia dentro de cada grupo solo cuando el grupo completo ha sido asignado al cronograma.
-\end{itemize}
-
-La configuración del solucionador CP-SAT incluye dos parámetros clave, \texttt{max\_time\_in\_seconds} y \texttt{relative\_gap\_limit}, que permiten limitar el tiempo de búsqueda y definir un margen de optimalidad aceptable, respectivamente:
+Las restricciones se modelan de la siguiente manera:
 
 \begin{itemize}
-    \item \texttt{max\_time\_in\_seconds}: Se establece un límite de tiempo máximo para la búsqueda de soluciones, lo cual ayuda a evitar tiempos de procesamiento prolongados en caso de problemas complejos. En nuestro, el límite se ha configurado en 10 segundos.
-
-    \item \texttt{relative\_gap\_limit}: Este parámetro permite especificar un \textit{gap} relativo de optimalidad que representa el porcentaje aceptable de desviación de la solución encontrada respecto al óptimo teórico. En nuestro caso, se ha fijado en 10\%, lo cual permite una solución razonable en menos tiempo de procesamiento.
-\end{itemize}
-
-
-\subsection{Output}
-
-La etapa de \textit{Output} se encarga de procesar los resultados generados por el solver y estructurarlos en un formato JSON simple y claro. Este archivo JSON contiene, para cada tarea, información clave sobre su estado de programación y su tiempo de inicio, lo que facilita la interpretación de los resultados y su integración con las etapas posteriores del flujo de trabajo.
-
-El archivo JSON generado incluye las siguientes variables por cada tarea:
-
-\begin{itemize}
-    \item \textbf{Scheduled}: Indica si la tarea fue programada o no. Toma el valor de 1 si la tarea fue programada exitosamente y 0 si no pudo ser programada debido a conflictos de recursos o restricciones de tiempo.
+    \item \textbf{Ventanas de tiempo}: Cada tarea se programa respetando sus límites temporales, utilizando variables de intervalo que delimitan su inicio y fin dentro de los intervalos permitidos.
     
-    \item \textbf{Start}: Especifica la fecha y hora en la que comienza la tarea, en caso de que haya sido programada. Si la variable \texttt{Scheduled} es 0, entonces \texttt{Start} será \texttt{null}, indicando que la tarea no tiene una asignación en el cronograma.
+    \item \textbf{Intervalos prohibidos}: Las tareas que requieren ciertos recursos se ajustan para no solaparse con periodos en los que dichos recursos no están disponibles, garantizando la factibilidad de la asignación.
+
+    \item \textbf{Restricciones cumulativas de recursos}: Cada recurso tiene una capacidad máxima. El modelo asegura que el conjunto de tareas asignadas simultáneamente a un mismo recurso no exceda esta capacidad.
+
+    \item \textbf{Precedencia en grupos de tareas}: Cuando existe una secuencia lógica de ejecución entre tareas (por ejemplo, en órdenes de trabajo), se incorporan restricciones de precedencia que aseguran el cumplimiento de dichas relaciones.
+
 \end{itemize}
 
-Un ejemplo de salida en formato JSON es el siguiente:
+Para equilibrar la calidad de la solución y el tiempo de cómputo, se emplean parámetros como \texttt{max\_time\_in\_seconds} y \texttt{relative\_gap\_limit}, que limitan el tiempo de búsqueda y la desviación aceptable respecto al óptimo teórico, respectivamente.
 
-\begin{verbatim}
-{
-    "TaskID_1": {
-        "Scheduled": 1,
-        "Start": "2023-07-01T08:00:00"
-    },
-    "TaskID_2": {
-        "Scheduled": 0,
-        "Start": null
-    },
-    ...
-}
-\end{verbatim}
 
 \subsection{Post-Procesamiento}
 
-La etapa de \textit{Post-Procesamiento} tiene como objetivo transformar los resultados del solver en formatos finales que sean compatibles con diversas herramientas de gestión y análisis. Esta etapa toma como entrada el JSON generado por el solver junto con los datos originales de entrada, y prepara archivos que consolidan toda la información relevante de las tareas y los recursos programados.
+La fase de Post-Procesamiento consolida los resultados generados por el solver y los prepara en formatos finales útiles para su análisis, integración o visualización en herramientas externas.
 
-Durante esta etapa, se generan los siguientes outputs principales:
+Partiendo del archivo JSON producido por el solver (que indica para cada tarea si fue programada y su hora de inicio), se procesan estos datos junto con la información original, produciendo:
 
 \begin{itemize}
-    \item \textbf{Archivo XML para Microsoft Project}: Este archivo contiene toda la información de las tareas programadas, incluyendo su hora de inicio, duración y hora de finalización. Es compatible con Microsoft Project, permitiendo que los resultados puedan integrarse fácilmente en esta herramienta para visualización y gestión avanzada.
+    \item \textbf{Archivos XML para Microsoft Project}: Se genera un archivo compatible con Microsoft Project, conteniendo horas de inicio, finalización y duraciones, facilitando la incorporación del cronograma en flujos de trabajo existentes.
 
-    \item \textbf{Archivo XLSX para Excel}: Se genera una carta Gantt en formato Excel que organiza las tareas en un cronograma visual. Este archivo incluye detalles como:
-    \begin{itemize}
-        \item Hora de inicio y hora de finalización de cada tarea.
-        \item Duración de las tareas en unidades temporales definidas.
-        \item Recursos asignados a cada tarea.
-    \end{itemize}
+    \item \textbf{Archivo XLSX para Excel}: Se produce una carta Gantt en Excel, organizando las tareas en un cronograma visual y detallando inicio, fin, duración, así como los recursos asignados, permitiendo una interpretación rápida y clara.
 
-    \item \textbf{Integración con APIs o plataformas empresariales}: Los resultados también pueden ser enviados a las plataformas de gestión existentes en la empresa, como un ERP o sistemas similares, utilizando integraciones basadas en APIs. Esto permite que los datos programados sean automáticamente incorporados en el flujo de trabajo operativo de la organización.
+    \item \textbf{Integraciones con APIs empresariales}: Si la organización cuenta con sistemas ERP u otros entornos de gestión, los resultados pueden integrarse automáticamente mediante APIs, asegurando la continuidad operativa y minimizando el trabajo manual.
 \end{itemize}
 
+El Post-Procesamiento garantiza que los resultados generados por el solver sean comunicados de forma clara y estén listos para su explotación por usuarios finales, herramientas de gestión o análisis posterior. De este modo, el flujo de trabajo se completa con un producto final útil y adaptable a las necesidades específicas de la organización.
 
-\section{Resultados}
+\section{Resultados y Análisis}
 
 El desarrollo e implementación del modelo de optimización ha generado resultados prometedores, tanto en términos de la calidad del cronograma producido como en los beneficios operativos proyectados para el equipo de programación. A continuación, se presentan estadísticas clave y una evaluación de los ahorros potenciales derivados del uso de esta herramienta.
+
+
+\subsection{Descripción del Dataset}
+
+El dataset utilizado en este proyecto fue proporcionado por el equipo de programación de la empresa colaboradora. Estos datos corresponden a tareas reales de mantenimiento para un período específico de tiempo y reflejan el contexto operativo y las restricciones enfrentadas por la empresa durante dicho período. El análisis del dataset proporciona una visión integral sobre la escala y la complejidad del problema de programación abordado.
+
+El conjunto de datos incluye un total de 4,898 tareas, distribuidas en 1,055 órdenes de trabajo (OT). Estas tareas abarcan un rango de tiempo desde el 17 de julio de 2023 hasta el 3 de agosto de 2023, lo que representa un período de planificación de poco más de dos semanas. La duración promedio de las tareas es de aproximadamente 1.92 horas, indicando que la mayoría de las actividades tienen una extensión corta, aunque hay una variación considerable en las duraciones específicas.
+
+En términos de criticidad, las tareas se clasifican en tres niveles de impacto, donde 1 representa las tareas más críticas, 2 aquellas con una prioridad intermedia y 3 las de menor prioridad. La distribución de tareas según su criticidad es la siguiente:
+\begin{itemize}
+    \item \textbf{Criticidad 1 (Alta):} 666 tareas (13.6\% del total).
+    \item \textbf{Criticidad 2 (Media):} 2,403 tareas (49.1\% del total).
+    \item \textbf{Criticidad 3 (Baja):} 1,829 tareas (37.3\% del total).
+\end{itemize}
+
+El dataset también incluye información sobre los recursos disponibles para ejecutar las tareas. Estos recursos se dividen en dos categorías principales:
+\begin{itemize}
+    \item \textbf{Cuadrillas:} El dataset considera un total de 31 cuadrillas, cada una con su respectivo esquema de turnos y capacidades específicas.
+    \item \textbf{Equipos Auxiliares:} Hay 16 equipos auxiliares disponibles, los cuales deben compartirse entre las diferentes cuadrillas, lo que añade restricciones significativas al problema de programación.
+\end{itemize}
+
+El rango temporal y las características de las tareas se resumen en la Tabla~\ref{tab:dataset_summary}, mientras que la distribución de tareas según su criticidad se ilustra en la Figura~\ref{fig:task_impact_distribution}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lc}
+        \toprule
+        \textbf{Atributo} & \textbf{Valor} \\
+        \midrule
+        Número total de tareas & 4.898 \\
+        Número de órdenes de trabajo (OT) & 1.055 \\
+        Fecha mínima & 2023-07-17 \\
+        Fecha máxima & 2023-08-03 \\
+        Duración promedio de tareas (horas) & 1,92 \\
+        Número de cuadrillas & 31 \\
+        Número de equipos auxiliares & 16 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Resumen de las características principales del dataset.}
+    \label{tab:dataset_summary}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{imgs/barras_impacto.png}
+    \caption{Distribución de tareas según su nivel de criticidad.}
+    \label{fig:barras_impacto}
+\end{figure}
+
+Este dataset proporciona una base detallada y realista para el análisis y la implementación del modelo de programación, ya que combina un gran volumen de tareas con restricciones complejas y una diversidad de recursos. Además, la alta proporción de tareas con criticidad 1 y 2 subraya la importancia de optimizar el uso de los recursos para garantizar la ejecución de las tareas más críticas dentro de sus ventanas de tiempo establecidas
+
+\subsection{Ajuste de Parámetros para la Función Objetivo}
+
+La función objetivo del modelo combina dos componentes clave: el makespan, representado por el parámetro \( \alpha \), y la penalización por tareas no programadas, representada por el parámetro \( \beta \). Para determinar los valores más adecuados de \( \alpha \) y \( \beta \), se llevaron a cabo múltiples experimentos utilizando diferentes combinaciones de estos parámetros. El objetivo fue evaluar cómo cada configuración afecta el equilibrio entre la minimización del makespan y la cantidad de tareas programadas, especialmente aquellas con criticidad alta (impacto 1).
+
+En estos experimentos, los resultados fueron analizados en función de métricas clave, incluyendo el número total de tareas programadas, la cantidad de tareas no programadas, el makespan obtenido, el tiempo de solución requerido y la cantidad de tareas no programadas según su nivel de impacto. Los resultados se presentan en dos tablas: la Tabla~\ref{tab:alpha_beta_general} resume las métricas generales, mientras que la Tabla~\ref{tab:alpha_beta_impact} detalla la distribución de tareas no programadas según su impacto.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c>{\centering\arraybackslash}p{0.8cm} >{\centering\arraybackslash}p{0.8cm} 
+                    >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.5cm}
+                    >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.5cm}}
+        \toprule
+        \textbf{Conf.} & \( \alpha \) & \( \beta \) & 
+        \makecell{\textbf{Tareas} \\ \textbf{Programadas}} & 
+        \makecell{\textbf{Tareas no} \\ \textbf{Programadas}} & 
+        \makecell{\textbf{Tiempo de} \\ \textbf{Solución (s)}} & 
+        \textbf{Makespan} \\
+        \midrule
+        (a) & 1 & 0 & 0 & 4.898 & 3,43 & 0 \\
+        (b) & 0 & 1 & 4.854 & 44 & 4,35 & 1.072 \\
+        (c) & 1 & 1 & 4.658 & 240 & 8,42 & 492,75 \\
+        (d) & 1 & 2 & 4.831 & 67 & 9,95 & 516,25 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Resultados generales obtenidos con diferentes configuraciones de \( \alpha \) y \( \beta \).}
+    \label{tab:alpha_beta_general}
+\end{table}
+
+
+\paragraph{Resultados por Configuración}  
+La configuración \( a \), donde \( \alpha = 1 \) y \( \beta = 0 \), prioriza exclusivamente la minimización del makespan. Sin embargo, este enfoque no logra programar ninguna tarea, lo que resulta inaceptable, ya que no se cumple el objetivo principal del modelo. Por otro lado, la configuración \( b \) (\( \alpha = 0 \), \( \beta = 1 \)) busca maximizar la cantidad de tareas programadas, logrando 4854 tareas en total. Aunque esta configuración presenta un makespan elevado (1072 unidades de tiempo), consigue programar todas las tareas de impacto 1, lo cual es un resultado favorable para las tareas más críticas.
+
+La configuración \( c \) (\( \alpha = 1 \), \( \beta = 1 \)) equilibra ambos objetivos, pero a costa de una mayor cantidad de tareas no programadas (240). Si bien su makespan es menor que el de \( b \), su penalización por dejar tareas críticas fuera del cronograma lo hace menos atractivo.
+
+Finalmente, la configuración \( d \) (\( \alpha = 1 \), \( \beta = 2 \)) logra un balance ideal entre los objetivos de programación y makespan. Con 4831 tareas programadas, esta configuración deja fuera solo 67 tareas, manteniendo el makespan en un nivel razonable de 516.25 unidades de tiempo. Además, se asegura que todas las tareas de impacto 1 son programadas, mientras que las tareas de impacto 2 y 3 no programadas son reducidas al mínimo posible.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c>{\centering\arraybackslash}p{1.5cm} >{\centering\arraybackslash}p{1.5cm} 
+                    >{\centering\arraybackslash}p{1.5cm}}
+        \toprule
+        \textbf{Conf.} & \makecell{\textbf{Impacto} \\ \textbf{1}} & 
+        \makecell{\textbf{Impacto} \\ \textbf{2}} & 
+        \makecell{\textbf{Impacto} \\ \textbf{3}} \\
+        \midrule
+        (a) & 666 & 2.403 & 1.829 \\
+        (b) & 0 & 8 & 36 \\
+        (c) & 21 & 59 & 160 \\
+        (d) & 0 & 12 & 55 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Distribución de tareas no programadas según su impacto.}
+    \label{tab:alpha_beta_impact}
+\end{table}
+
+
+\paragraph{Justificación de la Configuración Elegida}  
+Se seleccionó la configuración \( d \) debido a su capacidad para satisfacer las prioridades del modelo. Aunque el tiempo de solución es el más alto entre las configuraciones evaluadas (9,95 segundos), este es un compromiso aceptable dado que garantiza un equilibrio óptimo entre la minimización del makespan y la programación de tareas críticas. Sin embargo, este tiempo de solución podría representar un desafío operativo en escenarios más grandes. Para abordar este problema, se propone utilizar la segmentación en subconjuntos, una técnica que divide el problema en partes más manejables, reduciendo así el tiempo de cálculo necesario para resolver cada subconjunto de tareas.
+
+\paragraph{Visualización de los Resultados}  
+Para ilustrar el efecto de los diferentes valores de \( \alpha \) y \( \beta \), se incluye la Figura~\ref{fig:alpha_beta_analysis}, que muestra el trade-off entre tareas programadas y el makespan en función de las configuraciones evaluadas. Este gráfico resalta cómo la configuración \( d \) logra un equilibrio favorable en comparación con las demás opciones.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{imgs/sensibilidad_soluciones.png}
+    \caption{Análisis de las configuraciones de \( \alpha \) y \( \beta \).}
+    \label{fig:alpha_beta_analysis}
+\end{figure}
+
+En conclusión, la selección de \( \alpha = 1 \) y \( \beta = 2 \) se justifica por su desempeño superior en las métricas clave del modelo, alineándose con las prioridades operativas y estratégicas de la empresa. La implementación de la segmentación en subconjuntos permitirá optimizar aún más el tiempo de solución, asegurando que el modelo pueda escalar eficientemente a problemas más complejos.
+
+
+
+\subsection{Resultados de la Segmentación en Subconjuntos}
+
+La segmentación en subconjuntos permitió dividir el conjunto total de tareas en 14 subconjuntos más manejables, con el objetivo de reducir el tiempo de procesamiento del modelo. En la Tabla~\ref{tab:subsets_results} se presentan los resultados obtenidos, incluyendo el número de tareas en cada subconjunto, su porcentaje relativo con respecto al total (redondeado sin decimales) y el tiempo de solución requerido para resolver cada uno. Este análisis se llevó a cabo en un servidor virtual con las siguientes especificaciones:  
+
+\begin{itemize}
+    \item \textbf{vCPU/s:} 4 vCPUs.
+    \item \textbf{RAM:} 8192 MB.
+    \item \textbf{Almacenamiento:} 75 GB NVMe.
+    \item \textbf{Sistema Operativo:} Ubuntu 24.10 x64.
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cccc}
+        \toprule
+        \textbf{Subconjunto} & \textbf{Número de Tareas} & \textbf{\% del Total} & \textbf{Tiempo de Solución (s)} \\
+        \midrule
+        \textit{S1} & 2.598 & 53\% & 4,34 \\
+        \textit{S2} & 674 & 14\% & 0,65 \\
+        \textit{S3} & 319 & 7\% & 0,43 \\
+        \textit{S4} & 254 & 5\% & 0,12 \\
+        \textit{S5} & 198 & 4\% & 0,01 \\
+        \textit{S6} & 136 & 3\% & 0,01 \\
+        \textit{S7} & 122 & 2\% & 0,00 \\
+        \textit{S8} & 110 & 2\% & 0,01 \\
+        \textit{S9} & 98 & 2\% & 0,00 \\
+        \textit{S10} & 87 & 2\% & 0,00 \\
+        \textit{S11} & 84 & 2\% & 0,01 \\
+        \textit{S12} & 78 & 2\% & 0,00 \\
+        \textit{S13} & 72 & 1\% & 0,00 \\
+        \textit{S14} & 68 & 1\% & 0,00 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Resultados de la segmentación en subconjuntos.}
+    \label{tab:subsets_results}
+\end{table}
+
+
+\paragraph{Distribución de Tareas}  
+La segmentación produjo un subconjunto principal, \( S1 \), que contiene 2598 tareas, lo que equivale al 53\% del total. Este subconjunto representa más de la mitad de las tareas y, consecuentemente, requirió el mayor tiempo de solución (4.34 segundos). Por otro lado, los restantes 13 subconjuntos contienen entre 68 y 674 tareas cada uno, representando porcentajes significativamente menores del total.  
+
+El segundo subconjunto más grande, \( S2 \), con 674 tareas (14\%), presentó un tiempo de solución de 0.65 segundos, lo cual destaca la eficiencia del enfoque modular al tratar con subconjuntos de menor tamaño. Los subconjuntos más pequeños, desde \( S5 \) hasta \( S14 \), contienen menos del 5\% de las tareas totales cada uno y se resolvieron en tiempos cercanos a cero segundos.  
+
+\paragraph{Paralelización del Procesamiento}  
+El procesamiento de los subconjuntos se realizó de manera paralela, aprovechando las capacidades del servidor utilizado. Como resultado, el tiempo total de solución fue igual al máximo tiempo de solución de todos los subconjuntos, es decir, 4.34 segundos. Este enfoque evidencia la ventaja de dividir el problema en partes independientes y resolverlas simultáneamente, reduciendo significativamente el tiempo total necesario para obtener los resultados.
+
+\paragraph{Análisis de Desempeño}  
+La segmentación permitió reducir notablemente los tiempos de solución al dividir el problema en partes más manejables. Aunque \( S1 \) sigue siendo considerablemente grande, su tiempo de solución es razonable gracias a la eficiencia del modelo implementado y a las especificaciones del servidor utilizado. Los subconjuntos más pequeños muestran un tiempo de solución despreciable, evidenciando que la segmentación fue efectiva en distribuir la carga computacional.  
+
+\paragraph{Relevancia de la Segmentación}  
+El análisis demuestra que más del 50\% de las tareas están concentradas en un único subconjunto (\( S1 \)), mientras que los demás subconjuntos están distribuidos de manera desigual, con tamaños que van disminuyendo gradualmente. Esto sugiere que ciertas tareas tienen conexiones más fuertes o restricciones compartidas, lo que explica la formación de un subconjunto dominante.  
+
+Esta concentración implica que el tiempo de solución de \( S1 \) tiene un impacto considerable en el desempeño general del modelo. Sin embargo, el tiempo total de cálculo es altamente competitivo debido al enfoque de paralelización, que permite manejar incluso el subconjunto más grande sin afectar el tiempo general de procesamiento.
+
+\paragraph{Conclusión sobre la Segmentación}  
+La segmentación en subconjuntos demostró ser una estrategia efectiva para abordar el tiempo de solución del modelo, permitiendo resolver problemas complejos en tiempos razonables. El tiempo de solución total fue igual al máximo tiempo de solución de un subconjunto (4.34 segundos), gracias al procesamiento paralelo. En el futuro, podrían explorarse estrategias adicionales, como balancear aún más el tamaño de los subconjuntos o aplicar técnicas de optimización avanzada, para mejorar la eficiencia en escenarios con volúmenes de datos aún mayores.  
+
 
 \subsection{Mejoras en la duración total del cronograma}
 
