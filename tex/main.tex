@@ -16,6 +16,8 @@
 \usepackage{bold-extra}
 \usepackage{array} % Para definir ancho de columnas y word wrapping
 \usepackage{makecell} % Para ajustar texto dentro de las celdas
+\usepackage{ulem}
+
 
 
 \setlength{\parskip}{1em}  % Ajusta la distancia entre párrafos
@@ -827,5 +829,193 @@ En resumen, los principales beneficios obtenidos mediante la implementación del
 \end{itemize}
 
 Estos resultados preliminares destacan el potencial del modelo para transformar el proceso de programación, haciéndolo más eficiente, preciso y adaptado a las necesidades dinámicas de la operación.
+
+
+
+\newpage
+
+\begin{appendix}
+    \section{Resultados Encuesta sobre Programación de Actividades en el Área de Mantenimiento de Anglo American Chile}
+    \section*{Resumen Ejecutivo}
+
+    Se realizó una encuesta a programadores del área de mantenimiento de las operaciones Los Bronces y El Soldado de Anglo American Chile, con el objetivo de identificar los principales desafíos y oportunidades de mejora en el proceso de programación. La encuesta abordó aspectos como dedicación horaria, actividades realizadas, errores comunes y problemas asociados a la coordinación.
+    
+    Las principales conclusiones son:
+    
+    \begin{itemize}
+        \item \textbf{Alta dedicación horaria}: 64\% de los encuestados invierte más de la mitad de su jornada semanal en generación del cronograma de actividades.
+        \item \textbf{La creación del borrador inicial} es la fase más intensiva en tiempo, superando otras actividades como resolver conflictos o validar con otras áreas.
+        \item \textbf{La no disponibilidad de materiales y repuestos} durante la ejecución de las mantenciones es el error más recurrente.
+        \item \textbf{Entorno altamente dinámico}: El 90\% de los encuestados enfrenta cambios de último minuto al menos una vez por semana.
+        \item \textbf{Problemas de coordinación con otras áreas} y \textbf{falta de colaboración} son barreras adicionales que dificultan la programación eficiente.
+    \end{itemize}
+    
+    Los resultados de la encuesta muestran que el proceso de programación podría beneficiarse significativamente de herramientas que automaticen partes claves del proceso. Una herramienta de automatización que permita generar el borrador inicial del cronograma, incorporar facilmente cambios de último minuto y realizar ajustes derivados de conflictos de recursos o validaciones \textbf{podría reducir en un 50\% la dedicación horaria del equipo de programación} en lo que respecta a la creación del cronograma de tareas. 
+    
+    Su éxito dependerá de su integración con las fuentes de información adecuadas, especialmente con bodega, para garantizar la disponibilidad de materiales y repuestos. Con información precisa y confiable, esta herramienta también \textbf{podría disminuir hasta en un 75\% los errores en las labores de mantenimiento derivados de una programación deficiente}.
+    
+    \section*{Metodología}
+    
+    La encuesta se aplicó a un total de 19 programadores de las operaciones Los Bronces y El Soldado de Anglo American Chile, mediante una plataforma on-line, durante el mes de Diciembre de 2024. Se trató de un cuestionario breve, compuesto por 7 preguntas. La mediana del tiempo de respuesta fue de aproximadamente 5 minutos y 30 segundos. 
+    
+    Las preguntas estuvieron diseñadas para estimar el tiempo dedicado a la programación, la distribución de dicho tiempo entre distintas actividades, la frecuencia e impacto de errores, y las condiciones cambiantes que inciden en la planificación.
+    
+    A continuación se presentan los resultados y el análisis de las respuestas obtenidas.
+    
+    \section*{Resultados de la Encuesta}
+    
+    En esta sección se presentan las preguntas realizadas a los encuestados junto con una tabla que resume los resultados obtenidos. Posteriormente, se incluye un comentario que analiza los datos presentados y destaca las principales conclusiones relacionadas con cada pregunta.
+    
+    \vspace{.5em}
+    \subsubsection*{Pregunta 1: ¿Cuántas horas a la semana dedica el equipo de programación a generar el cronograma de tareas?}
+    
+    
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{lcc}
+            \toprule
+            \textbf{Rango de horas} & \textbf{Porcentaje} & \textbf{Cantidad} \\
+            \midrule
+            Menos de 10 horas & 5\% & 1 \\
+            Entre 10 y 20 horas & 32\% & 6 \\
+            Entre 20 y 40 horas & 53\% & 10 \\
+            Más de 40 horas & 11\% & 2 \\
+            \bottomrule
+        \end{tabular}
+        \label{tab:horas_semanales}
+    \end{table}
+    
+    \paragraph{Comentario} Es notable que más de la mitad de los encuestados (53\%) dedica entre 20 y 40 horas semanales a la programación. Esto sugiere que la generación del cronograma de tareas consume una parte significativa de la jornada: en 64\% de los casos, más de la mitad de la semana laboral.
+    
+    
+    \vspace{1.5em}
+    \subsubsection*{Pregunta 2: ¿Qué porcentaje del tiempo total de programación está dedicado a las siguientes actividades?}
+    \vspace{.5em}
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{lccc c}
+            \toprule
+            \textbf{Actividad} & \textbf{Promedio (\%)} & \textbf{Mínimo (\%)} & \textbf{Máximo (\%)} \\
+            \midrule
+            Generar el borrador inicial & 34.8 & 0 & 66\\
+            Resolver conflictos de recursos & 23.8 & 10 & 70\\
+            Validar con otras áreas & 19.7 & 10 & 40\\
+            Realizar ajustes finales & 21.7 & 0 & 50\\
+            \bottomrule
+        \end{tabular}
+        \label{tab:distribucion_actividades}
+    \end{table}
+    
+    \paragraph{Comentario} Alrededor del 35\% del tiempo total de programación se concentra en la generación del borrador inicial, convirtiéndose en la actividad más demandante. Le siguen la resolución de conflictos de recursos y la realización de ajustes finales, con promedios cercanos al 24\% y 22\%, respectivamente. Cabe destacar que algunas personas reportan dedicar un 0\% de su tiempo a generar el borrador inicial o a realizar ajustes finales, lo que sugiere que estas etapas pueden ser asumidas por otras áreas o que ciertos roles se centran exclusivamente en validaciones o resolución de conflictos.
+    
+    \vspace{1.5em}
+    \subsubsection*{Pregunta 3: ¿Cuántas personas del equipo participan activamente en la programación y qué porcentaje de su jornada diaria dedican a esta actividad?}
+    
+    A partir del análisis de las 19 respuestas obtenidas, se observa una gran variabilidad en el porcentaje de jornada diaria dedicado a la programación y en el número de personas involucradas. Las estadísticas resumen se presentan en la siguiente tabla:
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{lcc}
+            \toprule
+            & \textbf{Promedio} & \textbf{Desviación Estándar} \\
+            \midrule
+            Número de personas & 2.8 & 1.5 \\
+            Porcentaje de jornada diaria (\%) & 64.2 & 30.3 \\
+            \bottomrule
+        \end{tabular}
+        \label{tab:estadisticas_resumen_jornada}
+    \end{table}
+    
+    \paragraph{Comentario} Estos resultados reflejan una dispersión significativa: en algunos casos, un equipo reducido (2 personas) dedica el 100\% de su jornada a la programación, mientras que en otros equipos, más numerosos, el porcentaje de tiempo invertido es mucho menor.
+    
+    
+    \vspace{1.5em}
+    \subsubsection*{Pregunta 4: ¿Con qué frecuencia ocurren cambios de último minuto en las tareas o recursos disponibles?}
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{lcc}
+            \toprule
+            \textbf{Frecuencia} & \textbf{Porcentaje} & \textbf{Cantidad} \\
+            \midrule
+            Varias veces por semana & 42\% & 8 \\
+            Semanalmente & 47\% & 9 \\
+            Pocas veces al mes & 5\% & 1 \\
+            Rara vez & 5\% & 1 \\
+            \bottomrule
+        \end{tabular}
+        \label{tab:cambios_ultimo_minuto}
+    \end{table}
+    
+    \paragraph{Comentario} Casi un 90\% del equipo enfrenta cambios de último minuto al menos una vez por semana. Esto evidencia un entorno altamente dinámico y la dificultad de anteponerse a los imprevistos en el proceso de programación.
+    
+    
+    \vspace{1.5em}
+    \subsubsection*{Pregunta 5: Cuál de estos errores es el más comun durante el proceso de programación?}
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{p{7cm}cc}
+            \toprule
+            \textbf{Tipo de error} & \textbf{Porcentaje} & \textbf{Cantidad} \\
+            \midrule
+            Cuadrilla no disponible & 0\% & 0 \\
+            Herramientas o Equipos no disponibles & 16\% & 3 \\
+            Naves o Talleres no disponibles & 0\% & 0 \\
+            Materiales o Repuestos no disponibles & 74\% & 14 \\
+            Omisión de tareas críticas & 0\% & 0 \\
+            El equipo sobre el cual se programó la mantención se encuentra ocupado & 11\% & 2 \\
+            \bottomrule
+        \end{tabular}
+        \label{tab:errores_comunes}
+    \end{table}
+    
+    \paragraph{Comentario} Lejos, el problema más recurrente identificado por los encuestados es la falta de materiales o repuestos disponibles, con un 74\% de respuestas. En segundo lugar, se encuentra la falta de herramientas o equipos disponibles; y en tercer la coordinación deficiente que genera conflictos al programar mantenciones en equipos ocupados.
+    
+    Por otro lado, es destacable que algunos factores potencialmente problemáticos, como la falta de cuadrillas o de talleres disponibles, no representan un obstáculo en este contexto, ya que ninguno de los encuestados los señaló como fuente de errores. De manera similar, la omisión de tareas críticas tampoco parece ser un problema recurrente, lo que sugiere que estos asuntos se encuentran relativamente resueltas en el proceso actual.
+    
+    \vspace{1.5em}
+    \subsubsection*{Pregunta 6: ¿Qué otros errores considera que podrían ocurrir durante el proceso de programación?}
+    
+    Las respuestas a esta pregunta abierta señalaron como errores adicionales frecuentes la falta de coordinación con otras áreas, la inclusión de actividades de último minuto, y las dificultades para coordinar a los diferentes especialistas involucrados en una tarea. También se mencionaron problemas relacionados con la falta de repuestos y la indisponibilidad de equipos auxiliares, fechas de mantenciones variables, y cambios operacionales o provenientes de otras áreas. Además, se destacó la información deficiente desde bodega en relación con los repuestos.
+    
+    \paragraph{Comentario} En conjunto, estas respuestas cualitativas confirman nuevamente la existencia de problemas significativos relacionados con la disponibilidad de materiales y repuestos, en gran parte vinculados a la información deficiente proporcionada por bodega. Sin embargo, también se destacan con frecuencia los problemas de coordinación con otras áreas, que reflejan desafíos relacionados con la alineación de procesos y la colaboración entre equipos.
+    
+    \vspace{1.5em}
+    \subsubsection*{Pregunta 7: En promedio, ¿cuántos de estos errores ocurren por mes?}
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{p{7cm}cccc}
+            \toprule
+            \textbf{Tipo de error} & \textbf{Promedio} & \textbf{Mínimo} & \textbf{Máximo} \\
+            \midrule
+            Cuadrilla no disponible & 3.5 & 0 & 10 \\
+            Herramientas o equipos no disponibles & 3.9 & 1 & 12 \\
+            Naves o talleres no disponibles & 2.7 & 0 & 10 \\
+            Omisión de tareas críticas & 2.4 & 0 & 6 \\
+            El equipo sobre el cual se programó la mantención se encuentra ocupado & 3.9 & 1 & 12 \\
+            Materiales o repuestos no disponibles & 6.3 & 1 & 14 \\
+            \bottomrule
+        \end{tabular}
+        \label{tab:errores_especificos}
+    \end{table}
+    
+    \paragraph{Comentario}La falta de materiales o repuestos disponibles vuelve a ser un factor crítico, con un promedio superior a 6 eventos por mes. Esto confirma la relevancia de contar con información fidedigna e integrada sobre la disponibilidad de recursos para mejorar la eficiencia del proceso de programación. Le siguen en frecuencia la falta de herramientas o equipos disponibles y la ocupación de los equipos programados para mantenciones, con un promedio de 3.9 eventos por mes cada uno.
+    
+    \section*{Análisis y Conclusiones}
+    
+    El análisis de los resultados de la encuesta resalta varios aspectos críticos que afectan el proceso de programación de las actividades de mantenimiento de Anglo American Chile. Entre los hallazgos principales, destaca la alta dedicación horaria, con un 64\% de los encuestados invirtiendo más de la mitad de su jornada semanal en la generación del cronograma de tareas. La creación del borrador inicial se identifica como la etapa más demandante, representando en promedio el 35\% del tiempo total dedicado.
+    
+    El entorno de programación se caracteriza por ser altamente dinámico, con el 90\% de los encuestados reportando cambios de último minuto al menos semanalmente. Los errores más recurrentes están relacionados con la disponibilidad de materiales y repuestos, mencionados por el 74\% de los participantes, seguidos por la falta de herramientas y equipos auxiliares. Adicionalmente, los problemas de coordinación con otras áreas y la falta de colaboración surgen como barreras relevantes que dificultan la planificación efectiva.
+    
+    Los resultados de la encuesta muestran que el proceso de programación de actividades de mantenimiento \uline{podría beneficiarse significativamente de herramientas que automatizan partes clave del proceso}. En particular, una herramienta que automatice la creación del borrador inicial del cronograma y que permita incorporar de forma fluida cambios de último minuto o ajustes derivados de la resolución de conflictos de recursos y validaciones con otras áreas sería altamente efectiva. Una herramienta de este tipo, que facilite la incorporación rápida de modificaciones, \textbf{podría reducir hasta en un 50\% la dedicación horaria} de los equipos de programación a esta tarea, optimizando el uso de su tiempo.
+    
+    El éxito de esta herramienta, sin embargo, dependerá en gran medida de su integración con las fuentes de información de otras áreas de la empresa. En particular, será esencial conectarla con el área de planificación para acceder a información crítica sobre las tareas, como sus requerimientos de recursos, ventanas de tiempo (fechas de inicio más tempranas y fechas requeridas), y restricciones operativas. Además, será crucial integrarla con la información de bodega para garantizar la disponibilidad de materiales y repuestos, así como también con los datos sobre la disponibilidad de equipos. Es posible que se necesite revisar y ajustar los procedimientos de estas áreas para garantizar que la información sea precisa y confiable. Si se logra implementar una herramienta que integre estas funcionalidades y asegure la calidad de los datos, los \textbf{errores en las labores de mantenimiento derivados de una programación deficiente podrían reducirse en alrededor de un 75\%}.
+    
+    
+\end{appendix}
 
 \end{document}

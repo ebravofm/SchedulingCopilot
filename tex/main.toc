@@ -45,3 +45,11 @@
 \contentsline {subsubsection}{\numberline {6.8.2}Frontend}{25}{subsubsection.6.8.2}%
 \contentsline {subsubsection}{\numberline {6.8.3}Integración con Plataformas de la Empresa}{25}{subsubsection.6.8.3}%
 \contentsline {subsection}{\numberline {6.9}Resumen de beneficios}{25}{subsection.6.9}%
+\contentsline {section}{\numberline {A}Resultados Encuesta sobre Programación de Actividades en el Área de Mantenimiento de Anglo American Chile}{27}{appendix.Alph1}%
+\contentsline {paragraph}{Comentario}{28}{section*.26}%
+\contentsline {paragraph}{Comentario}{28}{section*.29}%
+\contentsline {paragraph}{Comentario}{29}{section*.32}%
+\contentsline {paragraph}{Comentario}{29}{section*.35}%
+\contentsline {paragraph}{Comentario}{29}{section*.38}%
+\contentsline {paragraph}{Comentario}{30}{section*.40}%
+\contentsline {paragraph}{Comentario}{30}{section*.43}%
