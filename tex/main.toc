@@ -2,54 +2,47 @@
 \contentsline {section}{\numberline {1}Introducción}{4}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Contexto}{4}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Consideraciones}{4}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Descripción detallada y levantamiento del problema}{6}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Proceso de Planificación}{6}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Proceso de Programación}{6}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Ciclo Semanal de Programación}{7}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Consideraciones al programar}{7}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Definiciones teóricas}{8}{section.3}%
+\contentsline {section}{\numberline {2}Análisis y Descripción del Problema de Programación de Tareas}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Descripción del Proceso de Programación}{5}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Proceso de Planificación}{5}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Proceso de Programación}{6}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Ciclo Semanal de Programación}{6}{subsubsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.2}Diagnóstico del proceso actual}{7}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Definiciones teóricas}{7}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Problema de Programación de Proyectos con Restricciones de Recursos (RCPSP)}{8}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Algoritmos de Programación por Restricciones}{8}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Aplicación de los conceptos teóricos al problema}{9}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Datos necesarios para el proceso de programación}{9}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Generalización del Problema como RCPSP}{10}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Parámetros del Modelo}{10}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Variables de decisión}{11}{subsubsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Restricciones}{11}{subsubsection.4.2.3}%
-\contentsline {subsubsection}{\numberline {4.2.4}Objetivo}{13}{subsubsection.4.2.4}%
-\contentsline {subsubsection}{\numberline {4.2.5}Resumen del Modelo}{13}{subsubsection.4.2.5}%
-\contentsline {subsection}{\numberline {4.3}Detalle de Función Objetivo}{13}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Flujo de Trabajo}{14}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Pre-Procesamiento}{15}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Segmentación en Subconjuntos}{16}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Solver}{16}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Post-Procesamiento}{17}{subsection.5.4}%
-\contentsline {section}{\numberline {6}Resultados y Análisis}{17}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Descripción del Dataset}{18}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Ajuste de Parámetros para la Función Objetivo}{19}{subsection.6.2}%
-\contentsline {paragraph}{Resultados por Configuración}{20}{section*.8}%
-\contentsline {paragraph}{Justificación de la Configuración Elegida}{20}{section*.10}%
-\contentsline {paragraph}{Visualización de los Resultados}{20}{section*.11}%
-\contentsline {subsection}{\numberline {6.3}Resultados de la Segmentación en Subconjuntos}{21}{subsection.6.3}%
-\contentsline {paragraph}{Distribución de Tareas}{22}{section*.14}%
-\contentsline {paragraph}{Paralelización del Procesamiento}{22}{section*.15}%
-\contentsline {paragraph}{Análisis de Desempeño}{22}{section*.16}%
-\contentsline {paragraph}{Relevancia de la Segmentación}{22}{section*.17}%
-\contentsline {paragraph}{Conclusión sobre la Segmentación}{23}{section*.18}%
-\contentsline {subsection}{\numberline {6.4}Mejoras en la duración total del cronograma}{23}{subsection.6.4}%
-\contentsline {subsection}{\numberline {6.5}Ahorros estimados en tiempo del equipo de programación}{23}{subsection.6.5}%
-\contentsline {subsection}{\numberline {6.6}Impacto en la reducción de errores humanos}{23}{subsection.6.6}%
-\contentsline {subsection}{\numberline {6.7}Proyección de ahorros generales}{24}{subsection.6.7}%
-\contentsline {subsection}{\numberline {6.8}Pasos a seguir}{24}{subsection.6.8}%
-\contentsline {subsubsection}{\numberline {6.8.1}Backend}{25}{subsubsection.6.8.1}%
-\contentsline {subsubsection}{\numberline {6.8.2}Frontend}{25}{subsubsection.6.8.2}%
-\contentsline {subsubsection}{\numberline {6.8.3}Integración con Plataformas de la Empresa}{25}{subsubsection.6.8.3}%
-\contentsline {subsection}{\numberline {6.9}Resumen de beneficios}{25}{subsection.6.9}%
-\contentsline {section}{\numberline {A}Resultados Encuesta sobre Programación de Actividades en el Área de Mantenimiento de Anglo American Chile}{27}{appendix.Alph1}%
-\contentsline {paragraph}{Comentario}{28}{section*.26}%
-\contentsline {paragraph}{Comentario}{28}{section*.29}%
-\contentsline {paragraph}{Comentario}{29}{section*.32}%
-\contentsline {paragraph}{Comentario}{29}{section*.35}%
-\contentsline {paragraph}{Comentario}{29}{section*.38}%
-\contentsline {paragraph}{Comentario}{30}{section*.40}%
-\contentsline {paragraph}{Comentario}{30}{section*.43}%
+\contentsline {subsection}{\numberline {3.2}Algoritmos de Programación por Restricciones}{9}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Aplicación de los conceptos teóricos al problema}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Datos necesarios para el proceso de programación}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Consideraciones al programar}{11}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Generalización del Problema como RCPSP}{11}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Parámetros del Modelo}{11}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Variables de decisión}{12}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Restricciones}{13}{subsubsection.4.3.3}%
+\contentsline {subsubsection}{\numberline {4.3.4}Objetivo}{14}{subsubsection.4.3.4}%
+\contentsline {subsubsection}{\numberline {4.3.5}Resumen del Modelo}{14}{subsubsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.4}Detalle de Función Objetivo}{15}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Flujo de Trabajo de la Solución}{16}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Pre-Procesamiento}{17}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Segmentación en Subconjuntos}{17}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Solver}{18}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Post-Procesamiento}{19}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Resultados y Análisis}{19}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Descripción del Dataset}{19}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Ajuste de Parámetros para la Función Objetivo}{20}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Resultados de la Segmentación en Subconjuntos}{23}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Conclusiones y Pasos a Seguir}{24}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Pasos a Seguir}{25}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Backend}{25}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Frontend}{26}{subsubsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Integración con Plataformas de la Empresa}{26}{subsubsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}Arquitectura de la Solución}{27}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Próximos Pasos}{27}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Conclusión Final}{28}{subsection.7.4}%
+\contentsline {section}{\numberline {A}Resultados Encuesta sobre Programación de Actividades en el Área de Mantenimiento de la empresa colaboradora}{29}{appendix.Alph1}%
+\contentsline {paragraph}{Comentario}{30}{section*.25}%
+\contentsline {paragraph}{Comentario}{30}{section*.28}%
+\contentsline {paragraph}{Comentario}{31}{section*.31}%
+\contentsline {paragraph}{Comentario}{31}{section*.34}%
+\contentsline {paragraph}{Comentario}{31}{section*.37}%
+\contentsline {paragraph}{Comentario}{32}{section*.39}%
+\contentsline {paragraph}{Comentario}{32}{section*.42}%

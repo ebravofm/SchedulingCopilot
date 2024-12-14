@@ -223,8 +223,44 @@ INPUT /usr/local/texlive/2024/texmf-dist/tex/generic/ulem/ulem.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/generic/ulem/ulem.sty
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/logreq/logreq.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/logreq/logreq.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/logreq/logreq.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/logreq/logreq.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/logreq/logreq.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/blx-dm.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/blx-dm.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/blx-dm.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/blx-compat.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/blx-compat.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/blx-compat.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.cfg
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.cfg
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/biblatex.cfg
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/l3kernel/expl3.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/l3kernel/expl3.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 INPUT ./main.aux
 INPUT ./main.aux
 INPUT main.aux
@@ -245,6 +281,15 @@ OUTPUT main.pdf
 INPUT ./main.out
 INPUT ./main.out
 OUTPUT main.out
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
+OUTPUT main.bcf
+INPUT main.bbl
+INPUT ./main.bbl
+INPUT ./main.bbl
+INPUT ./main.bbl
+INPUT main.bbl
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
@@ -266,13 +311,7 @@ INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./main.toc
-INPUT ./main.toc
-INPUT main.toc
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -287,6 +326,13 @@ INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./main.toc
+INPUT ./main.toc
+INPUT main.toc
 OUTPUT main.toc
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -297,19 +343,42 @@ INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
+INPUT ./imgs/process_flowchart.png
+INPUT ./imgs/process_flowchart.png
+INPUT ./imgs/process_flowchart.png
+INPUT ./imgs/process_flowchart.png
+INPUT ./imgs/process_flowchart.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
+INPUT ./imgs/pie_chart.png
+INPUT ./imgs/pie_chart.png
+INPUT ./imgs/pie_chart.png
+INPUT ./imgs/pie_chart.png
+INPUT ./imgs/pie_chart.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
+INPUT ./imgs/rcpsp.png
+INPUT ./imgs/rcpsp.png
+INPUT ./imgs/rcpsp.png
+INPUT ./imgs/rcpsp.png
+INPUT ./imgs/rcpsp.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/constraint_programming.png
+INPUT ./imgs/constraint_programming.png
+INPUT ./imgs/constraint_programming.png
+INPUT ./imgs/constraint_programming.png
+INPUT ./imgs/constraint_programming.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -340,10 +409,24 @@ INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
+INPUT ./imgs/solution.png
+INPUT ./imgs/solution.png
+INPUT ./imgs/solution.png
+INPUT ./imgs/solution.png
+INPUT ./imgs/solution.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/segmentacion.png
+INPUT ./imgs/segmentacion.png
+INPUT ./imgs/segmentacion.png
+INPUT ./imgs/segmentacion.png
+INPUT ./imgs/segmentacion.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -366,10 +449,6 @@ INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
 INPUT ./imgs/sensibilidad_soluciones.png
 INPUT ./imgs/sensibilidad_soluciones.png
 INPUT ./imgs/sensibilidad_soluciones.png
@@ -383,6 +462,11 @@ INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
+INPUT ./imgs/gantt-project.jpg
+INPUT ./imgs/gantt-project.jpg
+INPUT ./imgs/gantt-project.jpg
+INPUT ./imgs/gantt-project.jpg
+INPUT ./imgs/gantt-project.jpg
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -396,6 +480,15 @@ INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/blank.png
+INPUT ./imgs/blank.png
+INPUT ./imgs/blank.png
+INPUT ./imgs/blank.png
+INPUT ./imgs/blank.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -427,6 +520,8 @@ INPUT ./imgs/UC Logo.png
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
+INPUT main.run.xml
+OUTPUT main.run.xml
 INPUT /Users/laptop/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/cm-mf-extra-bold/cmbcsc10.600pk
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb

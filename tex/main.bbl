@@ -1,0 +1,105 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{artigues2008resource}{book}{}
+      \name{author}{3}{}{%
+        {{hash=15e4fe0f572303c8820f273a04075a0d}{%
+           family={Artigues},
+           familyi={A\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=c8b49cbc66280f27d99f3b969b76af9a}{%
+           family={Demassey},
+           familyi={D\bibinitperiod},
+           given={Sophie},
+           giveni={S\bibinitperiod}}}%
+        {{hash=563c94ea26a5988d924e26b8919a39c3}{%
+           family={Néron},
+           familyi={N\bibinitperiod},
+           given={Emmanuel},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {London, UK}%
+      }
+      \list{publisher}{1}{%
+        {Wiley}%
+      }
+      \strng{namehash}{859c952570b66c4c43f924313664d1e0}
+      \strng{fullhash}{859c952570b66c4c43f924313664d1e0}
+      \strng{bibnamehash}{859c952570b66c4c43f924313664d1e0}
+      \strng{authorbibnamehash}{859c952570b66c4c43f924313664d1e0}
+      \strng{authornamehash}{859c952570b66c4c43f924313664d1e0}
+      \strng{authorfullhash}{859c952570b66c4c43f924313664d1e0}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-1-84821-034-9}
+      \field{note}{Includes bibliographical references and index}
+      \field{series}{Library of Congress Cataloging-in-Publication Data}
+      \field{title}{Resource-Constrained Project Scheduling: Models, Algorithms, Extensions and Applications}
+      \field{year}{2008}
+      \keyw{Production scheduling,Resource management}
+    \endentry
+    \entry{rossi2006}{book}{}
+      \name{author}{3}{}{%
+        {{hash=ed2fcdb25982e0ec1a0fa6af1490b33a}{%
+           family={Rossi},
+           familyi={R\bibinitperiod},
+           given={Francesca},
+           giveni={F\bibinitperiod}}}%
+        {{hash=916275d1d39fcac58fc43c89f29645d6}{%
+           family={Beek},
+           familyi={B\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           prefix={van},
+           prefixi={v\bibinitperiod}}}%
+        {{hash=0083caa546c0b2a86576a95dbef046a9}{%
+           family={Walsh},
+           familyi={W\bibinitperiod},
+           given={Toby},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Amsterdam}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{6465cdaa8bce6dfa75c72fd8e08a9468}
+      \strng{fullhash}{6465cdaa8bce6dfa75c72fd8e08a9468}
+      \strng{bibnamehash}{6465cdaa8bce6dfa75c72fd8e08a9468}
+      \strng{authorbibnamehash}{6465cdaa8bce6dfa75c72fd8e08a9468}
+      \strng{authornamehash}{6465cdaa8bce6dfa75c72fd8e08a9468}
+      \strng{authorfullhash}{6465cdaa8bce6dfa75c72fd8e08a9468}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Handbook of Constraint Programming}
+      \field{year}{2006}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
