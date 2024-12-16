@@ -361,6 +361,7 @@ INPUT ./imgs/pie_chart.png
 INPUT ./imgs/pie_chart.png
 INPUT ./imgs/pie_chart.png
 INPUT ./imgs/pie_chart.png
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -399,10 +400,7 @@ INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
 INPUT ./imgs/UC Logo.png
@@ -427,15 +425,15 @@ INPUT ./imgs/segmentacion.png
 INPUT ./imgs/segmentacion.png
 INPUT ./imgs/segmentacion.png
 INPUT ./imgs/segmentacion.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
 INPUT ./imgs/barras_impacto.png
 INPUT ./imgs/barras_impacto.png
 INPUT ./imgs/barras_impacto.png
@@ -449,15 +447,6 @@ INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
-INPUT ./imgs/sensibilidad_soluciones.png
-INPUT ./imgs/sensibilidad_soluciones.png
-INPUT ./imgs/sensibilidad_soluciones.png
-INPUT ./imgs/sensibilidad_soluciones.png
-INPUT ./imgs/sensibilidad_soluciones.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -467,6 +456,22 @@ INPUT ./imgs/gantt-project.jpg
 INPUT ./imgs/gantt-project.jpg
 INPUT ./imgs/gantt-project.jpg
 INPUT ./imgs/gantt-project.jpg
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
+INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -476,19 +481,6 @@ INPUT ./imgs/ModulosDesarrollo.png
 INPUT ./imgs/ModulosDesarrollo.png
 INPUT ./imgs/ModulosDesarrollo.png
 INPUT ./imgs/ModulosDesarrollo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/UC Logo.png
-INPUT ./imgs/blank.png
-INPUT ./imgs/blank.png
-INPUT ./imgs/blank.png
-INPUT ./imgs/blank.png
-INPUT ./imgs/blank.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
 INPUT ./imgs/UC Logo.png
@@ -525,6 +517,7 @@ OUTPUT main.run.xml
 INPUT /Users/laptop/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/cm-mf-extra-bold/cmbcsc10.600pk
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
@@ -532,7 +525,9 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pf
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
