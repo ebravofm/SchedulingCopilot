@@ -80,7 +80,7 @@ En este trabajo buscamos automatizar el proceso de programación de tareas de ma
 
 El objetivo central de este trabajo es desarrollar una solución que permita (1) liberar al equipo de programación de tareas manuales intensivas, optimizando su tiempo y esfuerzo y (2) reducir los errores en las labores de mantenimiento, especialmente aquellos derivados de programaciones deficientes.
 
-A partir de un conjunto de datos de 4.898 tareas, nuestra solución es capaz de generar un cronograma programando el 98,6\% de las tareas con un \textit{makespan} de 21,5 días y con tiempo de procesamiento de 6,1 segundos.
+A partir de un conjunto de datos de 4.898 tareas, nuestra solución es capaz de generar un cronograma programando el 98,6\% de las tareas con un \textit{makespan} de 21,5 días y con tiempo de procesamiento de 6,12 segundos.
 \newpage
 
 \tableofcontents
@@ -92,17 +92,17 @@ A partir de un conjunto de datos de 4.898 tareas, nuestra solución es capaz de 
 \section{Introducción}
 
 \subsection{Contexto}
-El mantenimiento de equipos es una actividad fundamental en cualquier industria que busque garantizar la continuidad operativa y la eficiencia en sus procesos productivos. Una planificación y programación adecuada de las actividades de mantenimiento no sólo previene fallos inesperados en los equipos, sino que también optimiza el uso de recursos y minimiza costos asociados a tiempos de inactividad. Sin embargo, la programación de estas actividades representa un desafío significativo debido a las múltiples restricciones y variables involucradas, como la disponibilidad de personal, recursos materiales y prioridades de tareas.
+El mantenimiento de equipos es una actividad fundamental en cualquier industria que busque garantizar la continuidad operativa y la eficiencia en sus procesos productivos. Una planificación y programación adecuada de las actividades de mantenimiento no sólo previene fallos inesperados en los equipos, sino que también optimiza el uso de recursos y minimiza costos asociados a tiempos de inactividad. Sin embargo, la programación de estas actividades representa un desafío significativo debido a las múltiples restricciones y variables involucradas.
 
 Tradicionalmente, la planificación del mantenimiento ha dependido de equipos humanos que, a pesar de su experiencia y conocimiento, enfrentan limitaciones en términos de tiempo y capacidad para manejar grandes volúmenes de datos. El proceso manual es propenso a errores y puede no garantizar una solución óptima que maximice la eficiencia operativa. En este contexto, surge la necesidad de automatizar este proceso mediante el uso de algoritmos de optimización que puedan abordar de manera efectiva la complejidad inherente de la programación de tareas de mantenimiento.
 
 El problema de programación de mantenimiento puede modelarse como un Problema de Programación de Proyectos con Restricciones de Recursos (\textit{RCPSP}, por sus siglas en inglés: \textit{Resource-Constrained Project Scheduling Problem}), un enfoque de investigación operativa para resolver la labor de planificación bajo condiciones de recursos limitados.
 
-En este modelo, las tareas de mantenimiento se consideran actividades con duraciones definidas, precedencias entre ellas y recursos compartidos, como personal y maquinaria, cuya disponibilidad es limitada. Generalmente el objetivo es encontrar una programación que minimice el tiempo total de ejecución (\textit{makespan}). Modelar el problema de esta forma permite aplicar algoritmos de optimización avanzados, como algoritmos de Programación por Restricciones (\textit{CP} por sus siglas en inglés: \textit{Constraint Programming}), para generar soluciones factibles y eficientes.
+En este modelo, las tareas de mantenimiento se consideran actividades con duraciones definidas, precedencias entre ellas y recursos compartidos cuya disponibilidad es limitada. Generalmente el objetivo es encontrar una programación que minimice el tiempo total de ejecución (\textit{makespan}). Modelar el problema de esta forma permite aplicar algoritmos de optimización avanzados, como algoritmos de Programación por Restricciones (\textit{CP} por sus siglas en inglés: \textit{Constraint Programming}), para generar soluciones factibles y eficientes.
 
 El presente proyecto tiene como objetivo principal proponer un algoritmo para automatizar la programación de actividades de mantenimiento, que permita (1) liberar al equipo de programación de tareas manuales intensivas, optimizando su tiempo y esfuerzo y (2) reducir los errores en las labores de mantenimiento, especialmente aquellos derivados de programaciones deficientes. 
 
-Se evaluan distintas funciones objetivo para determinar cuál entrega los mejores resultados en términos de calidad de las soluciones generadas y tiempo de procesamiento. Para ello, se cuenta con el apoyo del área de mantenimiento de una empresa colaboradora del rubro minero, quienes proporcionan datos para realizar las pruebas y ofrecen retroalimentación durante el desarrollo de la solución. Esta colaboración permite ajustar el modelo a las necesidades específicas y desafíos particulares del entorno operativo, asegurando resultados relevantes y aplicables.
+Para ello, se cuenta con el apoyo del área de mantenimiento de una empresa colaboradora del rubro minero, quienes proporcionan datos para realizar las pruebas y ofrecen retroalimentación durante el desarrollo de la solución. Esta colaboración permite ajustar el modelo a las necesidades específicas y desafíos particulares del entorno operativo, asegurando resultados relevantes y aplicables.
 
 
 \subsection{Consideraciones}
@@ -110,7 +110,7 @@ Es importante contextualizar la terminología específica utilizada en la progra
 
 % \textbf{Cronograma}: El cronograma es la representación temporal de la programación de todas las actividades a lo largo del tiempo. En este proyecto, el cronograma se materializa en una carta GANTT que muestra todas las tareas con su fecha de inicio, hora de inicio y duración. Es una herramienta clave para visualizar y gestionar la ejecución del mantenimiento.
 
-\textbf{Orden de Trabajo (OT)}: Una orden de trabajo es un conjunto de tareas que se deben realizar para cumplir con un objetivo específico, como el mantenimiento de un equipo o vehículo. Estas órdenes de trabajo se ingresan en el sistema \textit{ERP} de la empresa y sirven para coordinar y gestionar las actividades de mantenimiento o producción.
+\textbf{Orden de Trabajo (OT)}: Una orden de trabajo es un conjunto de tareas que se deben realizar para cumplir con un objetivo específico, como el mantenimiento de un equipo o vehículo. Estas OTs se ingresan en el sistema de \textit{Enterprise Resource Planning} (\textit{ERP}) de la empresa y sirven para coordinar y gestionar las actividades de mantenimiento o producción.
 
 % \textbf{Tareas}: Actividades individuales dentro de una orden de trabajo. Estas tareas pueden tener requisitos de precedencia, es decir, algunas deben completarse antes de que otras puedan comenzar. Cada tarea cuenta con una fecha de inicio más temprana (earliest date), una fecha requerida de finalización, una duración, una cantidad de trabajadores necesaria y recursos específicos que se requieren para su ejecución.
 
@@ -136,27 +136,27 @@ Es importante contextualizar la terminología específica utilizada en la progra
 
 \section{Análisis y descripción del problema de programación de tareas}
 
-Con el objetivo de generalizar el proceso de programación de tareas en el rubro minero, se realizó un estudio que combinó el análisis de los documentos normativos del proceso con una encuesta dirigida al personal encargado de la programación. Este enfoque permitió comprender el funcionamiento operativo actual, identificar las principales barreras y desafíos, y validar la necesidad de una solución automatizada.
+Con el objetivo de generalizar el proceso de programación de tareas en el rubro minero, se realizó un estudio que combinó (1) el análisis de los documentos normativos del proceso y (2) una encuesta dirigida al personal encargado de la programación. Este enfoque permitió comprender el funcionamiento operativo actual, identificar las principales barreras y desafíos, y validar la necesidad de una solución automatizada.
 
 A continuación, se presenta una descripción detallada del proceso actual, sus elementos clave y las restricciones involucradas, como punto de partida para el diseño de la solución propuesta.
 
 
-\subsection{Descripción del Proceso de Programación}
+\subsection{Descripción del proceso de programación}
 
-El proceso de programación de tareas en el área de mantenimiento es posterior a la etapa previa de planificación, la cual proporciona los \textit{inputs} esenciales, como las ventanas temporales iniciales para las tareas. A partir de esta información, el equipo de programación adapta las tareas a las restricciones reales de recursos mediante un ciclo semanal iterativo. A continuación, se describen en detalle estas etapas y su interacción.
+El proceso de programación de tareas es posterior a la etapa previa de planificación, la cual proporciona los \textit{inputs} esenciales, como las ventanas temporales iniciales para las tareas. A partir de esta información, el equipo de programación adapta las tareas a las restricciones reales de recursos mediante un ciclo semanal iterativo. A continuación, se describen en detalle estas etapas y su interacción.
 
-\subsubsection{Proceso de Planificación}
+\subsubsection{Proceso de planificación}
 
-Previo al proceso de programación, el equipo de planificación es responsable de definir, con base a los requerimientos de las máquinas, los tiempos de los procesos industriales, y otros factores relacionados con el negocio minero, las ventanas temporales en las que deben ejecutarse las tareas de mantenimiento. Esto da como resultado una planificación inicial sobre la cual se basa el proceso de programación.
+Previo al proceso de programación, el equipo de planificación es responsable de definir las ventanas temporales en las que deben ejecutarse las tareas de mantenimiento. Para hacerlo, se basan los requerimientos de las máquinas, los tiempos de los procesos industriales, y otros factores relacionados con el negocio minero. Esto da como resultado una planificación inicial sobre la cual se basa el proceso de programación.
 
 La planificación considera los objetivos estratégicos de la mina y prioriza el cumplimiento de los requerimientos operativos. Como resultado, se genera una planificación inicial en bruto que indica, para cada tarea, la ventana dentro de la cual debe ser realizada y los recursos necesarios. Sin embargo, este proceso no contempla las restricciones de recursos (personal, equipos o herramientas) y asume la disponibilidad de estos en todo momento. Por lo tanto, es necesario el proceso de programación para asignar los recursos de forma precisa, considerando las limitaciones reales de la operación.
 
-\subsubsection{Proceso de Programación}
+\subsubsection{Proceso de programación}
 
 El equipo de programación recibe esta planificación inicial como \textit{input} y realiza un trabajo detallado para adaptarla a las capacidades reales de los recursos disponibles. Su labor principal es balancear los recursos, asegurando que no haya sobreasignaciones y que todas las tareas puedan ser ejecutadas dentro de sus respectivas ventanas. Esto incluye:
 
 \begin{itemize}
-    \item \textbf{Generar el borrador inicial}: Crear una primera versión del cronograma, integrando las tareas planificadas, asignando fecha y hora de incio para cada tarea. Este paso suele representar una parte significativa del proceso, dado que establece la base para los ajustes posteriores.
+    \item \textbf{Generar el borrador inicial}: Crear una primera versión del cronograma asignando fecha y hora de incio para cada tarea. Este paso suele representar una parte significativa del proceso, dado que establece la base para los ajustes posteriores.
     \item \textbf{Resolver conflictos de recursos}: Identificar y solucionar problemas relacionados con la disponibilidad de recursos, evitando sobreasignaciones y asegurando que cada tarea tenga los recursos necesarios para su ejecución.
     \item \textbf{Validar con otras áreas}: Consultar y coordinar con las áreas relacionadas para garantizar la viabilidad del cronograma, obteniendo el visto bueno sobre la distribución de tareas y recursos.
     \item \textbf{Realizar ajustes finales}: Incorporar cambios de última hora y ajustar los detalles finales del cronograma para garantizar su alineación con las necesidades operativas.
@@ -172,7 +172,7 @@ El equipo de programación recibe esta planificación inicial como \textit{input
 
 El cronograma resultante detalla las tareas a realizar, la fecha y hora de inicio, la duración y los recursos necesarios. Este proceso también considera tareas en función de su criticidad, priorizando aquellas que tienen mayor impacto en la continuidad operativa.
 
-\subsubsection{Ciclo Semanal de Programación}
+\subsubsection{Ciclo semanal de programación}
 
 El proceso de programación en el área de mantenimiento se organiza en un ciclo semanal, cuyo objetivo es garantizar que el cronograma sea factible, actualizado y aprobado por las áreas involucradas, alineándose con los requerimientos del negocio y la disponibilidad de recursos.
 
@@ -206,10 +206,12 @@ Los resultados refuerzan la hipótesis de que el proceso de programación podrí
     \label{fig:pie_chart}
   \end{figure}
 
-\section{Definiciones teóricas}
-En este apartado se presentan las definiciones y conceptos teóricos fundamentales para comprender el enfoque del proyecto. Se abordan el \textit{RCPSP} y los algoritmos \textit{CP}. Estos conceptos son esenciales para entender las metodologías utilizadas en nuestra solución para la programación de actividades de mantenimiento.
 
-\subsection{Problema de Programación de Proyectos con Restricciones de Recursos (\textit{RCPSP})}
+  \section{Definiciones teóricas}
+
+En este apartado se presentan las definiciones y conceptos teóricos fundamentales para comprender el enfoque del proyecto. Se abordan el \textit{RCPSP} y los algoritmos de \textit{CP}. Estos conceptos son esenciales para entender las metodologías utilizadas en nuestra solución para la programación de actividades de mantenimiento.
+
+\subsection{Problema de programación de proyectos con restricciones de recursos (\textit{RCPSP})}
 El \textit{RCPSP} es un problema clásico en el campo de la investigación operativa y la gestión de proyectos. Cabe dentro de los \textit{Constraint Satisfaction Problems} (CSP) y más especificamente dentro de los \textit{Constraint Optimization Problems} (COP).
 
 Consiste en programar un conjunto de actividades interrelacionadas, considerando restricciones tanto de precedencia entre tareas como de disponibilidad limitada de recursos. El objetivo principal es determinar el calendario óptimo que minimice la duración total del proyecto (\textit{makespan}) o que optimice otro criterio relevante, como costos o utilización de recursos\cite{artigues2008resource}.
@@ -232,13 +234,13 @@ En la \textbf{Figura \ref{fig:rcpsp}} se muestra un ejemplo de un \textit{RCPSP}
 \end{figure}
     
 
-El \textit{RCPSP} es reconocido como un problema NP-Hard, lo que significa que no se dispone de un algoritmo que pueda resolver todas sus instancias en tiempo polinomial, dada la complejidad inherente al crecimiento exponencial del espacio de soluciones conforme aumenta el número de tareas y recursos involucrados.
+El \textit{RCPSP} es reconocido como un problema \textit{NP-Hard}, lo que significa que no se dispone de un algoritmo que pueda resolver todas sus instancias en tiempo polinomial, dada la complejidad inherente al crecimiento exponencial del espacio de soluciones conforme aumenta el número de tareas y recursos involucrados.
 
 Si bien para instancias reducidas pueden aplicarse métodos exactos, la escalabilidad del problema suele requerir el uso de enfoques alternativos. En este sentido, \textit{CP} resulta una herramienta especialmente eficaz, ya que permite modelar y resolver el \textit{RCPSP} de forma declarativa, aprovechando técnicas de propagación de restricciones y búsqueda guiada.
 
 
 
-\subsection{Algoritmos de Programación por Restricciones (\textit{CP})}
+\subsection{Algoritmos de programación por restricciones (\textit{CP})}
 
 \textit{CP} es una técnica ampliamente utilizada para resolver problemas combinatorios complejos, como los problemas de programación y planificación de actividades. En el contexto de este trabajo, \textit{CP} es fundamental para abordar el \textit{RCPSP}, proporcionando un marco eficaz para modelar y resolver problemas que incluyen restricciones de tiempo y recursos.
 
@@ -307,7 +309,7 @@ Además de la información proveniente del proceso de planificación, es necesar
 \end{table}
 
 
-\subsection{Consideraciones al Programar}
+\subsection{Consideraciones al programar}
 El proceso de programación de actividades de mantenimiento implica que el programador tome las órdenes de trabajo pendientes y agende cada una de las tareas considerando su compatibilidad con los horarios y restricciones de otras actividades y de los recursos. Se deben tener en cuenta las siguientes consideraciones:
 
 \begin{itemize}
@@ -319,18 +321,18 @@ El proceso de programación de actividades de mantenimiento implica que el progr
     \item Cada \textbf{cuadrilla} tiene una capacidad determinada, que corresponde al número de trabajadores disponibles, lo que influye en la cantidad de tareas que pueden realizarse simultáneamente. Por ejemplo, si una cuadrilla tiene una capacidad de 10 trabajadores, podrá ejecutar 5 tareas que requieran 2 trabajadores cada una de manera simultánea.
     \item Los \textbf{equipos auxiliares} son unitarios, por lo tanto no pueden asignarse a más de una tarea simultaneamente.
     \item Generalmente los programadores se basan en \textbf{cronogramas generados en semanas anteriores}, sobre el cual hacen ajustes o incorporan las tareas nuevas que van ingresando.
-    \item Si se programa una tarea de una \textbf{Orden de Trabajo}, todas las tareas de esa OT deben ser programadas.
+    \item Si se programa una tarea de una \textbf{orden de trabajo}, todas las tareas de esa OT deben ser programadas.
 
 \end{itemize}
 
 
-\subsection{Generalización del Problema como \textit{RCPSP}}
+\subsection{Generalización del problema como \textit{RCPSP}}
 
 Vamos a modelar el problema de programación de tareas de la empresa colaboradora como un \textit{RCPSP}. El objetivo es asignar tiempos de inicio a las tareas, minimizando el \textit{makespan} y minimizando la cantidad de tareas no programadas. Se consideran también las restricciones de capacidad de los recursos, las ventanas de tiempo, los intervalos prohibidos y las posibles relaciones de precedencia entre tareas.
 
 A continuación, se presenta una descripción general del modelo de programación de tareas con recursos limitados que servirá como base para la implementación de la solución.
 
-\subsubsection{Parámetros del Modelo}
+\subsubsection{Parámetros del modelo}
 
 Tenemos los siguientes elementos:
 
@@ -473,10 +475,8 @@ Donde:
     \item \( \beta \): Peso asociado a la penalización por no programar tareas según su criticidad.
 \end{itemize}
 
-Este enfoque busca una solución que equilibre la minimización del \textit{makespan} global y la priorización de tareas críticas según su criticidad.
 
-
-\subsection{Detalle de Función Objetivo}
+\subsection{Detalle de función objetivo}
 
 Dado que en la práctica puede surgir la posibilidad de que ciertas tareas no puedan ser programadas debido a restricciones como la indisponibilidad de recursos, ventanas de tiempo incompatibles o conflictos en los intervalos prohibidos; es crucial considerar un mecanismo que penalice esta situación pero que la permita, de otro modo cada vez que hayan este tipo de incompatibilidades, el modelo no podrá encontrar una solución factible. 
 
@@ -514,7 +514,7 @@ De esta manera, la función objetivo ofrece un balance flexible que puede ser aj
 
 %%%%%%%%%%%%%%%%%%%
 
-\section{Diseño de la Solución}
+\section{Diseño de la solución}
 
 El flujo de trabajo de la solución se ha organizado en cuatro etapas secuenciales, cada una diseñada para estructurar y procesar la información de programación de manera eficiente (Ver \textbf{Figura \ref{fig:solution}}). Estas etapas abarcan desde la ingesta y preparación de datos hasta la generación del cronograma optimizado, en distintos formato. A continuación, se describen las cuatro partes que componen el flujo de trabajo:
 
@@ -538,14 +538,14 @@ Este flujo de trabajo modular garantiza flexibilidad y adaptabilidad, permitiend
     \label{fig:solution}
 \end{figure}
 
-\subsection{Pre-Procesamiento}
+\subsection{Pre-procesamiento}
 
-La etapa de Pre-Procesamiento constituye el punto de partida del flujo de trabajo, recibiendo y preparando la información procedente de diversas fuentes (como sistemas \textit{ERP}, Microsoft Project u otros formatos externos). Esta fase garantiza que los datos sobre tareas, personal y equipos estén libres de inconsistencias, limpios y normalizados, facilitando así la labor posterior del \textit{solver}.
+La etapa de pre-procesamiento constituye el punto de partida del flujo de trabajo, recibiendo y preparando la información procedente de diversas fuentes (como sistemas \textit{ERP}, Microsoft Project u otros formatos externos). Esta fase garantiza que los datos sobre tareas, personal y equipos estén libres de inconsistencias, limpios y normalizados, facilitando así la labor posterior del \textit{solver}.
 
-Las operaciones clave realizadas durante el Pre-Procesamiento incluyen:
+Las operaciones clave realizadas durante el pre-procesamiento incluyen:
 
 \begin{itemize}
-    \item \textbf{Corrección de discrepancias}: Se revisan y ajustan datos en caso de encontrar inconsistencias. Por ejemplo, si una tarea presenta una fecha requerida previa a su fecha de inicio extrema, se corrige automáticamente. Asimismo, se unifican los formatos de fechas, duraciones y demás campos relevantes.
+    \item \textbf{Corrección de discrepancias}: Se revisan y ajustan datos en caso de encontrar inconsistencias. Por ejemplo, si una tarea presenta una fecha requerida previa a su fecha de inicio extrema, se corrige automáticamente. Asimismo, se estandarizan los formatos de fechas, duraciones y demás campos relevantes.
 
     \item \textbf{Cuantización de ventanas horarias}: Las duraciones se expresan en intervalos de 15 minutos para trabajar con unidades enteras en el \textit{solver}. De este modo, una tarea de una hora se representa como 4 unidades, y una tarea de 15 minutos como 1 unidad, optimizando la eficiencia en el modelado de restricciones temporales.
     
@@ -557,9 +557,9 @@ Las operaciones clave realizadas durante el Pre-Procesamiento incluyen:
 
 
 
-\subsection{Segmentación en Subconjuntos}
+\subsection{Segmentación en subconjuntos}
 
-La Segmentación en Subconjuntos tiene como objetivo reducir la complejidad del problema, dividiendo el conjunto global de tareas en grupos más pequeños y manejables. Este proceso se basa en la identificación de dependencias entre tareas, garantizando que aquellas actividades que comparten recursos se mantengan dentro de un mismo subconjunto.
+La segmentación en subconjuntos tiene como objetivo reducir la complejidad del problema, dividiendo el conjunto global de tareas en grupos más pequeños y manejables. Este proceso se basa en la identificación de dependencias entre tareas, garantizando que aquellas actividades que comparten recursos se mantengan dentro de un mismo subconjunto.
 
 El método para llevar a cabo esta segmentación es el siguiente:
 
@@ -608,12 +608,12 @@ Luego, para resolver cada uno de los subconjuntos de tareas se utiliza el \texti
 
 En el caso en el que se trabaja con un cronograma previo, se incorporan las tareas de este cronograma en el modelo, utilizando el método \verb|add_hint| de \textit{OR-Tools}. Esto permite que el usuario pueda hacer ajustes finos sobre el cronograma anterior, manteniendo las tareas en los horarios preferidos, siempre que sea posible.
 
-Para mejorar el desempeño, se aplican estrategias de paralelización con librerías como \texttt{joblib}, ejecutando la resolución de múltiples subconjuntos de forma simultánea en diferentes hilos o núcleos de procesamiento.
+Para mejorar el desempeño, se aplican estrategias de paralelización con librerías como \textit{joblib}, ejecutando la resolución de múltiples subconjuntos de forma simultánea en diferentes hilos o núcleos de procesamiento.
 
 
-\subsection{Post-Procesamiento}
+\subsection{Post-procesamiento}
 
-La fase de Post-Procesamiento consolida los resultados generados por el \textit{solver} y los prepara en formatos finales útiles para su análisis, integración o visualización en herramientas externas.
+La fase de post-procesamiento consolida los resultados generados por el \textit{solver} y los prepara en formatos finales útiles para su análisis, integración o visualización en herramientas externas.
 
 Partiendo del archivo JSON producido por el \textit{solver} (que indica para cada tarea si fue programada y su hora de inicio), se procesan estos datos junto con la información original, produciendo:
 
@@ -622,17 +622,17 @@ Partiendo del archivo JSON producido por el \textit{solver} (que indica para cad
 
     \item \textbf{Archivo XLSX para \textit{Microsoft Excel}}: Se produce una carta Gantt en \textit{MS Excel}, organizando las tareas en un cronograma visual y detallando inicio, fin, duración, así como los recursos asignados, permitiendo una int\textit{erp}retación rápida y clara.
 
-    \item \textbf{Integraciones con APIs empresariales}: Si la organización cuenta con sistemas \textit{ERP} u otros entornos de gestión, los resultados pueden integrarse automáticamente mediante APIs, asegurando la continuidad operativa y minimizando el trabajo manual.
+    \item \textbf{Integraciones con \textit{APIs} empresariales}: Si la organización cuenta con sistemas \textit{ERP} u otros entornos de gestión, los resultados pueden integrarse automáticamente mediante \textit{APIs}, asegurando la continuidad operativa y minimizando el trabajo manual.
 \end{itemize}
 
-El Post-Procesamiento garantiza que los resultados generados por el \textit{solver} sean comunicados de forma clara y estén listos para su explotación por usuarios finales, herramientas de gestión o análisis posterior. De este modo, el flujo de trabajo se completa con un producto final útil y adaptable a las necesidades específicas de la organización.
+El post-procesamiento garantiza que los resultados generados por el \textit{solver} sean comunicados de forma clara y estén listos para su explotación por usuarios finales, herramientas de gestión o análisis posterior. De este modo, el flujo de trabajo se completa con un producto final útil y adaptable a las necesidades específicas de la organización.
 
-\section{Resultados y Análisis}
+\section{Resultados y análisis}
 
 El desarrollo e implementación del modelo de optimización ha generado resultados prometedores, tanto en términos de la calidad del cronograma producido como en los beneficios operativos proyectados para el equipo de programación. A continuación, se presentan los resultados clave.
 
 
-\subsection{Descripción del Conjunto de Datos}
+\subsection{Descripción del conjunto de datos}
 
 El conjunto de datos utilizado en este proyecto fue proporcionado por el equipo de programación de la empresa colaboradora. Estos datos corresponden a tareas reales de mantenimiento para un período específico de tiempo y reflejan el contexto operativo y las restricciones enfrentadas por la empresa durante dicho período. El análisis del conjunto de datos proporciona una visión integral sobre la escala y la complejidad del problema de programación abordado.
 
@@ -667,7 +667,7 @@ En términos de criticidad, las tareas se clasifican en tres niveles, donde 1 re
 
 El conjunto de datos también incluye información sobre los recursos disponibles para ejecutar las tareas. Estos recursos se dividen en dos categorías principales:
 \begin{itemize}
-    \item \textbf{Cuadrillas:} El conjunto de daots considera un total de 31 cuadrillas, cada una con su respectivo esquema de turnos y capacidades específicas.
+    \item \textbf{Cuadrillas:} El conjunto de datos considera un total de 31 cuadrillas, cada una con su respectivo esquema de turnos y capacidades específicas.
     \item \textbf{Equipos Auxiliares:} Hay 16 equipos auxiliares disponibles, los cuales deben compartirse entre las diferentes cuadrillas.
 \end{itemize}
 
@@ -683,7 +683,7 @@ El rango temporal y las características de las tareas se resumen en el \textbf{
 
 Este conjunto de datos proporciona una base detallada y realista para el análisis y la implementación de nuestra solución, ya que combina un gran volumen de tareas con restricciones complejas y diversidad de recursos.
 
-\subsection{Ajuste de Parámetros para la Función Objetivo}
+\subsection{Ajuste de parámetros para la función objetivo}
 
 La función objetivo del modelo combina dos componentes clave: el \textit{makespan}, representado por el parámetro \( \alpha \), y la penalización por tareas no programadas, representada por el parámetro \( \beta \). Para determinar los valores más adecuados de \( \alpha \) y \( \beta \), se llevaron a cabo múltiples experimentos utilizando diferentes combinaciones de estos parámetros. El objetivo fue evaluar cómo cada configuración afecta el equilibrio entre la minimización del \textit{makespan} y la cantidad de tareas programadas, especialmente aquellas con criticidad alta (criticidad 1).
 
@@ -714,7 +714,7 @@ En estos experimentos, los resultados fueron analizados en función de métricas
 
 La configuración \( a \), donde \( \alpha = 1 \) y \( \beta = 0 \), prioriza exclusivamente la minimización del makespan. Sin embargo, este enfoque no logra programar ninguna tarea, lo que resulta inaceptable, ya que no se cumple el objetivo principal del modelo. Por otro lado, la configuración \( b \) (\( \alpha = 0 \), \( \beta = 1 \)) busca maximizar la cantidad de tareas programadas, logrando 4.854 tareas en total. Aunque esta configuración presenta un makespan elevado (1.072 horas o 44,7 días), consigue programar todas las tareas de criticidad 1, lo cual es un resultado favorable para las tareas más críticas.
 
-La configuración \( c \) (\( \alpha = 1 \), \( \beta = 1 \)) equilibra ambos objetivos, pero a costa de una mayor cantidad de tareas no programadas (240). Si bien su \textit{makespan} es menor que el de \( b \), su penalización por dejar tareas críticas fuera del cronograma lo hace menos atractivo.
+La configuración \( c \) (\( \alpha = 1 \), \( \beta = 1 \)) equilibra ambos objetivos, pero a costa de una mayor cantidad de tareas no programadas (240 tareas). Si bien su \textit{makespan} es menor que el de \( b \), su penalización por dejar tareas críticas fuera del cronograma lo hace menos atractivo.
 
 Finalmente, la configuración \( d \) (\( \alpha = 1 \), \( \beta = 2 \)) logra un balance ideal entre los objetivos de programación y makespan. Con 4.831 tareas programadas, esta configuración deja fuera solo 67 tareas (1,4\% del total), manteniendo el \textit{makespan} en un nivel razonable de 516,25 horas (21,5 días). Además, se asegura que todas las tareas de criticidad 1 son programadas, mientras que las tareas de criticidad 2 y 3 no programadas son reducidas al mínimo posible.
 
@@ -738,11 +738,11 @@ Finalmente, la configuración \( d \) (\( \alpha = 1 \), \( \beta = 2 \)) logra 
 \end{table}
 
 
-Se seleccionó la configuración \( d \) debido a su capacidad para satisfacer las prioridades del modelo. Aunque el tiempo de solución es el más alto entre las configuraciones evaluadas (9,95 segundos), este es un compromiso aceptable dado que garantiza un equilibrio óptimo entre la minimización del \textit{makespan} y la programación de tareas críticas. Sin embargo, este tiempo de solución podría representar un desafío operativo en escenarios más grandes. Para abordar este problema, se propone utilizar la segmentación en subconjuntos, una técnica que divide el problema en partes más manejables, reduciendo así el tiempo de cálculo necesario para resolver cada subconjunto de tareas.
+Se seleccionó la configuración \( d \) debido a su capacidad para satisfacer las prioridades del modelo. Aunque el tiempo de solución es el más alto entre las configuraciones evaluadas (9,95 segundos), este es un compromiso aceptable dado que garantiza un equilibrio óptimo entre la minimización del \textit{makespan} y la programación de tareas críticas.
 
-\subsection{Resultados de la Segmentación en Subconjuntos}
+\subsection{Resultados de la segmentación en subconjuntos}
 
-La segmentación en subconjuntos permitió dividir el conjunto total de tareas en 14 subconjuntos más manejables, con el objetivo de reducir el tiempo de procesamiento del modelo. En el Cuadro~\ref{tab:subsets_results} se presentan los resultados obtenidos, incluyendo el número de tareas en cada subconjunto, su porcentaje relativo con respecto al total y el tiempo de solución requerido para resolver cada uno. Este análisis se llevó a cabo en un servidor virtual con las siguientes especificaciones:  
+La segmentación en subconjuntos permitió dividir el conjunto total de tareas en 14 subconjuntos más manejables, con el objetivo de reducir el tiempo de procesamiento del modelo. En el \textbf{Cuadro~\ref{tab:subsets_results}} se presentan los resultados obtenidos, incluyendo el número de tareas en cada subconjunto, su porcentaje relativo con respecto al total y el tiempo de solución requerido para resolver cada uno. Este análisis se llevó a cabo en un servidor virtual con las siguientes especificaciones:  
 
 \begin{itemize}
     \item \textbf{vCPU/s:} 4 vCPUs.
@@ -782,14 +782,14 @@ La segmentación produjo un subconjunto principal, \( S1 \), que contiene 2.598 
 
 El procesamiento de los subconjuntos se llevó a cabo de manera paralela. Como resultado, el tiempo total de solución se igualó al máximo tiempo del \textit{solver} de todos los subconjuntos, es decir, 4,34 segundos. Este enfoque demostró la ventaja de dividir el problema en partes independientes y resolverlas simultáneamente, reduciendo considerablemente el tiempo total necesario para obtener los resultados.
 
-\section{Conclusiones y Pasos a Seguir}
+\section{Conclusiones y pasos a seguir}
 
 
 Los resultados obtenidos muestran que la solución desarrollada cumple con los objetivos propuestos al iniciar el trabajo, proporcionando una solución eficiente y satisfactoria para la programación automatizada de actividades de mantenimiento. Se logra un cronograma que cumple con las condiciones y restricciones definidas, en tiempos de procesamiento acotados y manejables.
 
 Para nuestro conjunto de datos de 4.898 tareas, la solución logra programar el 98,6\% de las tareas, dejando solo 67 tareas no programadas. Además, se garantiza la programación de todas las tareas de criticidad 1, lo que refleja la priorización de las actividades más críticas. El \textit{makespan} obtenido es de 21,5 días, lo que indica una distribución eficiente de las tareas en el tiempo disponible.
 
-El tiempo total de cálculo para resolver el problema completo fue de 6,12 segundos, contando el tiempo de Pre-Procesamiento, segmentación en subconjuntos, resolución de los subconjuntos y Post-Procesamiento. Consideramos este tiempo de cálculo como razonable. En la Figura \ref{fig:gantt-project} se muestra un ejemplo de un cronograma generado por la solución, en formato compatible con \textit{Microsoft Project}.
+El tiempo total de cálculo para resolver el problema completo fue de 6,12 segundos, contando el tiempo de Pre-Procesamiento, segmentación en subconjuntos, resolución de los subconjuntos y Post-Procesamiento. Consideramos este tiempo de cálculo como razonable. En la \textbf{Figura \ref{fig:gantt-project}} se muestra un ejemplo de un cronograma generado por la solución, en formato compatible con \textit{Microsoft Project}.
 
 
 \begin{figure}[htbp]
@@ -800,7 +800,7 @@ El tiempo total de cálculo para resolver el problema completo fue de 6,12 segun
   \end{figure}
 
 
-\subsection{Impacto sobre Proceso de Programación}
+\subsection{Impacto sobre proceso de programación}
 
 Estimamos que la solución desarrollada puede tener un impacto significativo en la optimización del proceso de programación de actividades de mantenimiento en la empresa colaboradora. En primer lugar, permite generar un primer borrador del cronograma de forma automatizada, eliminando completamente la necesidad de realizar esta tarea manualmente. Dado que la generación del borrador inicial representa aproximadamente el 35\% del tiempo total dedicado por el equipo de programación a la creación del cronograma\footnote{Ver Anexo \ref{anexo:encuesta}}, la automatización de esta etapa por sí sola ya implica un ahorro considerable en la dedicación horaria.
 
@@ -811,7 +811,7 @@ Considerando que las actividades de ``Resolver conflictos de recursos'' y ``Reso
 
 Por lo tanto, en términos generales \textbf{estimamos que la herramienta permite reducir en aproximadamente un 57,6\%  el tiempo total dedicado a la creación y ajuste del cronograma de tareas de mantenimiento}. Esto no solo libera al equipo de programación de una parte importante del trabajo manual, sino que también les permite enfocar su tiempo y esfuerzo en actividades estratégicas que agreguen mayor valor a las operaciones de la empresa colaboradora.
 
-\subsection{Limitaciones y Consideraciones}
+\subsection{Limitaciones y consideraciones}
 
 La principal limitación de nuestra solución surge de un punto identificado en la encuesta realizada al personal de programación de la empresa colaboradora, donde se destacó que el error más común derivado de una programación deficiente es la no disponibilidad de materiales y repuestos. Este problema representa un desafío crítico para garantizar la eficacia de las labores de mantenimiento. Sin embargo, en la actualidad, los datos relacionados con la disponibilidad de materiales y repuestos no están sistematizados de manera que permitan su integración con nuestra solución.
 
@@ -819,7 +819,7 @@ Para superar esta limitación, sería necesario implementar un paso previo enfoc
 
 Mientras estos pasos no se lleven a cabo, no podemos garantizar que nuestra herramienta reduzca los errores relacionados con la no disponibilidad de materiales y repuestos. Este aspecto requiere la colaboración y el compromiso de otras áreas de la empresa para establecer una base sólida de información confiable que pueda integrarse eficazmente al sistema de programación automatizada.
 
-\subsection{Pasos a Seguir}
+\subsection{Pasos a seguir}
 
 Es importante mencionar que el desarrollo del modelo y su implementación en un entorno operativo real requiere de una serie de pasos adicionales. A continuación, se detallan las recomendaciones para la implementación exitosa de la solución propuesta.
 
@@ -846,16 +846,16 @@ El desarrollo del frontend puede realizarse utilizando \textit{React.js} u otro 
 
 Para su despliegue, el frontend puede implementarse como una aplicación web en un entorno cloud compatible con las necesidades de la organización.
 
-\subsubsection{Integración con Plataformas de la Empresa}
+\subsubsection{Integración con plataformas de la empresa}
 
 Es fundamental garantizar la integración de la solución con las plataformas existentes de la empresa, particularmente con los sistemas \textit{ERP} y otros sistemas de gestión de datos. Esta integración debe diseñarse para ser bidireccional, permitiendo tanto la importación como la exportación de información relevante de manera fluida.
 
 Se recomienda configurar procesos automáticos para importar datos esenciales como las órdenes de trabajo, la disponibilidad de cuadrillas y los recursos necesarios desde el \textit{ERP} u otras plataformas internas. Del mismo modo, el cronograma final debe exportarse en formatos compatibles con los sistemas existentes, para su validación y distribución dentro de la organización.
 
-Se aconseja emplear herramientas de gestión de APIs que permitan monitorear y administrar las conexiones entre los distintos módulos. Este enfoque asegura la interoperabilidad de la solución con el ecosistema tecnológico existente, adaptándose a las necesidades específicas de la empresa colaboradora.
+Se aconseja emplear herramientas de gestión de \textit{APIs} que permitan monitorear y administrar las conexiones entre los distintos módulos. Este enfoque asegura la interoperabilidad de la solución con el ecosistema tecnológico existente, adaptándose a las necesidades específicas de la empresa colaboradora.
 
 
-\subsection{Reflexiones Finales}  
+\subsection{Reflexiones finales}  
 
 La solución desarrollada representa un avance significativo en la automatización de la programación de actividades de mantenimiento, con el potencial de optimizar el flujo de trabajo, reducir errores y mejorar la eficiencia operativa. La implementación de los pasos a seguir garantizará que esta solución pase de ser un prototipo a una herramienta integrada y funcional que genere un impacto tangible en las operaciones de la empresa colaboradora.
 
@@ -892,7 +892,7 @@ La solución desarrollada representa un avance significativo en la automatizaci�
     
     A continuación se presentan los resultados y el análisis de las respuestas obtenidas.
     
-    \section*{Resultados de la Encuesta}
+    \section*{Resultados de la encuesta}
     
     En esta sección se presentan las preguntas realizadas a los encuestados junto con un cuadro que resume los resultados obtenidos. Posteriormente, se incluye un comentario que analiza los datos presentados y destaca las principales conclusiones relacionadas con cada pregunta.
     
@@ -1035,7 +1035,7 @@ La solución desarrollada representa un avance significativo en la automatizaci�
     
     \paragraph{Comentario}La falta de materiales o repuestos disponibles vuelve a ser un factor crítico, con un promedio superior a 6 eventos por mes. Esto confirma la relevancia de contar con información fidedigna e integrada sobre la disponibilidad de recursos para mejorar la eficiencia del proceso de programación. Le siguen en frecuencia la falta de herramientas o equipos disponibles y la ocupación de los equipos programados para mantenciones, con un promedio de 3.9 eventos por mes cada uno.
     
-    \section*{Análisis y Conclusiones}
+    \section*{Análisis y conclusiones}
     
     El análisis de los resultados de la encuesta resalta varios aspectos críticos que afectan el proceso de programación de las actividades de mantenimiento de la empresa colaboradora. Entre los hallazgos principales, destaca la alta dedicación horaria, con un 64\% de los encuestados invirtiendo más de la mitad de su jornada semanal en la generación del cronograma de tareas. La creación del borrador inicial se identifica como la etapa más demandante, representando en promedio el 35\% del tiempo total dedicado.
     
