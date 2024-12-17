@@ -74,9 +74,9 @@ Programación de Tareas, Mantenimiento Industrial, Algoritmos de Optimización, 
 \newpage
 
 \section*{Resumen}
-El mantenimiento eficiente de equipos es crucial para garantizar la continuidad operativa en cualquier industria. Sin embargo, la programación manual de estas actividades es compleja, intensiva en tiempo y propensa a errores debido a las múltiples variables involucradas. Esto genera una alta dependencia de personal especializado para llevar a cabo la programación de tareas.
+El mantenimiento eficiente de equipos es crucial para garantizar la continuidad operativa en cualquier industria. Sin embargo, la programación manual de estas actividades es compleja, intensiva en tiempo y propensa a errores debido a la multiplicidad de variables involucradas. Esto genera una alta dependencia de personal especializado para llevar a cabo la programación de tareas.
 
-Este trabajo tiene como objetivo principal automatizar el proceso de programación de tareas de mantenimiento, liberando al equipo de programación de trabajo manual intensivo y reduciendo significativamente la ocurrencia de errores. Para ello, el problema se modela como un Problema de Programación de Proyectos con Restricciones de Recursos (\textit{RCPSP}, por sus siglas en inglés: \textit{Resource-Constrained Project Scheduling Problem}). Una generalización correcta del proceso permite utilizar herramientas de Programación por Restricciones (\textit{CP}, por sus siglas en inglés: \textit{Constraint Programming}) para generar cronogramas que cumplan con todas las restricciones del problema, minimizando el \textit{makespan} y las tareas no programadas.
+En este trabajo buscamos automatizar el proceso de programación de tareas de mantenimiento, liberando al equipo de programación de trabajo manual intensivo y reduciendo significativamente la ocurrencia de errores. Para ello, el problema se modela como un Problema de Programación de Proyectos con Restricciones de Recursos (\textit{RCPSP}, por sus siglas en inglés: \textit{Resource-Constrained Project Scheduling Problem}). Una generalización correcta del proceso permite utilizar herramientas de Programación por Restricciones (\textit{CP}, por sus siglas en inglés: \textit{Constraint Programming}) para generar cronogramas que cumplan con todas las restricciones del problema, minimizando el \textit{makespan} y las tareas no programadas.
 
 El objetivo central de este trabajo es desarrollar una solución que permita (1) liberar al equipo de programación de tareas manuales intensivas, optimizando su tiempo y esfuerzo y (2) reducir los errores en las labores de mantenimiento, especialmente aquellos derivados de programaciones deficientes.
 
@@ -96,7 +96,9 @@ El mantenimiento de equipos es una actividad fundamental en cualquier industria 
 
 Tradicionalmente, la planificación del mantenimiento ha dependido de equipos humanos que, a pesar de su experiencia y conocimiento, enfrentan limitaciones en términos de tiempo y capacidad para manejar grandes volúmenes de datos. El proceso manual es propenso a errores y puede no garantizar una solución óptima que maximice la eficiencia operativa. En este contexto, surge la necesidad de automatizar este proceso mediante el uso de algoritmos de optimización que puedan abordar de manera efectiva la complejidad inherente de la programación de tareas de mantenimiento.
 
-El problema de programación de mantenimiento puede modelarse como un Problema de Programación de Proyectos con Restricciones de Recursos (\textit{RCPSP}, por sus siglas en inglés: \textit{Resource-Constrained Project Scheduling Problem}), un enfoque de investigación operativa para resolver la labor de planificación bajo condiciones de recursos limitados. En este modelo, las tareas de mantenimiento se consideran actividades con duraciones definidas, precedencias entre ellas y recursos compartidos, como personal y maquinaria, cuya disponibilidad es limitada. Generalmente el objetivo es encontrar una programación que minimice el tiempo total de ejecución (\textit{makespan}). Modelar el problema de esta forma permite aplicar algoritmos de optimización avanzados, como algoritmos de Programación por Restricciones (\textit{CP} por sus siglas en inglés: \textit{Constraint Programming}), para generar soluciones factibles y eficientes.
+El problema de programación de mantenimiento puede modelarse como un Problema de Programación de Proyectos con Restricciones de Recursos (\textit{RCPSP}, por sus siglas en inglés: \textit{Resource-Constrained Project Scheduling Problem}), un enfoque de investigación operativa para resolver la labor de planificación bajo condiciones de recursos limitados.
+
+En este modelo, las tareas de mantenimiento se consideran actividades con duraciones definidas, precedencias entre ellas y recursos compartidos, como personal y maquinaria, cuya disponibilidad es limitada. Generalmente el objetivo es encontrar una programación que minimice el tiempo total de ejecución (\textit{makespan}). Modelar el problema de esta forma permite aplicar algoritmos de optimización avanzados, como algoritmos de Programación por Restricciones (\textit{CP} por sus siglas en inglés: \textit{Constraint Programming}), para generar soluciones factibles y eficientes.
 
 El presente proyecto tiene como objetivo principal proponer un algoritmo para automatizar la programación de actividades de mantenimiento, que permita (1) liberar al equipo de programación de tareas manuales intensivas, optimizando su tiempo y esfuerzo y (2) reducir los errores en las labores de mantenimiento, especialmente aquellos derivados de programaciones deficientes. 
 
@@ -132,7 +134,7 @@ Es importante contextualizar la terminología específica utilizada en la progra
 
 %%%%% SECCION 2 %%%%%
 
-\section{Análisis y Descripción del Problema de Programación de Tareas}
+\section{Análisis y descripción del problema de programación de tareas}
 
 Con el objetivo de generalizar el proceso de programación de tareas en el rubro minero, se realizó un estudio que combinó el análisis de los documentos normativos del proceso con una encuesta dirigida al personal encargado de la programación. Este enfoque permitió comprender el funcionamiento operativo actual, identificar las principales barreras y desafíos, y validar la necesidad de una solución automatizada.
 
