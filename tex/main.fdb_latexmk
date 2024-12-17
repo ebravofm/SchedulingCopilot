@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1734035332.30371 "main.bcf" "main.bbl" "main" 1734401374.75143 0
-  "main.bcf" 1734401374.62776 107841 ec8dd91b03e4e91a0ff3daccdbf57e18 "pdflatex"
+["biber main"] 1734035332.30371 "main.bcf" "main.bbl" "main" 1734403168.49652 0
+  "main.bcf" 1734403168.37305 107841 ec8dd91b03e4e91a0ff3daccdbf57e18 "pdflatex"
   "referencias.bib" 1734035327.10338 771 74a4fbafd5953a4bd2d898c81de3de4d ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1734401372.09019 "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" "main.pdf" "main" 1734401374.75173 0
+["pdflatex"] 1734403165.85563 "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" "main.pdf" "main" 1734403168.49681 0
   "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" 1734401371.83331 87713 2ef1cee9410e26cfa93a4a7e05902801 ""
   "/Users/laptop/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/cm-mf-extra-bold/cmbcsc10.600pk" 1731202822.32429 10972 1ed6a5d8ee63c0437e713199bbc8927d ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -206,19 +206,19 @@
   "imgs/UC Logo Grande.png" 1731200840.07745 172036 3bbdf8a73ac431a7111ec246c673fd47 ""
   "imgs/UC Logo.png" 1723994970.42055 59116 5e24b430aa1a2264b0c5234af3a48a8e ""
   "imgs/barras_impacto.png" 1733527397.26955 61700 fa46e95ad4de0e68a50b8b281bb19fba ""
-  "imgs/constraint_programming.png" 1734156535.71805 213894 07fd03cf0b711dc4620b96216ac4bce5 ""
+  "imgs/constraint_programming.png" 1734402971 214079 38bbfd209eda0ac447d461cf6ed3b8f1 ""
   "imgs/gantt-project.jpg" 1733930272.48232 419375 81f8f2a609ce79440c8f7c4e5563a134 ""
   "imgs/pie_chart.png" 1734037138.80908 37292 e5eee7d5f88b83ecfb45b0dfebc4cd69 ""
-  "imgs/process_flowchart.png" 1734139913.8891 322666 89b02d2a3d6c917ada628b01b96ef687 ""
+  "imgs/process_flowchart.png" 1734402718 330063 d7c8e09e1ec32d197353c471ea043ac7 ""
   "imgs/rcpsp.png" 1734127827.87178 68038 5d25b9d3aedc70cf81198b233c664ac6 ""
   "imgs/segmentacion.png" 1734127848.7477 222249 e18e86425e24b0aa16ee9507b90ff327 ""
-  "imgs/solution.png" 1734156071.07284 145074 d79585e25c5132c5a305e135797a01d5 ""
-  "main.aux" 1734401374.62448 12637 95b5632676df7859042ea7885c4f4168 "pdflatex"
+  "imgs/solution.png" 1734403096 145259 460b6ec9e6610b5abbf45ab4d75bfbeb ""
+  "main.aux" 1734403168.36978 12637 95b5632676df7859042ea7885c4f4168 "pdflatex"
   "main.bbl" 1734035334.39813 3621 b9a24526039f95801db2680eb859f31a "biber main"
-  "main.out" 1734401374.62689 6806 5512e67264047a09d4623f7bcdd35c0d "pdflatex"
-  "main.run.xml" 1734401374.62833 2306 21b6f2342482d65f7bca9ce329356541 "pdflatex"
+  "main.out" 1734403168.37221 6806 5512e67264047a09d4623f7bcdd35c0d "pdflatex"
+  "main.run.xml" 1734403168.37363 2306 21b6f2342482d65f7bca9ce329356541 "pdflatex"
   "main.tex" 1734401371.83331 87713 2ef1cee9410e26cfa93a4a7e05902801 ""
-  "main.toc" 1734401374.62839 4285 19e0ec6db899c9be8f036b04ed4931cf "pdflatex"
+  "main.toc" 1734403168.37369 4285 19e0ec6db899c9be8f036b04ed4931cf "pdflatex"
   (generated)
   "main.aux"
   "main.bcf"
