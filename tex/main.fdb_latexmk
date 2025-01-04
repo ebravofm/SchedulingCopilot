@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber main"] 1734035332.30371 "main.bcf" "main.bbl" "main" 1734403168.49652 0
-  "main.bcf" 1734403168.37305 107841 ec8dd91b03e4e91a0ff3daccdbf57e18 "pdflatex"
+["biber main"] 1734035332.30371 "main.bcf" "main.bbl" "main" 1735948282.15089 0
+  "main.bcf" 1735948282.03674 107841 ec8dd91b03e4e91a0ff3daccdbf57e18 "pdflatex"
   "referencias.bib" 1734035327.10338 771 74a4fbafd5953a4bd2d898c81de3de4d ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1734403165.85563 "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" "main.pdf" "main" 1734403168.49681 0
-  "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" 1734401371.83331 87713 2ef1cee9410e26cfa93a4a7e05902801 ""
+["pdflatex"] 1735948279.59073 "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" "main.pdf" "main" 1735948282.15117 0
+  "/Users/laptop/Documents/Magister/Memoria/git/tex/main.tex" 1735948276.72532 87728 028b384dbedd830539220e6d7646055d ""
   "/Users/laptop/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/cm-mf-extra-bold/cmbcsc10.600pk" 1731202822.32429 10972 1ed6a5d8ee63c0437e713199bbc8927d ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -213,12 +213,12 @@
   "imgs/rcpsp.png" 1734127827.87178 68038 5d25b9d3aedc70cf81198b233c664ac6 ""
   "imgs/segmentacion.png" 1734127848.7477 222249 e18e86425e24b0aa16ee9507b90ff327 ""
   "imgs/solution.png" 1734403096 145259 460b6ec9e6610b5abbf45ab4d75bfbeb ""
-  "main.aux" 1734403168.36978 12637 95b5632676df7859042ea7885c4f4168 "pdflatex"
+  "main.aux" 1735948282.03349 12637 fc15150d2561fdf69292d6ccd14ac76c "pdflatex"
   "main.bbl" 1734035334.39813 3621 b9a24526039f95801db2680eb859f31a "biber main"
-  "main.out" 1734403168.37221 6806 5512e67264047a09d4623f7bcdd35c0d "pdflatex"
-  "main.run.xml" 1734403168.37363 2306 21b6f2342482d65f7bca9ce329356541 "pdflatex"
-  "main.tex" 1734401371.83331 87713 2ef1cee9410e26cfa93a4a7e05902801 ""
-  "main.toc" 1734403168.37369 4285 19e0ec6db899c9be8f036b04ed4931cf "pdflatex"
+  "main.out" 1735948282.03588 6806 5512e67264047a09d4623f7bcdd35c0d "pdflatex"
+  "main.run.xml" 1735948282.03732 2306 21b6f2342482d65f7bca9ce329356541 "pdflatex"
+  "main.tex" 1735948276.72532 87728 028b384dbedd830539220e6d7646055d ""
+  "main.toc" 1735948282.03739 4285 19e0ec6db899c9be8f036b04ed4931cf "pdflatex"
   (generated)
   "main.aux"
   "main.bcf"

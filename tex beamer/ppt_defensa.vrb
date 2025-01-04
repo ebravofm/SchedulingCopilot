@@ -1,0 +1,27 @@
+\frametitle{Ejemplo de Tarea y sus atributos}
+\vspace{-2ex}
+\begin{table}[htbp]
+    \centering
+    \captionsetup{justification=centering}
+    \vspace{0.3cm}
+    \begin{tabular}{p{6cm} p{8cm}}
+        \toprule
+        \textbf{Atributo} & \textbf{Descripción} \\
+        \midrule
+        \textbf{ID Orden de Trabajo} & 4000001 \\
+        \textbf{ID Tarea} & 001 \\
+        \textbf{Descripción OT} & Cambio de suspensión trasera lado izquierdo \\
+        \textbf{Descripción Tarea} & Retiro de suspensión trasera \\
+        \textbf{Fecha Inicio Extrema} & 2024-11-29 \\
+        \textbf{Fecha Requerida} & 2024-12-30 \\
+        \textbf{Cuadrilla} & BM001 \\
+        \textbf{Equipo Auxiliar} & Alza Hombres Telescópico \\
+        \textbf{Duración (horas)} & 6 \\
+        \textbf{Criticidad} & 2 \\
+        \textbf{Cantidad de Trabajadores} & 4 \\
+        \bottomrule
+    \end{tabular}
+    % \caption{Ejemplo de Tarea y sus atributos \cite{tabla:fuente}.}
+    \label{table:task}
+\end{table}
+\vfill
