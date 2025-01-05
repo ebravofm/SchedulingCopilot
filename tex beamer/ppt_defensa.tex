@@ -22,7 +22,6 @@
 \date{\today}
 
 
-
 % ---------------------
 % begin of presentation
 % ---------------------
@@ -47,9 +46,11 @@
 \section{Resumen Ejecutivo}
 
 % --- FRAME 1 ---
-\begin{frame}{Importancia del Mantenimiento Eficiente}
+\begin{frame}{Programación de Actividades de Mantenimiento}
 \begin{itemize}
     \item El mantenimiento eficiente de equipos es crucial para garantizar la continuidad operativa en cualquier industria.
+    \vfill
+    \item Las \textbf{restricciones de recursos} y las ventanas temporales son factores que complejizan el proceso de programación.
     \vfill
     \item La programación manual de actividades de mantenimiento:
     \begin{itemize}
@@ -71,29 +72,40 @@
 \begin{itemize}
     \item El problema se modela como un Problema de Programación de Proyectos con Restricciones de Recursos (\textit{RCPSP}).
     \vfill
-    \item Se utilizan técnicas de Programación por Restricciones (\textit{Constraint Programming, CP}) para:
-    \begin{itemize}
-        \item Minimizar el \textit{makespan}.
-        \item Reducir tareas no programadas.
-    \end{itemize}
+    \item Se utilizan técnicas de Programación por Restricciones (\textit{Constraint Programming, CP}) para encontrar soluciones eficientes.
 \end{itemize}
 \vfill
 \end{frame}
 
+% --- FRAME 2: Ejemplo de Gantt en MS Project ---
+\begin{frame}{Programación de Actividades}
+    \centering
+    \includegraphics[scale=0.2]{imgs/gantt-project.jpg}
+    \captionof{figure}{Captura de Cronograma Resultante en \textit{MS Project} \cite{refMSProject}.}
+    \label{fig:gantt-project}
+    \vfill
+    \end{frame}
+
+
 \begin{frame}{Impacto de la Solución}
+    Un correcto diseño e implementación de la solución propuesta permitirá:
+    \vfill
 \begin{itemize}
     \item \textbf{Optimización del tiempo y esfuerzo:} Liberación del equipo de programación de tareas manuales intensivas.
     \item \textbf{Reducción de errores:} Especialmente aquellos derivados de programaciones deficientes.
-    \item \textbf{Resultados obtenidos:}
-    \begin{itemize}
-        \item Cronograma generado para 4.898 tareas.
-        \item Programación del 98,6\% de las tareas.
-        \item \textit{Makespan:} 21,5 días.
-        \item Tiempo de procesamiento: 6,12 segundos.
-    \end{itemize}
 \end{itemize}
 \vfill
 
+\end{frame}
+
+\begin{frame}{Resultados Obtenidos}
+\begin{itemize}
+    \item Cronograma generado para \textbf{4.898 tareas}.
+    \item Programación del 98,6\% de las tareas.
+    \item \textit{Makespan} (Tiempo total del proyecto): 21,5 días.
+    \item Tiempo de procesamiento: \textbf{6,12 segundos}.
+\end{itemize}
+\vfill
 \end{frame}
 
 
@@ -104,9 +116,9 @@
 \section{Análisis y descripción del problema}
 
 % --- FRAME 3: Visión General ---
-\begin{frame}{Visión General}
+\begin{frame}{Levantamiento del Proceso de Programación}
 \begin{itemize}
-    \item \textbf{Objetivo:} Generalizar el proceso de programación de tareas en el rubro minero.
+    \item \textbf{Objetivo:} Generalizar el proceso de programación de tareas en la empresa colaboradora.
     \vfill
     \item \textbf{Metodología:}
     \begin{itemize}
@@ -124,39 +136,61 @@
 \vfill
 \end{frame}
 
+% --- FRAME 7: Ciclo Semanal de Programación ---
+\begin{frame}{Ciclo Semanal de Programación}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.66\textwidth]{imgs/process_flowchart.png}
+        \caption{Ciclo Semanal de Programación de Actividades.}
+        \label{fig:flowchart}
+    \end{figure}
+    \vfill
+    \end{frame}
+
+
+% --- FRAME 7: Ciclo Semanal de Programación ---
+% \begin{frame}{Ciclo Semanal de Programación}
+%     \begin{itemize}
+%         \item Se revisa y ajusta el cronograma cada semana (miércoles), incorporando nuevas tareas.
+%         \item El borrador del cronograma para las próximas tres semanas se valida con otras áreas.
+%         \item Cada viernes se emite el cronograma oficial, base del siguiente ciclo iterativo.
+%     \end{itemize}
+%     \vfill
+%     \end{frame}
+
 % --- FRAME 4: Descripción General del Proceso ---
-\subsection{Descripción del proceso de programación}
-\begin{frame}{Descripción General del Proceso}
-\begin{itemize}
-    \item El proceso de programación de tareas se sustenta en la planificación previa, que define las ventanas temporales iniciales.
-    \vfill
-    \item El equipo de programación:
-    \begin{itemize}
-        \arrowitem Ajusta las tareas a las restricciones reales de recursos.
-        \arrowitem Itera semanalmente para mantener el cronograma actualizado.
-    \end{itemize}
-    \vfill
-    \item \textbf{Elementos clave:} Ventanas temporales, disponibilidad de recursos, coordinación con áreas involucradas, criticidad de tareas.
-\end{itemize}
-\vfill
-\end{frame}
+% \subsection{Descripción del proceso de programación}
+% \begin{frame}{Descripción General del Proceso}
+% \begin{itemize}
+%     \item El proceso de programación de tareas se sustenta en la planificación previa, que define las ventanas temporales iniciales.
+%     \vfill
+%     \item El equipo de programación:
+%     \begin{itemize}
+%         \arrowitem Ajusta las tareas a las restricciones reales de recursos.
+%         \arrowitem Itera semanalmente para mantener el cronograma actualizado.
+%     \end{itemize}
+%     \vfill
+%     \item \textbf{Elementos clave:} Ventanas temporales, disponibilidad de recursos, coordinación con áreas involucradas, criticidad de tareas.
+% \end{itemize}
+% \vfill
+% \end{frame}
 
 % --- FRAME 5: Proceso de Planificación ---
-\subsubsection{Proceso de planificación}
-\begin{frame}{Proceso de Planificación}
-\begin{itemize}
-    \item Responsables de definir ventanas temporales y requerimientos de mantenimiento.
-    \item Consideraciones:
-    \begin{itemize}
-        \arrowitem Objetivos estratégicos de la mina.
-        \arrowitem Tiempos de procesos industriales.
-        \arrowitem Otros factores del negocio minero.
-    \end{itemize}
-    \item \textbf{Resultado:} Una planificación inicial en bruto (ventanas y recursos necesarios), \\
-    pero sin contemplar restricciones reales de disponibilidad.
-\end{itemize}
-\vfill
-\end{frame}
+% \subsubsection{Proceso de planificación}
+% \begin{frame}{Proceso de Planificación}
+% \begin{itemize}
+%     \item Responsables de definir ventanas temporales y requerimientos de mantenimiento.
+%     \item Consideraciones:
+%     \begin{itemize}
+%         \arrowitem Objetivos estratégicos de la mina.
+%         \arrowitem Tiempos de procesos industriales.
+%         \arrowitem Otros factores del negocio minero.
+%     \end{itemize}
+%     \item \textbf{Resultado:} Una planificación inicial en bruto (ventanas y recursos necesarios), \\
+%     pero sin contemplar restricciones reales de disponibilidad.
+% \end{itemize}
+% \vfill
+% \end{frame}
 
 % --- FRAME 6: Proceso de Programación ---
 \subsubsection{Proceso de programación}
@@ -173,40 +207,25 @@
     \end{itemize}
     \vfill
     \item El cronograma resultante detalla tareas, fechas, duración y recursos, priorizando la continuidad operativa.
-\end{itemize}
-\vfill
-\end{frame}
-
-% --- FRAME 7: Ciclo Semanal de Programación ---
-\begin{frame}{Ciclo Semanal de Programación}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\textwidth]{imgs/process_flowchart.png}
-    \caption{Ciclo Semanal de Programación de Actividades.}
-    \label{fig:flowchart}
-\end{figure}
-\vfill
-\begin{itemize}
-    \item Se revisa y ajusta el cronograma cada semana (miércoles), incorporando nuevas tareas.
-    \item El borrador del cronograma para las próximas tres semanas se valida con otras áreas.
+    \vfill
     \item Cada viernes se emite el cronograma oficial, base del siguiente ciclo iterativo.
 \end{itemize}
 \vfill
 \end{frame}
 
+
+
 % --- FRAME 8: Diagnóstico del Proceso Actual ---
 \subsection{Diagnóstico del proceso actual}
 \begin{frame}{Diagnóstico del Proceso Actual}
-\begin{itemize}
-    \item \textbf{Encuesta} al personal de programación:
-    \begin{itemize}
-        \arrowitem 64\% invierte más de la mitad de su jornada en la generación de cronogramas.
-        \arrowitem La fase más intensiva es la \textbf{creación del borrador inicial}.
-        \arrowitem El error más recurrente es la \textbf{no disponibilidad de materiales y repuestos}.
-    \end{itemize}
+    Se llevó a cabo un diagnóstico del proceso de programación de tareas a través de una \textbf{encuesta} al personal de programación, identificando:
     \vfill
-    \item \textbf{Entorno dinámico}: 90\% afronta cambios de último minuto al menos una vez por semana.
-    \item Existen barreras de \textbf{coordinación} y \textbf{colaboración} con otras áreas.
+\begin{itemize}
+    \arrowitem 64\% invierte más de la mitad de su jornada en la generación de cronogramas.
+    \arrowitem La fase más intensiva es la \textbf{creación del borrador inicial}.
+    \arrowitem El error más recurrente es la \textbf{no disponibilidad de materiales y repuestos}.
+    \arrowitem \textbf{Entorno dinámico}: 90\% afronta cambios de último minuto al menos una vez por semana.
+    \arrowitem Existen barreras de \textbf{coordinación} y \textbf{colaboración} con otras áreas.
 \end{itemize}
 \vfill
 \end{frame}
@@ -237,16 +256,12 @@
 
 % --- FRAME 10: Introducción a la sección ---
 \begin{frame}{Definiciones Teóricas}
+    Se presentan los conceptos fundamentales para comprender el enfoque del proyecto.
 \begin{itemize}
-    \item Se presentan los conceptos fundamentales para comprender el enfoque del proyecto.
     \vfill
-    \item Temas abordados:
-    \begin{itemize}
-        \arrowitem RCPSP (Problema de Programación de Proyectos con Restricciones de Recursos)
-        \arrowitem CP (Programación por Restricciones)
-    \end{itemize}
-    \vfill
-    \item Estos conceptos son esenciales para la metodología de programación de actividades de mantenimiento.
+        \arrowitem \textbf{RCPSP} (Problema de Programación de Proyectos con Restricciones de Recursos)
+        \arrowitem \textbf{CP} (Programación por Restricciones)
+
 \end{itemize}
 \vfill
 \end{frame}
@@ -255,12 +270,23 @@
 \subsection{Problema de programación de proyectos con restricciones de recursos (RCPSP)}
 \begin{frame}{\textit{RCPSP}: Definición e Importancia}
 \begin{itemize}
-    \item El \textit{RCPSP} es un problema clásico de investigación operativa y gestión de proyectos.
+    \item El \textit{\textbf{RCPSP}} es un problema clásico de investigación operativa y gestión de proyectos.
     \vfill
     \item Pertenece a los \textit{Constraint Satisfaction Problems} (CSP) y, más específicamente, a los \textit{Constraint Optimization Problems} (COP).
     \vfill
     % \item \textbf{Objetivo principal}: determinar el calendario óptimo que minimice el \textit{makespan} (o cualquier otro criterio relevante, como costos o utilización de recursos) \cite{artigues2008resource}.
 \end{itemize}
+\vfill
+\end{frame}
+
+% --- FRAME 13: RCPSP - Ejemplo ---
+\begin{frame}{Ejemplo de \textit{RCPSP}}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{imgs/rcpsp.png}
+    \caption{Ejemplo de un \textit{RCPSP} con 2 recursos y 10 tareas.}
+    \label{fig:rcpsp}
+\end{figure}
 \vfill
 \end{frame}
 
@@ -286,22 +312,6 @@
 \vfill
 \end{frame}
 
-% --- FRAME 13: RCPSP - Ejemplo ---
-\begin{frame}{Ejemplo de \textit{RCPSP}}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{imgs/rcpsp.png}
-    \caption{Ejemplo de un \textit{RCPSP} con 2 recursos y 10 tareas.}
-    \label{fig:rcpsp}
-\end{figure}
-
-\begin{itemize}
-    \item Recurso A: Capacidad de 7 unidades.
-    \item Recurso B: Capacidad de 4 unidades.
-    \item Se logra un \textit{makespan} de 12 unidades de tiempo cumpliendo todas las restricciones.
-\end{itemize}
-\vfill
-\end{frame}
 
 % --- FRAME 14: RCPSP - Complejidad ---
 \begin{frame}{Complejidad del \textit{RCPSP}}
@@ -320,7 +330,7 @@
 \subsection{Algoritmos de programación por restricciones (\textit{CP})}
 \begin{frame}{\textit{CP}: Definición e Importancia}
 \begin{itemize}
-    \item \textit{CP} es una técnica para resolver problemas combinatorios complejos (planificación, programación, optimización).
+    \item \textit{\textbf{CP}} es una técnica para resolver problemas combinatorios complejos (planificación, programación, optimización).
     \vfill
     \item En este trabajo, \textit{CP} es fundamental para abordar el \textit{RCPSP}, 
     permitiendo modelar restricciones de tiempo y recursos.
@@ -329,174 +339,43 @@
 \end{frame}
 
 % --- FRAME 16: CP - Concepto de CSP/COP ---
-\begin{frame}{\textit{CSP} y \textit{COP}}
-\begin{itemize}
-    \item Un CSP (\textit{Constraint Satisfaction Problem}) se define por:
-    \begin{itemize}
-        \arrowitem Un conjunto de variables $V$ con dominios de valores $D$.
-        \arrowitem Un conjunto de restricciones $R$.
-    \end{itemize}
-    \item La solución a un CSP es la asignación de valores a las variables que satisfaga todas las restricciones.
-    \vfill
-    % \item En un \textit{COP} (\textit{Constraint Optimization Problem}), se incorpora una función objetivo $O$ que se busca optimizar \cite{rossi2006}.
-\end{itemize}
-\vfill
-\end{frame}
+% \begin{frame}{\textit{CSP} y \textit{COP}}
+% \begin{itemize}
+%     \item Un \textbf{CSP} (\textit{Constraint Satisfaction Problem}) se define por:
+%     \begin{itemize}
+%         \arrowitem Un conjunto de variables $V$ con dominios de valores $D$.
+%         \arrowitem Un conjunto de restricciones $R$.
+%     \end{itemize}
+%     \item La solución a un \textbf{CSP} es la asignación de valores a las variables que satisfaga todas las restricciones.
+%     \item Un \textbf{COP} (\textit{Constraint Optimization Problem}) incorpora una función objetivo $O$ que se busca optimizar % \cite{rossi2006}.
+%     \vfill
+%     % \item En un \textit{COP} (\textit{Constraint Optimization Problem}), se incorpora una función objetivo $O$ que se busca optimizar \cite{rossi2006}.
+% \end{itemize}
+% \vfill
+% \end{frame}
 
 % --- FRAME 17: CP - Esquema General ---
 \begin{frame}{Esquema de Programación por Restricciones}
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{imgs/constraint_programming.png}
+    \includegraphics[width=0.52\textwidth]{imgs/constraint_programming.png}
     \caption{Esquema de Programación con Restricciones.}
     \label{fig:constraint_programming}
 \end{figure}
 \vfill
 \end{frame}
 
-% --- FRAME 18: CP en el contexto del RCPSP ---
-\begin{frame}{\textit{CP} en el contexto del \textit{RCPSP}}
-\begin{itemize}
-    \item Variables: Modelan inicio, duración y fin de cada actividad.
-    \vfill
-    \item Restricciones:
-    \begin{itemize}
-        \arrowitem Temporales (precedencia).
-        \arrowitem De recursos (capacidades máximas).
-    \end{itemize}
-    \vfill
-    \item Ventanas temporales: Representan los plazos operativos de cada tarea.
-    \vfill
-    \item Función objetivo: Minimización del \textit{makespan} (o adaptación a necesidades específicas).
-    \vfill
-    \item Ventaja: \textbf{Separación declarativa} entre el modelo y los algoritmos, facilitando la extensión y modificación del enfoque.
-\end{itemize}
-\vfill
-\end{frame}
-
-
-% -------------------------------------------------------
-% Sección: Aplicación de los conceptos teóricos al problema
-% -------------------------------------------------------
-\section{Aplicación de los conceptos teóricos al problema}
-
-% --- FRAME 1: Visión General ---
-\begin{frame}{Aplicación de los conceptos teóricos}
-\begin{itemize}
-  \item En esta sección se describe cómo los conceptos de \textit{RCPSP} y \textit{CP}
-  se aplican al diseño e implementación de la solución.
-  \vfill
-  \item Se detallan:
-  \begin{itemize}
-    \arrowitem Datos de \textit{input}.
-    \arrowitem Consideraciones al programar.
-    \arrowitem Generalización del problema como modelo matemático.
-  \end{itemize}
-  \vfill
-  \item Objetivo: Proveer un panorama completo de cómo se integran las bases teóricas con
-  la realidad operativa y las restricciones de la empresa.
-\end{itemize}
-\vfill
-\end{frame}
-
-% -----------------------------------------------------
-% Subsection: Datos necesarios para el proceso de programación
-% -----------------------------------------------------
-\subsection{Datos necesarios para el proceso de programación}
-
-% --- FRAME 2: Datos de entrada ---
-\begin{frame}{Datos necesarios para la programación}
-\begin{itemize}
-  \item El \textit{input} principal proviene del proceso de \textbf{planificación}, que define:
-  \begin{itemize}
-      \arrowitem Ventana de fechas.
-      \arrowitem Duración y criticidad de cada tarea.
-      \arrowitem Recursos requeridos (cuadrillas, equipos).
-  \end{itemize}
-  \vfill
-  \item También se incorporan datos desde el sistema \textit{ERP}:
-  \begin{itemize}
-      \arrowitem Turnos de las cuadrillas.
-      \arrowitem Disponibilidad de equipos auxiliares.
-  \end{itemize}
-  \vfill
-  \item Disponibilidad de \textbf{materiales y repuestos} no se considera debido a la falta de sistematización en el \textit{ERP}.
-\end{itemize}
-\vfill
-\end{frame}
-
-% --- FRAME 3: Tabla de ejemplo de Tarea ---
-\begin{frame}[fragile]{Ejemplo de Tarea y sus atributos}
-\vspace{-2ex}
-\begin{table}[htbp]
-    \centering
-    \captionsetup{justification=centering}
-    \vspace{0.3cm}
-    \begin{tabular}{p{6cm} p{8cm}}
-        \toprule
-        \textbf{Atributo} & \textbf{Descripción} \\
-        \midrule
-        \textbf{ID Orden de Trabajo} & 4000001 \\
-        \textbf{ID Tarea} & 001 \\
-        \textbf{Descripción OT} & Cambio de suspensión trasera lado izquierdo \\
-        \textbf{Descripción Tarea} & Retiro de suspensión trasera \\
-        \textbf{Fecha Inicio Extrema} & 2024-11-29 \\
-        \textbf{Fecha Requerida} & 2024-12-30 \\
-        \textbf{Cuadrilla} & BM001 \\
-        \textbf{Equipo Auxiliar} & Alza Hombres Telescópico \\
-        \textbf{Duración (horas)} & 6 \\
-        \textbf{Criticidad} & 2 \\
-        \textbf{Cantidad de Trabajadores} & 4 \\
-        \bottomrule
-    \end{tabular}
-    % \caption{Ejemplo de Tarea y sus atributos \cite{tabla:fuente}.}
-    \label{table:task}
-\end{table}
-\vfill
-\end{frame}
-
-
-% -----------------------------------------------------
-% Subsection: Consideraciones al programar
-% -----------------------------------------------------
-\subsection{Consideraciones al programar}
-
-% --- FRAME 4: Consideraciones al programar ---
-\begin{frame}{Consideraciones al programar}
-\begin{itemize}
-    \item Cada \textbf{tarea} incluye:
-    \begin{itemize}
-      \arrowitem Fecha de inicio extrema y requerida.
-      \arrowitem Duración y criticidad.
-      \arrowitem Recursos requeridos (cuadrillas, equipos).
-    \end{itemize}
-    \vfill
-    \item \textbf{Restricciones de precedencia} dentro de la orden de trabajo (OT).
-    \vfill
-    \item \textbf{Cuadrillas}:
-    \begin{itemize}
-      \arrowitem Tienen esquemas de turnos (disponibilidad limitada).
-      \arrowitem Cuentan con una capacidad (número de trabajadores) que determina cuántas tareas en paralelo pueden atender.
-    \end{itemize}
-    \vfill
-    \item \textbf{Equipos auxiliares} son recursos unitarios (no se comparten en simultáneo).
-    \vfill
-    \item \textbf{Cronograma base}: Se parte de cronogramas anteriores para ajustarlos e incorporar nuevas tareas.
-    \vfill
-    \item Si se programa una tarea de una \textbf{OT}, se programan todas las tareas de dicha OT.
-\end{itemize}
-\vfill
-\end{frame}
 
 % -----------------------------------------------------
 % Subsection: Generalización del problema como RCPSP
 % -----------------------------------------------------
+\section{Aplicación de los conceptos teóricos al problema}
 \subsection{Generalización del problema como \textit{RCPSP}}
 
 % --- FRAME 5: Modelado como RCPSP ---
 \begin{frame}{Modelado como un \textit{RCPSP}}
 \begin{itemize}
-    \item Objetivo: Asignar tiempos de inicio a cada tarea, minimizando el \textit{makespan} y 
+    \item \textbf{Objetivo}: Asignar tiempos de inicio a cada tarea, minimizando el \textit{makespan} y 
     la cantidad de tareas no programadas.
     \vfill
     \item Restricciones de:
@@ -505,8 +384,6 @@
         \arrowitem Ventanas de tiempo y precedencia.
         \arrowitem Intervalos prohibidos.
     \end{itemize}
-    \vfill
-    \item \textbf{Resultado:} Un modelo matemático que integra todas las consideraciones de la realidad operativa.
 \end{itemize}
 \vfill
 \end{frame}
@@ -543,9 +420,9 @@
 \begin{itemize}
     \item \( x_i \in \{0, 1\} \): Indica si la tarea \( T_i \) es \textbf{programada}.
     \item \( S_i \in \mathbb{N} \): Momento de \textbf{inicio} de la tarea \( T_i \).
-    \item \( E_i = S_i + C(T_i) \): Momento de \textbf{finalización} de la tarea \( T_i \).
-    \item \( \text{Intervalo}(T_i) = [S_i, E_i) \): Intervalo de ejecución.
-    \item \( y_k \in \{0, 1\} \): Indica si el \textbf{grupo de tareas} \( G_k \) se programa.
+    % \item \( E_i = S_i + C(T_i) \): Momento de \textbf{finalización} de la tarea \( T_i \).
+    % \item \( \text{Intervalo}(T_i) = [S_i, E_i) \): Intervalo de ejecución.
+    % \item \( y_k \in \{0, 1\} \): Indica si el \textbf{grupo de tareas} \( G_k \) se programa.
 \end{itemize}
 \vfill
 \end{frame}
@@ -585,10 +462,10 @@
       \quad \text{y} \quad \forall T_i \in G_k: x_i = y_k
     \]
     \vfill
-    \item \textbf{Consistencia de variables}:
-    \[
-      x_i = 0 \implies S_i = 0, \quad E_i = 0
-    \]
+    % \item \textbf{Consistencia de variables}:
+    % \[
+    %   x_i = 0 \implies S_i = 0, \quad E_i = 0
+    % \]
 \end{enumerate}
 \vfill
 \end{frame}
@@ -621,6 +498,11 @@
 % --- FRAME 11: Detalle de la función objetivo ---
 \subsection{Detalle de la función objetivo}
 \begin{frame}{Detalle de la función objetivo}
+    \[
+        \min Z = \alpha \cdot \text{makespan} 
+                 + \beta \cdot \sum_{i=0}^{n} w_i \cdot (1 - x_i)
+        \]
+      
 \begin{enumerate}
   \item \textbf{Componente Makespan} (\(\alpha \cdot \text{makespan}\)):
   \begin{itemize}
@@ -638,37 +520,132 @@
 \end{frame}
 
 
-% --- FRAME 12: Balance de objetivos ---
-\begin{frame}{Balance de objetivos}
+% % --- FRAME 12: Balance de objetivos ---
+% \begin{frame}{Balance de objetivos}
+% \begin{itemize}
+%     \item \(\alpha\) y \(\beta\) controlan la preferencia entre un \textit{makespan} menor y la programación de tareas críticas.
+%     \vfill
+%     \item \(\alpha \gg \beta\): Favorece un \textit{makespan} corto aunque implique no programar algunas tareas.
+%     \vfill
+%     \item \(\beta \gg \alpha\): Preferencia por programar tantas tareas como sea posible (especialmente las críticas), aun si aumenta el \textit{makespan}.
+%     \vfill
+%     \item Este balance permite al modelo adaptarse a distintas políticas operativas.
+% \end{itemize}
+% \vfill
+% \end{frame}
+
+
+% -------------------------------------------------------
+% Sección: Aplicación de los conceptos teóricos al problema
+% -------------------------------------------------------
+\section{Requisitos de la solución}
+
+\subsection{Datos necesarios para el proceso de programación}
+
+% --- FRAME 2: Datos de entrada ---
+\begin{frame}{Datos necesarios para la programación}
 \begin{itemize}
-    \item \(\alpha\) y \(\beta\) controlan la preferencia entre un \textit{makespan} menor y la programación de tareas críticas.
-    \vfill
-    \item \(\alpha \gg \beta\): Favorece un \textit{makespan} corto aunque implique no programar algunas tareas.
-    \vfill
-    \item \(\beta \gg \alpha\): Preferencia por programar tantas tareas como sea posible (especialmente las críticas), aun si aumenta el \textit{makespan}.
-    \vfill
-    \item Este balance permite al modelo adaptarse a distintas políticas operativas.
+  \item El \textit{input} principal proviene del proceso de \textbf{planificación}, que define:
+  \begin{itemize}
+      \arrowitem Ventana de fechas.
+      \arrowitem Duración y criticidad de cada tarea.
+      \arrowitem Recursos requeridos (cuadrillas, equipo auxiliares).
+  \end{itemize}
+  \vfill
+  \item También se incorporan datos desde el sistema \textit{ERP}:
+  \begin{itemize}
+      \arrowitem Turnos de las cuadrillas.
+      \arrowitem Disponibilidad de equipos auxiliares.
+  \end{itemize}
+  \vfill
+%   \item Disponibilidad de \textbf{materiales y repuestos} no se considera debido a la falta de sistematización en el \textit{ERP}.
 \end{itemize}
 \vfill
 \end{frame}
+
+% --- FRAME 3: Tabla de ejemplo de Tarea ---
+\begin{frame}[fragile]{Ejemplo de Tarea y sus atributos}
+\vspace{-2ex}
+\scriptsize
+\begin{table}[htbp]
+    \centering
+    \captionsetup{justification=centering}
+    \vspace{0.3cm}
+    \begin{tabular}{p{4cm} p{5.5cm}}
+        \toprule
+        \textbf{Atributo} & \textbf{Descripción} \\
+        \midrule
+        \textbf{ID Orden de Trabajo} & 4000001 \\
+        \textbf{ID Tarea} & 001 \\
+        \textbf{Descripción OT} & Cambio de suspensión trasera lado izquierdo \\
+        \textbf{Descripción Tarea} & Retiro de suspensión trasera \\
+        \textbf{Fecha Inicio Extrema} & 2024-11-29 \\
+        \textbf{Fecha Requerida} & 2024-12-30 \\
+        \textbf{Cuadrilla} & BM001 \\
+        \textbf{Equipo Auxiliar} & Alza Hombres Telescópico \\
+        \textbf{Duración (horas)} & 6 \\
+        \textbf{Criticidad} & 2 \\
+        \textbf{Cantidad de Trabajadores} & 4 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Ejemplo de Tarea y sus atributos }%\cite{tabla:fuente}.}
+    \label{table:task}
+\end{table}
+\vfill
+\end{frame}
+
+
+% -----------------------------------------------------
+% Subsection: Consideraciones al programar
+% -----------------------------------------------------
+\subsection{Consideraciones al programar}
+
+% --- FRAME 4: Consideraciones al programar ---
+\begin{frame}{Consideraciones al programar}
+\begin{itemize}
+    % \item Cada \textbf{tarea} incluye:
+    % \begin{itemize}
+    %   \arrowitem Fecha de inicio extrema y requerida.
+    %   \arrowitem Duración y criticidad.
+    %   \arrowitem Recursos requeridos (cuadrillas, equipos).
+    % \end{itemize}
+    % \vfill
+    \item \textbf{Restricciones de precedencia} dentro de la orden de trabajo (OT).
+    \vfill
+    \item \textbf{Cuadrillas}:
+    \begin{itemize}
+      \arrowitem Tienen esquemas de turnos (disponibilidad limitada).
+      \arrowitem Cuentan con una capacidad (número de trabajadores) que determina cuántas tareas en paralelo pueden atender.
+    \end{itemize}
+    \vfill
+    \item \textbf{Equipos auxiliares} son recursos unitarios (no se comparten en simultáneo).
+    \vfill
+    \item \textbf{Cronograma base}: Se parte de cronogramas anteriores para ajustarlos e incorporar nuevas tareas.
+    \vfill
+    % \item Si se programa una tarea de una \textbf{OT}, se programan todas las tareas de dicha OT.
+\end{itemize}
+\vfill
+\end{frame}
+
+\begin{frame}{Requisitos de la solución}
+    \begin{itemize}
+        \item \textbf{Eficiencia}: Procesamiento rápido y generación de cronogramas en tiempo real.
+        \vfill
+        \item \textbf{Escalabilidad}: Capacidad de manejar grandes volúmenes de tareas y recursos.
+        \vfill
+        \item \textbf{Flexibilidad}: Adaptación a cambios de último minuto y restricciones dinámicas. La solución debe ser capaz de partir de un cronograma base y ajustarlo, minimizando la cantidad de cambios.
+        \vfill
+        \item \textbf{Usabilidad}: Interfaz amigable y fácil de usar para el personal de programación. 
+    \end{itemize}
+    \vfill
+    \end{frame}
+    
 
 
 % ---------------------------------------------------
 % Sección: Diseño de la solución
 % ---------------------------------------------------
 \section{Diseño de la solución}
-
-% --- FRAME 1: Introducción a la sección ---
-\begin{frame}{Diseño de la Solución}
-\begin{itemize}
-    \item El flujo de trabajo se organiza en 4 etapas secuenciales, desde la ingesta y preparación de datos hasta la generación de un cronograma optimizado.
-    \vfill
-    \item Cada etapa contribuye a estructurar y procesar eficientemente la información de programación.
-    \vfill
-    \item En la \textbf{Figura \ref{fig:solution}} se presenta un panorama general de este proceso.
-\end{itemize}
-\vfill
-\end{frame}
 
 % --- FRAME 2: Visión General del Flujo de Trabajo ---
 \begin{frame}{Flujo de Trabajo de la Solución}
@@ -678,13 +655,22 @@
     \caption{Flujo de Trabajo de la Solución.}
     \label{fig:solution}
 \end{figure}
-\vfill
-\begin{enumerate}
-    \item Pre-Procesamiento
-    \item Segmentación en Subconjuntos
-    \item \textit{Solver}
-    \item Post-Procesamiento
-\end{enumerate}
+\begin{columns}[t] % [t] alinea las columnas en la parte superior
+    \begin{column}{0.5\textwidth}
+        \begin{enumerate}
+            \item Pre-Procesamiento
+            \item Segmentación en Subconjuntos
+        \end{enumerate}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{enumerate} % Retoma la numeración
+            \setcounter{enumi}{2}
+            \item \textit{Solver}
+            \item Post-Procesamiento
+        \end{enumerate}
+    \end{column}
+\end{columns}
+
 \vfill
 \end{frame}
 
@@ -694,15 +680,15 @@
 \subsection{Pre-procesamiento}
 
 % --- FRAME 3: Pre-Procesamiento ---
-\begin{frame}{Pre-Procesamiento}
+\begin{frame}{1. Pre-Procesamiento}
 \begin{itemize}
-    \item \textbf{Objetivo}: Unificar y limpiar la información procedente de diversas fuentes (\textit{ERP}, \textit{Microsoft Project}, u otros formatos).
+    \item \textbf{Objetivo}: Limpiar y preparar la información procedente de las fuentes de datos (\textit{ERP}, \textit{Microsoft Project}, u otros formatos).
     \vfill
     \item Operaciones clave:
     \begin{itemize}
         \arrowitem \textbf{Corrección de discrepancias}: Ajuste automático de errores (ej. fechas incoherentes).
         \arrowitem \textbf{Cuantización de ventanas horarias}: Expresar duraciones en intervalos de 15 minutos para optimizar el modelado.
-        \arrowitem \textbf{Restringir horarios fijos}: Configurar intervalos obligatorios para ciertas tareas.
+        % \arrowitem \textbf{Restringir horarios fijos}: Configurar intervalos obligatorios para ciertas tareas.
         \arrowitem \textbf{Estandarización en JSON}: Consolidación de datos (duraciones, recursos, dependencias) en un formato coherente.
     \end{itemize}
 \end{itemize}
@@ -714,32 +700,29 @@
 % ---------------------------------------------------
 \subsection{Segmentación en Subconjuntos}
 
+
+% --- FRAME 5: Ejemplo de Segmentación ---
+\begin{frame}{2. Segmentación en Subconjuntos}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.45\textwidth]{imgs/segmentacion.png}
+        \caption{Ejemplo de segmentación a través de componentes conexos.}
+        \label{fig:segmentacion}
+    \end{figure}
+    \vfill
+\end{frame}
+
 % --- FRAME 4: Segmentación en Subconjuntos ---
-\begin{frame}{Segmentación en Subconjuntos}
+\begin{frame}{Metodología de Segmentación}
 \begin{itemize}
     \item \textbf{Objetivo}: Reducir la complejidad del problema al dividirlo en grupos más pequeños.
     \vfill
-    \item Método:
+    \item \textbf{Método}:
     \begin{enumerate}
-        \item \textbf{Construcción del grafo}: Cuadrillas y equipos como nodos; existe arista si comparten recursos.
+        \item \textbf{Construcción del grafo}: Cuadrillas y equipos como nodos; existe arista si hay tareas que usan ambos recursos de forma simultánea.
         \item \textbf{Componentes conexos}: Identificación de grupos interrelacionados que se tratarán como un subconjunto.
         \item \textbf{Formación de subconjuntos}: Cada componente conexo se resuelve de manera independiente en el \textit{solver}.
     \end{enumerate}
-\end{itemize}
-\vfill
-\end{frame}
-
-% --- FRAME 5: Ejemplo de Segmentación ---
-\begin{frame}{Ejemplo de Segmentación}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{imgs/segmentacion.png}
-    \caption{Ejemplo de segmentación a través de componentes conexos.}
-    \label{fig:segmentacion}
-\end{figure}
-\begin{itemize}
-    \item Disminución de complejidad computacional.
-    \item Resolución en paralelo de cada subconjunto.
 \end{itemize}
 \vfill
 \end{frame}
@@ -750,28 +733,11 @@
 \subsection{\textit{Solver}}
 
 % --- FRAME 6: Solver - Diccionarios de entrada ---
-\begin{frame}{\textit{Solver}: Construcción de \textit{input}}
+\begin{frame}{3. \textit{Solver}: Construcción de \textit{input}}
 \begin{itemize}
-    \item Para cada subconjunto, se crean varios diccionarios en formato JSON:
-    \begin{itemize}
-        \arrowitem \textbf{Diccionario de tareas}: Duración, recursos requeridos, etc.
-        \arrowitem \textbf{Diccionario de ventanas de tiempo}: Límites de inicio y fin.
-        \arrowitem \textbf{Diccionario de capacidades de recursos}: Máxima disponibilidad.
-        \arrowitem \textbf{Diccionario de agrupaciones}: Conjuntos de tareas (OTs).
-        \arrowitem \textbf{Diccionario de intervalos prohibidos}: Bloqueos por recurso.
-        \arrowitem \textbf{Diccionario de horarios preferenciales}: Mantener horarios previos en caso de cronograma existente.
-    \end{itemize}
-    \vfill
     \item Uso de \textit{OR-Tools} (CP-SAT solver) para modelar y resolver el \textit{RCPSP}.
     \vfill
     \item \textbf{add\_hint}: Permite incorporar soluciones anteriores o ajustes del usuario como punto de partida.
-\end{itemize}
-\vfill
-\end{frame}
-
-% --- FRAME 7: Solver - Ejecución y Paralelización ---
-\begin{frame}{\textit{Solver}: Ejecución y Paralelización}
-\begin{itemize}
     \item Cada subconjunto se resuelve de forma independiente, pudiendo ejecutarse en paralelo (\textit{joblib}, hilos, múltiples núcleos).
     \vfill
     \item \textbf{Ventajas de la paralelización}:
@@ -792,7 +758,7 @@
 \subsection{Post-procesamiento}
 
 % --- FRAME 8: Post-Procesamiento ---
-\begin{frame}{Post-Procesamiento}
+\begin{frame}{4. Post-Procesamiento}
 \begin{itemize}
     \item \textbf{Objetivo}: Consolidar y preparar la salida del \textit{solver} para su integración y análisis final.
     \vfill
@@ -806,18 +772,6 @@
 \vfill
 \end{frame}
 
-% --- FRAME 9: Cierre Diseño de la Solución ---
-\begin{frame}{Conclusiones sobre el Diseño de la Solución}
-\begin{itemize}
-    \item \textbf{Flujo de trabajo modular}: Facilita la adaptación a diferentes fuentes de datos y objetivos.
-    \vfill
-    \item \textbf{Proceso escalable y paralelo}: Permite manejar grandes volúmenes de tareas sin sacrificar rendimiento.
-    \vfill
-    \item \textbf{Resultado final útil}: Archivos e integraciones que aportan valor a los usuarios finales en su día a día.
-\end{itemize}
-\vfill
-\end{frame}
-
 
 
 
@@ -827,21 +781,21 @@
 \section{Resultados y análisis}
 
 % --- FRAME 1: Introducción a la sección ---
-\begin{frame}{Resultados y análisis}
-\begin{itemize}
-    \item Se presentan los resultados clave del modelo de optimización.
-    \vfill
-    \item Se analiza:
-    \begin{itemize}
-        \arrowitem El conjunto de datos utilizado.
-        \arrowitem El ajuste de parámetros en la función objetivo.
-        \arrowitem El impacto de la segmentación en subconjuntos.
-    \end{itemize}
-    \vfill
-    \item Beneficios operativos proyectados para el equipo de programación.
-\end{itemize}
-\vfill
-\end{frame}
+% \begin{frame}{Resultados y análisis}
+% \begin{itemize}
+%     \item Se presentan los resultados clave del modelo de optimización.
+%     \vfill
+%     \item Se analiza:
+%     \begin{itemize}
+%         \arrowitem El conjunto de datos utilizado.
+%         \arrowitem El ajuste de parámetros en la función objetivo.
+%         \arrowitem El impacto de la segmentación en subconjuntos.
+%     \end{itemize}
+%     \vfill
+%     \item Beneficios operativos proyectados para el equipo de programación.
+% \end{itemize}
+% \vfill
+% \end{frame}
 
 % -----------------------------------------------
 % Subsection: Descripción del conjunto de datos
@@ -856,6 +810,7 @@
     \vfill
 \end{itemize}
 
+\scriptsize
 \begin{table}[htbp]
     \centering
     \begin{tabular}{lc}
@@ -878,32 +833,32 @@
 \end{frame}
 
 % --- FRAME 3: Criticidad de las Tareas (Figura) ---
-\begin{frame}{Distribución de tareas según criticidad}
-\begin{columns}
-    \begin{column}{0.5\textwidth}
-        \begin{itemize}
-            \item \textbf{Criticidad 1 (Alta)}: 666 tareas (13,6\%)
-            \item \textbf{Criticidad 2 (Media)}: 2.403 tareas (49,1\%)
-            \item \textbf{Criticidad 3 (Baja)}: 1.829 tareas (37,3\%)
-        \end{itemize}
-        \vfill
-        \textbf{Recursos}:
-        \begin{itemize}
-            \arrowitem 31 cuadrillas (distintos turnos y capacidades).
-            \arrowitem 16 equipos auxiliares (recursos unitarios).
-        \end{itemize}
-    \end{column}
-    \begin{column}{0.45\textwidth}
-        \begin{figure}
-            \centering
-            \includegraphics[width=0.8\textwidth]{imgs/barras_impacto.png}
-            \caption{Distribución de tareas según criticidad.}
-            \label{fig:barras_impacto}
-        \end{figure}
-    \end{column}
-\end{columns}
-\vfill
-\end{frame}
+% \begin{frame}{Distribución de tareas según criticidad}
+% \begin{columns}
+%     \begin{column}{0.5\textwidth}
+%         \begin{itemize}
+%             \item \textbf{Criticidad 1 (Alta)}: 666 tareas (13,6\%)
+%             \item \textbf{Criticidad 2 (Media)}: 2.403 tareas (49,1\%)
+%             \item \textbf{Criticidad 3 (Baja)}: 1.829 tareas (37,3\%)
+%         \end{itemize}
+%         \vfill
+%         \textbf{Recursos}:
+%         \begin{itemize}
+%             \arrowitem 31 cuadrillas (distintos turnos y capacidades).
+%             \arrowitem 16 equipos auxiliares (recursos unitarios).
+%         \end{itemize}
+%     \end{column}
+%     \begin{column}{0.45\textwidth}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width=0.8\textwidth]{imgs/barras_impacto.png}
+%             \caption{Distribución de tareas según criticidad.}
+%             \label{fig:barras_impacto}
+%         \end{figure}
+%     \end{column}
+% \end{columns}
+% \vfill
+% \end{frame}
 
 % -----------------------------------------------
 % Subsection: Ajuste de parámetros
@@ -911,9 +866,14 @@
 \subsection{Ajuste de parámetros para la función objetivo}
 
 % --- FRAME 4: Función objetivo y experimentos ---
-\begin{frame}{Ajuste de \(\alpha\) y \(\beta\) en la función objetivo}
+\begin{frame}{Resultados para distintos \(\alpha\) y \(\beta\)}
 \begin{itemize}
     \item La función objetivo combina:
+    \[
+    \min Z = \alpha \cdot \text{makespan} 
+             + \beta \cdot \sum_{i=0}^{n} w_i \cdot (1 - x_i)
+    \]
+  
     \begin{itemize}
         \arrowitem \(\alpha\): Peso del \textit{makespan}.
         \arrowitem \(\beta\): Penalización por no programar tareas (enfocada en criticidad).
@@ -957,45 +917,54 @@
 
 % --- FRAME 6: Distribución de Tareas no Programadas ---
 \begin{frame}{Distribución de Tareas no Programadas por Criticidad}
-\begin{table}[htbp]
-    \centering
-    \footnotesize
-    \begin{tabular}{c c c c}
-        \toprule
-        \textbf{Conf.} & \textbf{Criticidad 1} & 
-        \textbf{Criticidad 2} & \textbf{Criticidad 3} \\
-        \midrule
-        (a) & 666 & 2.403 & 1.829 \\
-        (b) & 0   & 8     & 36 \\
-        (c) & 21  & 59    & 160 \\
-        (d) & 0   & 12    & 55 \\
-        \bottomrule
-    \end{tabular}
-    \caption{Tareas no programadas, según criticidad, en cada configuración.}
-    \label{tab:alpha_beta_impact}
-\end{table}
-\vfill
-\textbf{Conclusiones}:
-\begin{itemize}
-    \arrowitem \((a)\): Minimiza \textit{makespan}, pero no programa ninguna tarea.
-    \arrowitem \((b)\): Maximiza tareas programadas (incluye todas las críticas), pero \textit{makespan} muy alto.
-    \arrowitem \((d)\): Equilibrio entre ambas metas: 4.831 tareas programadas y 516,25 h de \textit{makespan}.
-\end{itemize}
-\vfill
+    \begin{table}[htbp]
+        \centering
+        \footnotesize
+        \begin{tabular}{c c c c c c}
+            \toprule
+            \textbf{Conf.} & \(\alpha\) & \(\beta\) & 
+            \textbf{Criticidad 1} & 
+            \textbf{Criticidad 2} & \textbf{Criticidad 3} \\
+            \midrule
+            (a) & 1 & 0 & 666 & 2.403 & 1.829 \\
+            (b) & 0 & 1 & 0   & 8     & 36 \\
+            (c) & 1 & 1 & 21  & 59    & 160 \\
+            (d) & 1 & 2 & 0   & 12    & 55 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Tareas no programadas, según criticidad, en cada configuración.}
+        \label{tab:alpha_beta_impact}
+    \end{table}
+    \vfill
 \end{frame}
 
+\begin{frame}{Eleccion de \(\alpha\) y \(\beta\)}
+    \textbf{Conclusiones}:
+    \begin{itemize}
+        \arrowitem \((a)\): Minimiza \textit{makespan}, pero no programa ninguna tarea.
+        \arrowitem \((b)\): Maximiza tareas programadas (incluye todas las críticas), pero \textit{makespan} muy alto.
+        \arrowitem \((c)\): Menor \textit{makespan} pero muchas tareas críticas no programadas.
+        \arrowitem \((d)\): Equilibrio entre ambas metas: 4.831 tareas programadas (0 tareas críticas no programadas) y 516,25 h de \textit{makespan}.
+    \end{itemize}
+    \vfill
+    \end{frame}
 % -----------------------------------------------
 % Subsection: Resultados segmentación
 % -----------------------------------------------
 \subsection{Resultados de la segmentación en subconjuntos}
 
 % --- FRAME 7: Segmentación en Subconjuntos (Resumen) ---
+\begin{frame}{Optimización mediante Segmentación en Subconjuntos}
+    \begin{itemize}
+        \item El objetivo es reducir la complejidad del problema y \textbf{acelerar el tiempo de solución}.
+        \item A modo de \textit{benchmark}, el tiempo de solucion sin segmentación fue de \textbf{9,95 s}.
+        \item Se dividió el total de 4.898 tareas en \textbf{14 subconjuntos}.
+        \item Reducción de complejidad y paralelización del \textit{solver}.
+    \end{itemize}
+    \vfill
+\end{frame}
+
 \begin{frame}{Segmentación en Subconjuntos}
-\begin{itemize}
-    \item Se dividió el total de 4.898 tareas en 14 subconjuntos.
-    \item Reducción de complejidad y paralelización del \textit{solver}.
-\end{itemize}
-\vfill
 \begin{table}[htbp]
     \centering
     \footnotesize
@@ -1065,8 +1034,6 @@
     \item \textbf{Tiempo total de cálculo:} 6,12 segundos (incluye pre-procesamiento, segmentación,
     resolución y post-procesamiento).
     \vfill
-    \item En la \textbf{Figura \ref{fig:gantt-project}} se muestra un ejemplo de cronograma final
-    en \textit{Microsoft Project}.
 \end{itemize}
 \vfill
 \end{frame}
@@ -1074,31 +1041,27 @@
 % --- FRAME 2: Ejemplo de Gantt en MS Project ---
 \begin{frame}{Cronograma Resultante en MS Project}
 \centering
-\includegraphics[scale=0.3]{imgs/gantt-project.jpg}
-\captionof{figure}{Captura de Cronograma Resultante en \textit{MS Project} \cite{refMSProject}.}
+\includegraphics[scale=0.22]{imgs/gantt-project.jpg}
+\captionof{figure}{Captura de Cronograma Resultante en \textit{MS Project}}% \cite{refMSProject}.}
 \label{fig:gantt-project}
 \vfill
 \end{frame}
 
 % --- FRAME 3: Impacto sobre proceso de programación ---
-\subsection{Impacto sobre proceso de programación}
-\begin{frame}{Impacto sobre proceso de programación}
+\subsection{Impacto sobre el proceso de programación}
+\begin{frame}{Impacto estimado sobre el proceso de programación}
 \begin{itemize}
-    \item \textbf{Automatización del borrador inicial:} Ahorro de \(\sim35\%\) del tiempo dedicado
-    al cronograma \footnote{Ver Anexo \ref{anexo:encuesta}}.
+    \item La herramienta automatiza completamente la generación del \textbf{borrador inicial}, eliminando la necesidad de hacerlo manualmente.
     \vfill
-    \item \textbf{Ajustes finos al cronograma:}
+    \item Permite realizar \textbf{ajustes finos} sobre el borrador inicial, como:
     \begin{itemize}
         \arrowitem Fijar tareas en horarios específicos.
         \arrowitem Modificar disponibilidad de recursos.
         \arrowitem Incorporar tareas de último minuto.
     \end{itemize}
+    Durante estos ajustes, el programa adapta automáticamente las tareas relacionadas para garantizar un cronograma viable, reduciendo a la mitad el tiempo necesario para este proceso.
     \vfill
-    \item Reducción del tiempo en resolución de conflictos de recursos (\(\sim24\%\)) y ajustes
-    (\(\sim22\%\)) \footnote{Ver Anexo \ref{anexo:encuesta}}.
-    \vfill
-    \item \textbf{Estimación global}: Se reduce en \(\sim57,6\%\) el tiempo total de creación
-    y ajuste del cronograma.
+    \item Se estima por lo tanto una reducción total del \(\sim57,6\%\) en el tiempo necesario para la creación del cronograma final.
 \end{itemize}
 \vfill
 \end{frame}
@@ -1128,100 +1091,59 @@
 
 % --- FRAME 5: Pasos a seguir ---
 \subsection{Pasos a seguir}
-\begin{frame}{Pasos a seguir: Visión general}
-\begin{itemize}
-    \item \textbf{Objetivo}: Llevar la solución de un prototipo a un entorno operativo real.
-    \vfill
-    \item Módulos principales:
-    \begin{enumerate}
-        \item \textbf{Backend:} \textit{OR-Tools}, \textit{FastAPI}, \textit{PostgreSQL}, contenedores \textit{Docker}.
-        \item \textbf{Frontend:} \textit{React.js}, librerías de visualización (Gantt, D3.js).
-        \item \textbf{Integración}: Conexión bidireccional con ERP y sistemas existentes.
-    \end{enumerate}
-\end{itemize}
-\vfill
-\end{frame}
-
-% --- FRAME 6: Módulos de Desarrollo (Figura) ---
-\begin{frame}{Módulos de Desarrollo de la Solución}
+\begin{frame}{Pasos a seguir: Módulos de Desarrollo de la Solución}
 \begin{figure}
     \centering
-    \includegraphics[scale=0.3]{imgs/ModulosDesarrollo.png}
+    \includegraphics[scale=0.2]{imgs/ModulosDesarrollo.png}
     \caption{Propuesta de Módulos de Desarrollo de Solución.}
     \label{fig:modulos-desarrollo}
 \end{figure}
 \vfill
 \end{frame}
 
-% --- FRAME 7: Detalles del Backend ---
-\subsubsection{Backend}
-\begin{frame}{Recomendaciones para el Backend}
-\begin{itemize}
-    \item \textbf{Framework:} \textit{FastAPI} para exponer endpoints REST.
-    \vfill
-    \item \textbf{Motor de optimización}: \textit{OR-Tools} (\textit{CP}).
-    \vfill
-    \item \textbf{Base de datos}: \textit{PostgreSQL} para almacenar OT, recursos y restricciones.
-    \vfill
-    \item \textbf{Despliegue}: Contenedores \textit{Docker} + \textit{Kubernetes} (opcional) para
-    escalabilidad y alta disponibilidad.
-\end{itemize}
-\vfill
-\end{frame}
-
-% --- FRAME 8: Detalles del Frontend ---
-\subsubsection{Frontend}
-\begin{frame}{Recomendaciones para el Frontend}
-\begin{itemize}
-    \item \textbf{Interfaz intuitiva}: Orientada a programadores de la empresa.
-    \item \textbf{Tecnología}: \textit{React.js} + librerías de visualización (p.ej. \textit{React-Gantt-Chart}).
-    \vfill
-    \item \textbf{Funciones clave}:
+\begin{frame}{Estructura de la Solución}
     \begin{itemize}
-        \arrowitem Carga de órdenes de trabajo (integración ERP o subida manual).
-        \arrowitem Visualización y edición de cronogramas.
-        \arrowitem Exportaciones a \textit{MS Project} y \textit{Excel}.
+        \item \textbf{Backend:} 
+        \begin{itemize}
+            \arrowitem Coordina y paraleliza la ejecución del \textit{solver}.
+            \arrowitem Centraliza los datos y gestiona la comunicación con la base de datos.
+            \arrowitem Garantiza la escalabilidad y estabilidad del sistema.
+        \end{itemize}
+        \vfill
+        \item \textbf{Frontend:}
+        \begin{itemize}
+            \arrowitem Ofrece una interfaz clara e intuitiva para los programadores.
+            \arrowitem Facilita la carga de datos, la edición de cronogramas y la revisión de resultados.
+            \arrowitem Permite visualizar la información de forma amigable y comprensible.
+        \end{itemize}
+        \vfill
+        \item \textbf{Integración con la plataforma de la empresa:}
+        \begin{itemize}
+            \arrowitem Conecta la solución con sistemas existentes (p.ej. ERP).
+            \arrowitem Asegura la importación y exportación de datos de manera automatizada.
+            \arrowitem Mantiene la información sincronizada y actualizada en todo momento.
+        \end{itemize}
     \end{itemize}
-\end{itemize}
-\vfill
-\end{frame}
+    \end{frame}
 
-% --- FRAME 9: Integración con plataformas ---
-\subsubsection{Integración con plataformas}
-\begin{frame}{Integración con Plataformas de la Empresa}
-\begin{itemize}
-    \item \textbf{ERP} y sistemas de gestión: Importación de órdenes de trabajo y disponibilidad de recursos.
-    \item \textbf{Exportación}: Formatos compatibles (\textit{XML} para MS Project, \textit{XLSX} para Excel).
-    \vfill
-    \item Se recomienda:
-    \begin{itemize}
-        \arrowitem Integración bidireccional.
-        \arrowitem Herramientas de administración de \textit{APIs} para monitorear conexiones.
-    \end{itemize}
-    \vfill
-    \item \textbf{Beneficio}: Flujo de información continuo y actualizado, adaptado a la infraestructura de la empresa.
-\end{itemize}
-\vfill
-\end{frame}
-
-% --- FRAME 10: Reflexiones finales ---
 \subsection{Reflexiones finales}
 \begin{frame}{Reflexiones finales}
 \begin{itemize}
-    \item La solución mejora significativamente la automatización de la programación de mantenimiento.
+    \item \textbf{Objetivo cumplido}: Se desarrolló una herramienta capaz de automatizar la programación de actividades de mantenimiento con alta eficiencia.
     \vfill
-    \item Aporta:
+    \item \textbf{Reducción de errores y carga de trabajo}: Se estima que la herramienta permitirá reducir significativamente el tiempo necesario para las tareas de programación además de disminuir errores.
+    \vfill
+    \item \textbf{Limitaciones}: La falta de sistematización de información sobre materiales y repuestos es una limitación importante que debe ser abordada en futuras etapas.
+    \item \textbf{Adopción en la realidad operativa}: Para que la herramienta sea incorporada de manera efectiva,
+          se requiere:
     \begin{itemize}
-        \arrowitem \textbf{Optimización de flujo de trabajo}.
-        \arrowitem \textbf{Reducción de errores}.
-        \arrowitem \textbf{Mayor eficiencia operativa}.
+        \item Una \textbf{interfaz intuitiva} y fácil de usar.
+        \item \textbf{Integración} confiable con las plataformas de la empresa.
     \end{itemize}
     \vfill
-    \item La implementación de los pasos a seguir garantiza un \textbf{impacto tangible} en la empresa colaboradora.
 \end{itemize}
 \vfill
 \end{frame}
-
 
 % ----Ref Frame--------
 

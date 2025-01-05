@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex ppt_defensa"] 1735950109.29634 "ppt_defensa.aux" "ppt_defensa.bbl" "ppt_defensa" 1735957171.38554 0
+["bibtex ppt_defensa"] 1736108850.94856 "ppt_defensa.aux" "ppt_defensa.bbl" "ppt_defensa" 1736109060.63246 0
   "./ref.bib" 1735941780.78195 121 366ee2aacbd7e1535b15fec45503f55e ""
   "/usr/local/texlive/2024/texmf-dist/bibtex/bst/base/apalike.bst" 1292289607 24635 604dafcc79f521a11ea73e506e1fbd98 ""
-  "ppt_defensa.aux" 1735957171.09744 22661 b9dabf8d0d4a8dd7305b77de43bdfa12 "pdflatex"
+  "ppt_defensa.aux" 1736109060.34886 20661 67e400ef48f3735adaf7890c91f38fd5 "pdflatex"
   (generated)
   "ppt_defensa.bbl"
   "ppt_defensa.blg"
   (rewritten before read)
-["pdflatex"] 1735957167.96064 "/Users/laptop/Documents/Magister/Memoria/Beamer Defensa/ppt_defensa.tex" "ppt_defensa.pdf" "ppt_defensa" 1735957171.3857 0
-  "/Users/laptop/Documents/Magister/Memoria/Beamer Defensa/ppt_defensa.tex" 1735957167.70787 45582 89fa597b7473f919d9482185d88a8127 ""
+["pdflatex"] 1736109057.56014 "/Users/laptop/Documents/Magister/Memoria/git/tex beamer/ppt_defensa.tex" "ppt_defensa.pdf" "ppt_defensa" 1736109060.63262 0
+  "/Users/laptop/Documents/Magister/Memoria/git/tex beamer/ppt_defensa.tex" 1736109057.34424 43706 3924c9e58a4d1a2a047dcbbeecb50440 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -260,9 +260,8 @@
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1717966823 8221441 97c289e8cb47547532aa40fae33f6dd4 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
   "UMTitlePage_wide.PNG" 1735941262.12858 117330 e39a8a6574b1d8c41ddf67f40e7934ce ""
-  "beamerthemeUM.sty" 1735957166.64119 7942 3448c1e9f8dea3c8cdee62c6a86a2740 ""
+  "beamerthemeUM.sty" 1735971031.55 7949 a6a1b0ad6b5417b1b1d612adefc1168b ""
   "imgs/ModulosDesarrollo.png" 1731213645.83591 127100 dd5133403c5837fa5a0649ad79965426 ""
-  "imgs/barras_impacto.png" 1733527397.26955 61700 fa46e95ad4de0e68a50b8b281bb19fba ""
   "imgs/constraint_programming.png" 1734402971 214079 38bbfd209eda0ac447d461cf6ed3b8f1 ""
   "imgs/gantt-project.jpg" 1733930272.48232 419375 81f8f2a609ce79440c8f7c4e5563a134 ""
   "imgs/pie_chart.png" 1734037138.80908 37292 e5eee7d5f88b83ecfb45b0dfebc4cd69 ""
@@ -270,13 +269,13 @@
   "imgs/rcpsp.png" 1734127827.87178 68038 5d25b9d3aedc70cf81198b233c664ac6 ""
   "imgs/segmentacion.png" 1734127848.7477 222249 e18e86425e24b0aa16ee9507b90ff327 ""
   "imgs/solution.png" 1734403096 145259 460b6ec9e6610b5abbf45ab4d75bfbeb ""
-  "ppt_defensa.aux" 1735957171.09744 22661 b9dabf8d0d4a8dd7305b77de43bdfa12 "pdflatex"
-  "ppt_defensa.bbl" 1735950109.38368 49 0eba253fc001332e731e8aba3f23127b "bibtex ppt_defensa"
-  "ppt_defensa.nav" 1735957171.10061 12998 a47b2e916cbef6a32fa2b9ff00b2286f "pdflatex"
-  "ppt_defensa.out" 1735957168.67448 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "ppt_defensa.tex" 1735957167.70787 45582 89fa597b7473f919d9482185d88a8127 ""
-  "ppt_defensa.toc" 1735957171.10066 2574 f952f5f20b2d693e2e7192ba5698ce5a "pdflatex"
-  "ppt_defensa.vrb" 1735957170.05517 999 e9d39dc0aec1f9b5af56fbbf1b13db49 "pdflatex"
+  "ppt_defensa.aux" 1736109060.34886 20661 67e400ef48f3735adaf7890c91f38fd5 "pdflatex"
+  "ppt_defensa.bbl" 1736108851.05307 49 0eba253fc001332e731e8aba3f23127b "bibtex ppt_defensa"
+  "ppt_defensa.nav" 1736109060.3518 11700 70399a62f14b0f2e0d95109b48a886c7 "pdflatex"
+  "ppt_defensa.out" 1736109058.18253 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "ppt_defensa.tex" 1736109057.34424 43706 3924c9e58a4d1a2a047dcbbeecb50440 ""
+  "ppt_defensa.toc" 1736109060.35186 2293 892ccc53b5395a5e3dc69ee4b0aefc42 "pdflatex"
+  "ppt_defensa.vrb" 1736109059.58456 1013 be18b321cecff33363231443e019ab5c "pdflatex"
   (generated)
   "ppt_defensa.aux"
   "ppt_defensa.log"

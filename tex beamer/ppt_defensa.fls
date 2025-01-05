@@ -1,8 +1,8 @@
-PWD /Users/laptop/Documents/Magister/Memoria/Beamer Defensa
+PWD /Users/laptop/Documents/Magister/Memoria/git/tex beamer
 INPUT /usr/local/texlive/2024/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/laptop/Documents/Magister/Memoria/Beamer Defensa/ppt_defensa.tex
+INPUT /Users/laptop/Documents/Magister/Memoria/git/tex beamer/ppt_defensa.tex
 OUTPUT ppt_defensa.log
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/beamer/beamer.cls
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/beamer/beamer.cls
@@ -458,6 +458,11 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmsso10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmsso8.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmss12.tfm
+INPUT ./imgs/gantt-project.jpg
+INPUT ./imgs/gantt-project.jpg
+INPUT ./imgs/gantt-project.jpg
+INPUT ./imgs/gantt-project.jpg
+INPUT ./imgs/gantt-project.jpg
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm
 INPUT ./imgs/process_flowchart.png
 INPUT ./imgs/process_flowchart.png
@@ -471,6 +476,7 @@ INPUT ./imgs/pie_chart.png
 INPUT ./imgs/pie_chart.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbo10.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbo10.tfm
 INPUT ./imgs/rcpsp.png
 INPUT ./imgs/rcpsp.png
 INPUT ./imgs/rcpsp.png
@@ -481,13 +487,13 @@ INPUT ./imgs/constraint_programming.png
 INPUT ./imgs/constraint_programming.png
 INPUT ./imgs/constraint_programming.png
 INPUT ./imgs/constraint_programming.png
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 OUTPUT ppt_defensa.vrb
 INPUT ./ppt_defensa.vrb
 INPUT ./ppt_defensa.vrb
 INPUT ppt_defensa.vrb
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT ./imgs/solution.png
 INPUT ./imgs/solution.png
 INPUT ./imgs/solution.png
@@ -498,11 +504,6 @@ INPUT ./imgs/segmentacion.png
 INPUT ./imgs/segmentacion.png
 INPUT ./imgs/segmentacion.png
 INPUT ./imgs/segmentacion.png
-INPUT ./imgs/barras_impacto.png
-INPUT ./imgs/barras_impacto.png
-INPUT ./imgs/barras_impacto.png
-INPUT ./imgs/barras_impacto.png
-INPUT ./imgs/barras_impacto.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmss12.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmmi12.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmsy10.tfm
@@ -517,7 +518,6 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam1
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmsso9.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm
-INPUT ./imgs/gantt-project.jpg
 INPUT ./imgs/gantt-project.jpg
 INPUT ./imgs/gantt-project.jpg
 INPUT ./imgs/gantt-project.jpg
